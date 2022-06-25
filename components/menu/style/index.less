@@ -1,0 +1,69 @@
+@import "horizontal.less";
+@import "vertical.less";
+@import "inline.less";
+
+@light-font-color:#000000d9;
+@light-active-font-color:#1890ff;
+@light-background-color:#fff;
+@light-active-background-color:#e6f7ff;
+
+@dark-font-color:rgba(255, 255, 255, 0.65);
+@dark-active-font-color:#fff;
+@dark-background-color:#001529;
+@dark-active-background-color:#1890ff;
+
+.arrow-line{
+  position: absolute;
+  width: 6px;
+  height: 1.5px;
+  background-color: currentcolor;
+  border-radius: 2px;
+  transition: background .3s cubic-bezier(.645, .045, .355, 1), transform .3s cubic-bezier(.645, .045, .355, 1), top .3s cubic-bezier(.645, .045, .355, 1), color .3s cubic-bezier(.645, .045, .355, 1);
+  content: "";
+}
+.arrow{
+  &-right{
+    &::after{
+      .arrow-line();
+      transform: rotate(45deg) translate(-2.5px);
+    }
+    &::before{
+      .arrow-line();
+      transform: rotate(135deg) translate(2.5px);
+    }
+  }
+  &-top{
+    &::after{
+      .arrow-line();
+      transform: rotate(-45deg) translate(-2.5px);
+    }
+    &::before{
+      .arrow-line();
+      transform: rotate(45deg) translate(2.5px);
+    }
+  }
+  &-bottom{
+    &::after{
+      .arrow-line();
+      transform: rotate(45deg) translate(-2.5px);
+    }
+    &::before{
+      .arrow-line();
+      transform: rotate(-45deg) translate(2.5px);
+    }
+  }
+}
+.hidden{
+  display: none !important;
+}
+.menu-light{
+  color:@light-font-color;
+  background-color: @light-background-color;
+}
+.menu-dark{
+  color: @dark-font-color;
+  background: @dark-background-color;
+  border: 0px !important;
+}
+
+

@@ -1,0 +1,62 @@
+{
+  "menus": {
+    "en-US": {
+      "*": [
+        {
+          "path": "/",
+          "title": "Recycleui is an open-source third-party component library, which provides rich third-party view components and rich third-party business components to facilitate the daily development of front-end developers",
+          "meta": {}
+        }
+      ],
+      "/components": [
+        {
+          "path": "/components/button",
+          "title": "Button",
+          "meta": {}
+        },
+        {
+          "path": "/components/carousel",
+          "title": "Carousel",
+          "meta": {}
+        },
+        {
+          "path": "/components/dropdown",
+          "title": "Dropdown",
+          "meta": {}
+        },
+        {
+          "path": "/components/menu",
+          "title": "Menu",
+          "meta": {}
+        },
+        {
+          "path": "/components/tag",
+          "title": "Tag",
+          "meta": {}
+        }
+      ]
+    }
+  },
+  "locales": [
+    {
+      "name": "en-US",
+      "label": "English"
+    }
+  ],
+  "navs": {
+    "en-US": [
+      {
+        "path": "/components",
+        "title": "Components"
+      }
+    ]
+  },
+  "title": "RecycleUI",
+  "mode": "site",
+  "repository": {
+    "url": "",
+    "branch": "master"
+  },
+  "theme": {},
+  "exportStatic": {}
+}
