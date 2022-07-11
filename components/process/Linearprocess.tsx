@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-interface LinearProcessProps{
+export interface LinearProcessProps{
     percent:number;//进度条当前进度
     showInfo?:boolean;//是否显示进度数或状态图标(目前我没做状态图标的显示)
     status?:string;//状态可选：success exception normal active(仅限 line)

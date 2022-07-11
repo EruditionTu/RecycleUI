@@ -20,5 +20,8 @@ export default  ()=>{
         <br/>
         <h3>更改Linear进度条的宽度</h3>
         <Process percent={20} strokeWidth={50}></Process>
+        <br/>
+        <h3>success版本的Linear进度条</h3>
+        <Process percent={50} status={"success"} ></Process>
     </>
 }

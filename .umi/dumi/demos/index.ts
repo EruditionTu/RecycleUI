@@ -56,9 +56,10 @@ import rawCode52 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components
 import rawCode53 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/demo/linear.tsx?dumi-raw-code';
 import rawCode54 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/index.tsx?dumi-raw-code';
 import rawCode55 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/Linearprocess.tsx?dumi-raw-code';
-import rawCode56 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/button/index.tsx?dumi-raw-code';
-import rawCode57 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/style/index.tsx?dumi-raw-code';
-import rawCode58 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/demo/circle.tsx?dumi-raw-code';
+import rawCode56 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/Circleprocess.tsx?dumi-raw-code';
+import rawCode57 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/button/index.tsx?dumi-raw-code';
+import rawCode58 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/style/index.tsx?dumi-raw-code';
+import rawCode59 from '!!dumi-raw-code-loader!D:/Opensource/RecycleUI/components/process/demo/circle.tsx?dumi-raw-code';
 
 export default {
   'basic-demo': {
@@ -196,13 +197,13 @@ export default {
       loader: async () => (await import(/* webpackChunkName: "demos_no_comp" */'D:/Opensource/RecycleUI/components/process/demo/linear.tsx')).default,
       loading: () => null,
     }),
-    previewerProps: {"sources":{"_":{"tsx":rawCode53},"index.tsx":{"import":"../","content":rawCode54},"Linearprocess.tsx":{"import":"./Linearprocess","content":rawCode55},"button/index.tsx":{"import":"../../button","content":rawCode56},"button/button.tsx":{"import":"../button","content":rawCode1},"LoadingIcon.tsx":{"import":"./LoadingIcon","content":rawCode2},"button/style/index.tsx":{"import":"../style","content":rawCode3},"style/index.less":{"import":"./index.less","content":rawCode4},"style/loading.less":{"import":"./loading.less","content":rawCode5},"style/index.tsx":{"import":"../style","content":rawCode57}},"dependencies":{"react":{"version":"17.0.2"},"classnames":{"version":"2.3.1"}},"identifier":"process-linear"},
+    previewerProps: {"sources":{"_":{"tsx":rawCode53},"index.tsx":{"import":"../","content":rawCode54},"Linearprocess.tsx":{"import":"./Linearprocess","content":rawCode55},"Circleprocess.tsx":{"import":"./Circleprocess","content":rawCode56},"button/index.tsx":{"import":"../../button","content":rawCode57},"button/button.tsx":{"import":"../button","content":rawCode1},"LoadingIcon.tsx":{"import":"./LoadingIcon","content":rawCode2},"button/style/index.tsx":{"import":"../style","content":rawCode3},"style/index.less":{"import":"./index.less","content":rawCode4},"style/loading.less":{"import":"./loading.less","content":rawCode5},"style/index.tsx":{"import":"../style","content":rawCode58}},"dependencies":{"react":{"version":"17.0.2"},"classnames":{"version":"2.3.1"}},"identifier":"process-linear"},
   },
   'process-circle': {
     component: dynamic({
       loader: async () => (await import(/* webpackChunkName: "demos_no_comp" */'D:/Opensource/RecycleUI/components/process/demo/circle.tsx')).default,
       loading: () => null,
     }),
-    previewerProps: {"sources":{"_":{"tsx":rawCode58}},"dependencies":{},"identifier":"process-circle"},
+    previewerProps: {"sources":{"_":{"tsx":rawCode59},"index.tsx":{"import":"../","content":rawCode54},"Linearprocess.tsx":{"import":"./Linearprocess","content":rawCode55},"Circleprocess.tsx":{"import":"./Circleprocess","content":rawCode56}},"dependencies":{"react":{"version":"17.0.2"},"classnames":{"version":"2.3.1"}},"identifier":"process-circle"},
   },
 };

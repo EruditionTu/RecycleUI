@@ -365,7 +365,7 @@ export function getRoutes() {
         "exact": true,
         "meta": {
           "filePath": "docs/Components/Progress.md",
-          "updatedTime": 1657478046713,
+          "updatedTime": 1657499927000,
           "slugs": [
             {
               "depth": 1,
