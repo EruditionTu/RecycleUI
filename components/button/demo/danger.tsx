@@ -19,8 +19,9 @@ export default ()=>{
             <Button type={"dashed"} danger>
                 Danger Button
             </Button>
-            <br/>
-            <br/>
+            &nbsp;
+            &nbsp;
+            &nbsp;
             <Button type={"primary"} shape={"circle"} danger>
                 A
             </Button>
@@ -36,8 +37,9 @@ export default ()=>{
             <Button type={"dashed"} danger shape={"circle"}>
                 B
             </Button>
-            <br/>
-            <br/>
+            &nbsp;
+            &nbsp;
+            &nbsp;
             <Button type={"text"} danger>
                 Danger Text
             </Button>

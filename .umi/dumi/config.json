@@ -10,8 +10,18 @@
       ],
       "/components": [
         {
+          "path": "/components/alert",
+          "title": "Alert",
+          "meta": {}
+        },
+        {
+          "path": "/components/avatar",
+          "title": "Avatar",
+          "meta": {}
+        },
+        {
           "path": "/components/button",
-          "title": "Button",
+          "title": "Button  按钮",
           "meta": {}
         },
         {
@@ -20,8 +30,28 @@
           "meta": {}
         },
         {
+          "path": "/components/comment",
+          "title": "Comment",
+          "meta": {}
+        },
+        {
+          "path": "/components/drawer",
+          "title": "Drawer",
+          "meta": {}
+        },
+        {
           "path": "/components/dropdown",
           "title": "Dropdown",
+          "meta": {}
+        },
+        {
+          "path": "/components/empty",
+          "title": "Empty",
+          "meta": {}
+        },
+        {
+          "path": "/components/list",
+          "title": "List",
           "meta": {}
         },
         {
@@ -30,8 +60,43 @@
           "meta": {}
         },
         {
+          "path": "/components/message",
+          "title": "Message",
+          "meta": {}
+        },
+        {
+          "path": "/components/modal",
+          "title": "Modal",
+          "meta": {}
+        },
+        {
+          "path": "/components/progress",
+          "title": "Process  进度条",
+          "meta": {}
+        },
+        {
+          "path": "/components/table",
+          "title": "Table",
+          "meta": {}
+        },
+        {
+          "path": "/components/tabs",
+          "title": "Tabs",
+          "meta": {}
+        },
+        {
           "path": "/components/tag",
           "title": "Tag",
+          "meta": {}
+        },
+        {
+          "path": "/components/upload",
+          "title": "Upload",
+          "meta": {}
+        },
+        {
+          "path": "/components/virtuallist",
+          "title": "Virtuallist",
           "meta": {}
         }
       ]
