@@ -3,8 +3,6 @@
   font-size: 14px;
   position: relative;
   display: flex;
-  margin-right: 8px;
-  margin-bottom: 8px;
   .process-outer{
     flex: 1;
     width: 100%;
@@ -23,17 +21,14 @@
         height: 100%;
         border-radius: 100px;
         transition: all .4s cubic-bezier(.08,.82,.17,1) 0s;
-      &.normal{
-          background-color: #1890ff;
-        }
-        &.exception{
-          background-color: #ff4d4f;
-        }
-        &.success{
-          background-color: #52c41a;
-        }
       }
     }
+  }
+  .percent-icon{
+    display: flex;
+    align-items: center;
+    color: @success;
+    margin-left: 8px;
   }
   .percent-number{
     display: flex;

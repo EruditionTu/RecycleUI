@@ -1,1 +1,31 @@
-@import "./Linearprocess.less";
+@import "./LinearProcess.less";
+@import "./CircleProcess.less";
+@normal:#1890ff;
+@success:#52c41a;
+@exception:#ff4d4f;
+.process-wapper {
+  margin-bottom: 8px;
+  margin-right: 8px;
+  position: relative;
+}
+
+.normal {
+  background-color: @normal;
+  &-stroke{
+    stroke: @normal;
+  }
+}
+
+.exception {
+  background-color: @exception;
+  &-stroke{
+    stroke: @exception;
+  }
+}
+
+.success {
+  background-color: @success;
+  &-stroke{
+    stroke: @success;
+  }
+}
