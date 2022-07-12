@@ -1,6 +1,6 @@
 import * as React from "react";
-import Linearprocess,{LinearProcessProps} from "./Linearprocess";
-import Circleprocess,{CircleProcessProps} from "./Circleprocess";
+import LinearProcess,{LinearProcessProps} from "./LinearProcess";
+import CircleProcess,{CircleProcessProps} from "./CircleProcess";
 type ProcessProps=(LinearProcessProps&CircleProcessProps&{type?:"linear"|"circle"|"dashboard"})
 const Process:React.FC<ProcessProps>=React.memo((props:ProcessProps):React.ReactElement=>{
     const {
@@ -10,15 +10,11 @@ const Process:React.FC<ProcessProps>=React.memo((props:ProcessProps):React.React
     return <>
         {
             processType==="linear"&&
-            <Linearprocess {...props}></Linearprocess>
+            <LinearProcess {...props}></LinearProcess>
         }
         {
             processType==="circle"&&
-            <Circleprocess {...props}></Circleprocess>
-        }
-        {
-            processType==="dashboard"&&
-            <div></div>
+            <CircleProcess {...props}></CircleProcess>
         }
     </>
 })

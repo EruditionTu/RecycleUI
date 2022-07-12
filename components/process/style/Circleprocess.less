@@ -1,4 +1,5 @@
 .circle-process{
+  display: inline-block;
   .process-trail{
     stroke-width: 8;
     fill: none;
@@ -6,29 +7,27 @@
   }
   .process-stroke{
     fill: none;
-    stroke: #1890ff;
     stroke-width: 8;
-    stroke-dasharray: 314.15926;
-    //stroke-dashoffset:3;
     stroke-linecap: round;
-    transition: all .4s cubic-bezier(.08,.82,.17,1) 0s;
-    //animation: circle 3s infinite;
+    transition: all 1s cubic-bezier(.08,.82,.17,1) 0s;
     transform:rotate(-90deg);
     transform-origin: center;
     transform-box:fill-box;
   }
   .process-text{
-    color: #000000d9;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     font-size: 1em;
     line-height: 1;
     white-space: normal;
     text-align: center;
+    transform: translate(-50%,-50%);
     vertical-align: middle;
     word-break: normal;
   }
 }
-//@keyframes circle {
-//  100%{
-//    stroke-dashoffset:0;
-//  }
-//}
