@@ -15,7 +15,8 @@
   "scripts": {
     "dev": "dumi dev",
     "build:site": "rimraf doc-site && dumi build",
-    "preview:site": "npm run build:site && serve doc-site"
+    "preview:site": "npm run build:site && serve doc-site",
+    "init-cpnt":"node script/create-component-cli/index.js"
   },
   "dependencies": {
     "lodash": "^4.17.21",
