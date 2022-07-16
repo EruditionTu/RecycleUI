@@ -1,4 +1,5 @@
 import * as React from 'react';
+import useTimeout from '../_util/hooks/useTimeout';
 export interface ItemProps {
     content: string;
     type: MessageType;
@@ -40,6 +41,10 @@ const MsgIcon = (props: { type: MessageType }) => {
     </span>
 }
 const MessageItem: React.FC<ItemProps> = React.memo((props: ItemProps)=> {
+    const rmItem=React.useCallback(()=>{
+        
+    },[])
+    const timeout=useTimeout(rmItem,props.duration);
     return <div className='msg-row'>
     <div className='msg-item'>
         <MsgIcon type={props.type} />

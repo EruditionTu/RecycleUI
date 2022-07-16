@@ -5,7 +5,9 @@ import Button from "../../button";
 import "../../button/style";
 export default ()=>{
     const openMessage=()=>{
-        message.info()
+        message.success({
+            content:"success"
+        })
     }
     return <Button type={"primary"} onClick={openMessage}> Display normal message</Button>
 }
