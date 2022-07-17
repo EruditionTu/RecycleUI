@@ -14,7 +14,8 @@
             height: 32px;
             display: flex;
             justify-content: center;
-
+            margin-bottom: 10px;
+            transition: all 1s;
             .msg-item {
                 display: flex;
                 justify-content: center;
@@ -22,8 +23,11 @@
                 padding-right: 24px;
                 font-size: 14px;
                 text-align: center;
-                box-shadow: 1px 2px 10px #cdced0, -1px -2px 10px #d6d8db;
-                transition: all .8s cubic-bezier(.08,.82,.17,1) 0s;;
+                background-color: #ffffff;
+                box-shadow: 1px 2px 5px #cdced0, -1px -2px 5px #d6d8db;
+                transform: translateY(-100%);
+                opacity: 0;
+                animation: messageItemShow 1s ease forwards;
                 .msg-text {
                     line-height: 32px;
                 }
@@ -37,5 +41,17 @@
                 }
             }
         }
+    }
+}
+@keyframes messageItemShow {
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes messageItemHidden {
+    to{
+        transform: translateY(-2.5rem);
+        opacity: 0;
     }
 }
