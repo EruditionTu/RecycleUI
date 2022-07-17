@@ -6,7 +6,7 @@ import "../../button/style";
 export default ()=>{
     const [id,setId]=React.useState(0)
     const openMessage=()=>{
-        message.success("稳稳地"+id);
+        message.success({content:"看见你很高兴",type:"success"});
         setId(id+1)
     }
     return <Button type={"primary"} onClick={openMessage}> Display normal message</Button>

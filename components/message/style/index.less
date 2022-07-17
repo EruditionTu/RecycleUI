@@ -1,57 +1,31 @@
-#recycleui-message-container {
-    width: 100vw;
-    position: fixed;
-    z-index: 5000;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
 
-    .msg-box {
-        .msg-row {
-            width: 100%;
-            height: 32px;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-            transition: all 1s;
-            .msg-item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding-right: 24px;
-                font-size: 14px;
-                text-align: center;
-                background-color: #ffffff;
-                box-shadow: 1px 2px 5px #cdced0, -1px -2px 5px #d6d8db;
-                transform: translateY(-100%);
-                opacity: 0;
-                animation: messageItemShow 1s ease forwards;
-                .msg-text {
-                    line-height: 32px;
-                }
-                .msg-icon {
-                    line-height: 100%;
-                    display: inline-flex;
-                    height: 100%;
-                    align-items: center;
-                    margin-left: 10px;
-                    margin-right: 5px;
-                }
-            }
-        }
-    }
+.recycleui-message-container {
+  position: fixed;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 5px;
+  transform: translate(-50%, 0);
+  opacity: 1;
+  animation: concis-show-message 0.3s;
+  .msg-icon{
+    display: flex;
+  }
+  .toast-content {
+    margin: 0 10px;
+  }
 }
-@keyframes messageItemShow {
-    to{
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-@keyframes messageItemHidden {
-    to{
-        transform: translateY(-2.5rem);
-        opacity: 0;
-    }
+@keyframes concis-show-message {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

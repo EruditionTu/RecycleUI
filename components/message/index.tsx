@@ -1,252 +1,198 @@
-import * as React from 'react';
-import * as ReactDom from "react-dom";
-import useTimeout from '../_util/hooks/useTimeout';
-import MessageItem, { MessageType, MsgItemProps } from './MessageItem';
-//导出的消息对象接口
-export interface Message {
-    success: (msgInfo: string) => void;
-    // error: (msgInfo: MessageConfig) => void;
-    // info: (msgInfo: MessageConfig) => void;
-    // warn: (msgInfo: MessageConfig) => void;
-    // loading: (msgInfo: MessageConfig) => void;
-};
-// //导出对象的类
-// export class MessageClass implements MessageInterface{
-//     constructor(success) {
-//         this.=success
-//     }
-//     success(){
-//
-//     }
-// }
-//导出的消息对象
-let message: Message;
-export interface MessageParams{
-    content:MessageType;
-    duration?:number;
-    onClose?:()=>void;
+import React, { useState, useEffect, useMemo, useRef, CSSProperties } from 'react';
+import ReactDOM from 'react-dom';
+import MessageIcon, { MessageType } from './MessageIcon';
+import { MessageProps } from './MessageInterface';
+import Close from '../common/icon/close';
+export type Controler = (props: string | MessageProps<string>) => void;
+export interface MessageControl {
+    info: Controler;
+    success: Controler;
+    error: Controler;
+    normal: Controler;
+    warn: Controler;
+    loading: Controler;
 }
-// export interface MessageConfig {
-//     duration?: number;//默认自动关闭的时间
-//     maxCount?: number;//最大显示数量，超过限制时，最早的信息会被自动关闭
-//     top?: number;//消息距离顶部的距离
-// }
-
-//MessgeContainer组件state的接口
-export interface MessageContainerStateType{
-    nodeList: Array<MsgItemProps>;
-    activeIDList: Array<any>;
-    rmvList:Array<number>;
-    duration:number;
-    delay:number;
-}
-//节点列表
-export type MessageList = Array<MsgItemProps>;
-// class MessageContainer extends React.Component<any,MessageContainerStateType>{
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             nodeList: [],
-//             activeIDList: [],
-//             rmvList:[],
-//             duration:360,
-//             delay:3000
-//         };
-//         const addMessage = async (item:MsgItemProps) => {
-//             let nodeNew = [...this.state.nodeList];
-//             let id = new Date().getTime();
-//             nodeNew.push({
-//                 content:item.content,
-//                 id:id,
-//                 type:item.type,
-//                 duration:item.duration,
-//                 delay:item.delay
-//             })
-//             let newActiveIDList = [...this.state.activeIDList, id];
-//             return new Promise((resolve)=>{
-//                 this.setState({
-//                     ...this.state,
-//                     activeIDList: newActiveIDList,
-//                     nodeList: nodeNew,
-//                 },()=>{
-//                     resolve(id);
-//                 })
-//             })
-//         };
-//         const removeMessage = async (id) => {
-//             // let {
-//             //     duration,
-//             //     delay
-//             // } = this.state.nodeList.find(item=>item.id===id);
-//             const duration=150,delay=3000
-//             console.log(this.state.nodeList.find(item=>item.id===id))
-//             return new Promise((resolve, reject) =>{
-//                 setTimeout(()=>{
-//                     let newActiveIDList = this.state.activeIDList.filter(item=>item!==id)
-//                     this.setState({
-//                         ...this.state,
-//                         activeIDList:newActiveIDList
-//                     },()=>{
-//                         let newNodeList = this.state.nodeList.filter(item => item.id !== id);
-//                         setTimeout(() => {
-//                             this.setState({
-//                                 ...this.state,
-//                                 nodeList: newNodeList,
-//                             }, () => {
-//                                 resolve(id)
-//                             });
-//                         }, duration);
-//                     })
-//                 },delay)
-//             })
-//         };
-//         //创建一个success的message
-//         const addSuccess=async (content)=>{
-//             let lastIndex=await addMessage({
-//                 type:"success",
-//                 content:content,
-//                 duration:this.state.duration,
-//                 delay:this.state.delay
-//             })
-//             // const s=await removeMessage(lastIndex)
-//             // console.log(s)
-//             const rml=[...this.state.rmvList,Number(lastIndex)]
-//             this.setState({
-//                 ...this.state,
-//                 rmvList:rml
-//             },()=>{
-//                 console.log(this.state.rmvList)
-//                 console.log(this.state.nodeList)
-//             })
-//         }
-//         message= {
-//             success:addSuccess
-//         }
-//     }
-//     render(){
-//     return <div className='msg-box'>
-//         {
-//             this.state.nodeList.map((msgItem:MsgItemProps,msgIndex:number): React.ReactElement => {
-//                 return <MessageItem
-//                     index={msgIndex}
-//                     key={msgIndex}
-//                     id={msgItem.id}
-//                     content={msgItem.content}
-//                     duration={msgItem.duration}
-//                     delay={msgItem.delay}
-//                     type={msgItem.type}
-//                     hidden={this.state.activeIDList.indexOf(msgItem.id)===-1}
-//                 ></MessageItem>
-//             })
-//         }
-//     </div>
-//     }
-// }
-const MessageContainer = () => {
-    const [duration,setDuration]=React.useState(3);
-    const [delay,setDelay]=React.useState(1.5);
-    const [msgList, setMsgList] = React.useState<MessageList>([]);
-    const [preRemoveList,setPreRemoveList]=React.useState([])
-
-    //维护一个预先删除队列，每次删除一个
-    React.useEffect(()=>{
-        if(preRemoveList.length===0)return
-        setMsgList((oldList: MessageList): MessageList => {
-            const targetId=preRemoveList.shift();
-            const targetIdx=oldList.findIndex(item=>item.id===targetId)
-            oldList.splice(targetIdx,1)
-            return [...oldList]
-        })
-    },[preRemoveList,setMsgList])
-
-    //添加Message
-    const addMessage = React.useCallback((msgItem: MsgItemProps) => {
-        setMsgList((oldList: MessageList): MessageList => {
-            return [...oldList,msgItem]
-        })
-    }, [setMsgList])
-    //移除Message，不是真正意义上的删除，而是加入预先删除队列
-    const removeMessage = React.useCallback((id:number) => {
-        setPreRemoveList((oldList)=>{
-            return [...oldList,id]
-        })
-    }, [setPreRemoveList])
-    //添加Success
-    const addSuccess = React.useCallback((msg: string) => {
-        addMessage({
-            type: 'success',
-            content: msg,
-            duration:duration,
-            id:new Date().getTime(),
-            delay:delay
-        })
-    }, [addMessage])
-    // // 添加Info
-    // const addInfo = React.useCallback((msg: MessageParams) => {
-    //     addMessage({
-    //         type: 'info',
-    //         content: msg.content,
-    //         duration:duration
-    //     })
-    // }, [addMessage])
-    // //添加error
-    // const addError = React.useCallback((msg: MessageParams) => {
-    //     addMessage({
-    //         type: 'error',
-    //         content: msg.content,
-    //         duration:msg.duration
-    //     })
-    // }, [addMessage])
-    // //添加warn
-    // const addWarn = React.useCallback((msg: MessageParams)=>{
-    //     addMessage({
-    //         type: 'warn',
-    //         content:msg.content,
-    //         duration:msg.duration
-    //     })
-    // },[addMessage])
-    // //添加loading
-    // const addLoading = React.useCallback((msg: MessageParams)=>{
-    //     addMessage({
-    //         type: 'warn',
-    //         content: msg.content,
-    //         duration: msg.duration
-    //     })
-    // },[addMessage])
-    message={
-        success:addSuccess
-    }
-    // message.info=addInfo;
-    // message.error=addError;
-    // message.warn=addWarn;
-    // message.loading=addLoading;
-    return <div className='msg-box'>
-        {
-            msgList.map((msgItem: MsgItemProps,msgIndex:number): React.ReactElement => {
-                return <MessageItem
-                    id={msgItem.id}
-                    key={msgItem.id}
-                    content={msgItem.content}
-                    duration={msgItem.duration}
-                    type={msgItem.type}
-                    delay={delay}
-                    rmvMessage={removeMessage}
-                    index={msgIndex}
-                ></MessageItem>
-            })
+let container: HTMLDivElement | null;//包裹消息组件的容器
+let topMessageNum: number = 0;//统计在上面出现的message条数
+let bottomMessageNum: number = 0;//统计在下面出现的message条数
+/**
+ * 手动移除某个节点
+ * @param id 节点id
+ * @param position top/bottom节点出现的位置
+ */
+function remove(id: string, position: string) {
+    //重排节点下元素高度
+    const container = document.querySelector('.all-container');
+    const children = Array.prototype.slice.call(container?.childNodes);
+    for (let key in children) {
+        if (children[key].getAttribute('class') === `${position}-${id}`) {
+            const removeDom = children[key];
+            //移除节点
+            container?.removeChild(removeDom);
+            if (position === 'top') {
+                topMessageNum--;
+            } else {
+                bottomMessageNum--;
+            }
+            //改变高度
+            changeHeight(children.slice(Number(key)), position);
         }
-    </div>
+    }
 }
-//检查页面上是不是含有message容器,没有的话加上
-(function initMessageContainer() {
-    let messageContainer = document.getElementById("recycleui-message-container");
-    if (messageContainer) return;
-    //不存在容器那么进行创建
-    messageContainer = document.createElement('div');
-    messageContainer.id = 'recycleui-message-container';
-    document.body.appendChild(messageContainer);
-    //将react组件挂载到dom上面
-    ReactDom.render(<MessageContainer></MessageContainer>, messageContainer)
-    return
-})()
-export default message;
+/**
+ * 改变元素位置属性
+ * @param children 消息节点的dom数组
+ * @param position 消息节点出现的位置 top/bottom
+ */
+function changeHeight(children: Array<HTMLElement>, position: any) {
+    for (let key in children) {
+        const child = children[key].childNodes[0] as HTMLElement;
+        if (children[key].getAttribute('class')?.startsWith(position)) {
+            child.style[position] = Number(child.style[position].split('p')[0]) - 70 + 'px';
+        }
+    }
+}
+/**
+ * 消息节点的组件
+ * @param props 
+ * @returns 
+ */
+const Message = (props: MessageProps<string>) => {
+    const { style, content, type, duration, position, clearable, messageBoxId } = props;
+    //隐藏属性的控制值，用来配合实现动画
+    const [opac, setOpac] = useState(1);
+    //获取message组件的渲染实例，来通过transform属性设置组件的位置
+    const messageDom = useRef<any>(null);
+    //全局组件类名前缀--注意一下我之后对组件库的补充就在全局的名称前缀上面了
+    // const { prefixCls } = useContext(globalCtx) as GlobalConfigProps;
+    const classNames = 'recycleui-message-container'
+    //组件初次加载，数量加1，并在出现动画结束之后移除动画并加上过度属性
+    useEffect(() => {
+        if (position === 'top') {
+            topMessageNum++;
+        } else {
+            bottomMessageNum++;
+        }
+        //在出现动画执行完毕之后，移除动画，并加上过度属性
+        setTimeout(() => {
+            (messageDom.current as HTMLElement).style.transition = '0.2s linear';
+            (messageDom.current as HTMLElement).style.animation = 'none';
+        }, 300);
+        //在时间间隔之后，设置opcity属性，将元素满满隐藏起来作为移除动画
+        setTimeout(() => {
+            setOpac(0);
+        }, duration);
+    }, []);
+    //设置每一个message的transform位置
+    useEffect(() => {
+        const transform = position || 'top';
+        (messageDom?.current as HTMLElement).style[transform] =
+            (transform === 'top' ? topMessageNum : bottomMessageNum) * 70 + 'px';
+    }, [topMessageNum, bottomMessageNum]);
+
+    const closeMessage = () => {
+        remove(messageBoxId as string, position as string);
+    };
+
+    return (
+        <div className={classNames} style={{ opacity: opac, ...style }} ref={messageDom}>
+            <MessageIcon type={type} />
+            <span className="toast-content">{content}</span>
+            {
+                clearable &&
+                <span className='msg-icon'><Close onClick={closeMessage} width='16' height="16"/></span>
+            }
+        </div>
+    );
+};
+
+/**
+ * 添加消息
+ * @param type 消息类型
+ * @param props 消息配置
+ */
+function addInstance(
+    type: MessageType,
+    props: string | MessageProps<string>,
+) {
+    let style: CSSProperties = {},//消息样式
+        duration: number = 3000,//消息列表消失的时间间隔
+        content,//消息内容
+        position: 'top' | 'bottom' = 'top',//位置
+        clearable = false;//显示关闭图标
+    if (typeof props === 'object') {
+        style = props.style || {};
+        duration = props.duration || 3000;
+        content = props.content;
+        position = props.position ? props.position : 'top';
+        clearable = props.clearable ? props.clearable : false;
+    } else if (typeof props === 'string') {
+        content = props;
+    }
+    const div = document.createElement('div');
+    //获得一个独一无二的标识符
+    const messageBoxId = String(Math.floor(Math.random() * 1000));
+    div.setAttribute('class', `${position}-${messageBoxId}`);
+    //是否存在消息盒子，不存在就创建
+    if (container) {
+        container.appendChild(div);
+    } else {
+        container = document.createElement('div');
+        container.setAttribute('class', 'all-container');
+        document.body.appendChild(container);
+        container.appendChild(div);
+    }
+    //设置时间间隔来移除消息div，+200是为了等移除动画结束再删除dom节点
+    setTimeout(() => {
+        if (Array.prototype.slice.call(container?.childNodes).includes(div)) {
+            changeHeight(Array.prototype.slice.call(container?.childNodes), position);
+            container?.removeChild(div);
+            if (position === 'top') {
+                topMessageNum--;
+            } else {
+                bottomMessageNum--;
+            }
+        }
+    }, duration + 200);
+    //把Message组件挂载到真实的divDom节点上
+    ReactDOM.render(
+        <Message
+            style={style}//组件的自定义样式
+            content={content}//组件的展示内容
+            type={type}//组件的类型
+            duration={duration}//消息组件删除的时间间隔
+            position={position}//组件出现的位置
+            clearable={clearable}//是否展示关闭icon
+            messageBoxId={messageBoxId}
+        />,
+        div,
+    );
+}
+
+const info: Controler = (props: string | MessageProps<string>) => {
+    return addInstance('info', props);
+};
+const success: Controler = (props: string | MessageProps<string>) => {
+    return addInstance('success', props);
+};
+const error: Controler = (props: string | MessageProps<string>) => {
+    return addInstance('error', props);
+};
+const normal: Controler = (props: string | MessageProps<string>) => {
+    return addInstance('normal', props);
+};
+const warn: Controler = (props: string | MessageProps<string>) => {
+    return addInstance('warn', props);
+};
+const loading: Controler = (props: string | MessageProps<string>) => {
+    return addInstance('info', props);
+};
+let message: MessageControl = {
+    info,
+    success,
+    error,
+    normal,
+    warn,
+    loading
+}
+export default message
