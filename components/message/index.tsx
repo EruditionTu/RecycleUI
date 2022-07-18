@@ -185,7 +185,7 @@ const warn: Controler = (props: string | MessageProps<string>) => {
     return addInstance('warn', props);
 };
 const loading: Controler = (props: string | MessageProps<string>) => {
-    return addInstance('info', props);
+    return addInstance('loading', props);
 };
 let message: MessageControl = {
     info,

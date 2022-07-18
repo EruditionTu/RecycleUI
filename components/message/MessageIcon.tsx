@@ -3,6 +3,7 @@ import Error from '../common/icon/error';
 import Info from '../common/icon/info';
 import Success from '../common/icon/success';
 import Warn from '../common/icon/warn';
+import Loading from '../common/icon/loading/loading';
 export type MessageType = "success" | "error" | "info" | "loading" | "warn"|"normal";
 const MessageIcon = (props: { type?: MessageType }) => {
     console.log(props.type)
@@ -24,9 +25,8 @@ const MessageIcon = (props: { type?: MessageType }) => {
         return <span className={"msg-icon"}>
             <Warn width="16" height="16"/>
         </span>
-    //loadingIcon
-    return <span>
-
+    return <span className={"msg-icon"}>
+        <Loading/>
     </span>
 }
 export default MessageIcon;
