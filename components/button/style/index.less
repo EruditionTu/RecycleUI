@@ -1,214 +1,213 @@
 @import "mixin.less";
-.btn-primary-hover{
+.btn-primary-hover {
   .type-primary-hover();
 }
-.btn-white-hover{
+.btn-white-hover {
   .bg-white-hover(@blue-base);
 }
-.btn-default-circle{
+.btn-default-circle {
   .common(@default,@default-fontsize);
   .white-background();
   .type-default(@btn-white-bg-bordercolor);
   .shape-circle();
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .white-background();
     .type-default(@btn-white-bg-bordercolor);
     .shape-circle();
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .white-background();
     .type-default(@btn-white-bg-bordercolor);
     .shape-circle();
   }
 }
-.btn-default-rect{
+.btn-default-rect {
   .common(@default,@default-fontsize);
   .white-background();
   .type-default(@btn-white-bg-bordercolor);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .white-background();
     .type-default(@btn-white-bg-bordercolor);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .white-background();
     .type-default(@btn-white-bg-bordercolor);
   }
 }
-.btn-default-round{
+.btn-default-round {
   .common(@default,@default-fontsize);
   .white-background();
   .type-default(@btn-white-bg-bordercolor);
   .shape-round(@default,20px);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .white-background();
     .type-default(@btn-white-bg-bordercolor);
     .shape-round(@large,20px);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .white-background();
     .type-default(@btn-white-bg-bordercolor);
     .shape-round(@small,20px);
   }
 }
-.btn-primary-circle{
+.btn-primary-circle {
   .common(@default,@default-fontsize);
   .type-primary(@blue-base);
   .shape-circle();
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .type-primary(@blue-base);
     .shape-circle();
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .type-primary(@blue-base);
     .shape-circle();
   }
 }
-.btn-primary-rect{
+.btn-primary-rect {
   .common(@default,@default-fontsize);
   .type-primary(@blue-base);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .type-primary(@blue-base);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .type-primary(@blue-base);
   }
 }
-.btn-primary-round{
+.btn-primary-round {
   .common(@default,@default-fontsize);
   .type-primary(@blue-base);
   .shape-round(@default,20px);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .type-primary(@blue-base);
     .shape-round(@large,20px);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .type-primary(@blue-base);
     .shape-round(@small,20px);
   }
 }
-.btn-dashed-circle{
+.btn-dashed-circle {
   .common(@default,@default-fontsize);
   .white-background();
   .type-dashed(@btn-white-bg-bordercolor);
   .shape-circle();
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .white-background();
     .type-dashed(@btn-white-bg-bordercolor);
     .shape-circle();
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .white-background();
     .type-dashed(@btn-white-bg-bordercolor);
     .shape-circle();
   }
 }
-.btn-dashed-rect{
+.btn-dashed-rect {
   .common(@default,@default-fontsize);
   .white-background();
   .type-dashed(@btn-white-bg-bordercolor);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .white-background();
     .type-dashed(@btn-white-bg-bordercolor);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .white-background();
     .type-dashed(@btn-white-bg-bordercolor);
   }
 }
-.btn-dashed-round{
+.btn-dashed-round {
   .common(@default,@default-fontsize);
   .white-background();
   .type-dashed(@btn-white-bg-bordercolor);
   .shape-round(@default,20px);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .white-background();
     .type-dashed(@btn-white-bg-bordercolor);
     .shape-round(@large,20px);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .white-background();
     .type-dashed(@btn-white-bg-bordercolor);
     .shape-round(@small,20px);
   }
 }
-.text{
+.text {
   .common(@default,@default-fontsize);
   .type-text(@black-base);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .type-text(@black-base);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .type-text(@black-base);
   }
-  &-danger{
+  &-danger {
     color: @red-base;
   }
 }
-.link{
+.link {
   .common(@default,@default-fontsize);
   .type-link(@blue-base);
-  &-lg{
+  &-lg {
     .common(@large,@large-fontsize);
     .type-link(@blue-base);
   }
-  &-sm{
+  &-sm {
     .common(@small,@small-fontsize);
     .type-link(@blue-base);
   }
-  &-danger{
-    color:@red-base;
+  &-danger {
+    color: @red-base;
   }
 }
-.btn-disabled{
+.btn-disabled {
   .disabled();
   background-color: @disable-background-color;
-  border:  @disable-border-color solid 0.1px;
+  border: @disable-border-color solid 0.1px;
 }
-.text-disabled{
+.text-disabled {
   .disabled();
 }
-.link-disabled{
+.link-disabled {
   .disabled();
   text-decoration: none;
 }
-.btn-primary-danger{
+.btn-primary-danger {
   .type-primary(@red-base);
 }
-.btn-default-danger{
+.btn-default-danger {
   .type-default(@red-base);
   color: @red-base;
 }
-.btn-dashed-danger{
+.btn-dashed-danger {
   .type-dashed(@red-base);
   color: @red-base;
 }
-.block{
+.block {
   width: 100%;
 }
-.loading{
+.loading {
   opacity: 60%;
-  &:hover{
+  &:hover {
     cursor: default;
   }
 }
-

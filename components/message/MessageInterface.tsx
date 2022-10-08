@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react';
-import {MessageType} from './MessageIcon';
+import { CSSProperties } from "react";
+import { MessageType } from "./MessageIcon";
 interface MessageProps<T> {
   /**
    * @description 对象类型传参时的内容
@@ -18,7 +18,7 @@ interface MessageProps<T> {
    * @description 显示位置
    * @default top
    */
-  position?: 'top' | 'bottom';
+  position?: "top" | "bottom";
   /**
    * @description 出现可清除按钮
    * @default false

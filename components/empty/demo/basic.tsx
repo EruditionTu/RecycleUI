@@ -1,8 +1,10 @@
 import * as React from "react";
 import Empty from "../";
-import "../style"
-export default ()=>{
-    return <>
-    <Empty/>
+import "../style";
+export default () => {
+  return (
+    <>
+      <Empty />
     </>
-}
+  );
+};

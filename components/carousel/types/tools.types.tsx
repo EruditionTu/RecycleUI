@@ -1,5 +1,5 @@
-export interface carouselPluginresolverReturnTypes{
-    carouselClassNames?:any;
-    beforeCarouselItems?:any;
-    afterCarouselItems?:any;
+export interface carouselPluginresolverReturnTypes {
+  carouselClassNames?: any;
+  beforeCarouselItems?: any;
+  afterCarouselItems?: any;
 }

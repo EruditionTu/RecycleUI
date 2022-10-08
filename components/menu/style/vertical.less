@@ -1,4 +1,4 @@
-.vertical-menu-article{
+.vertical-menu-article {
   user-select: none;
   height: 40px;
   margin-top: 4px;
@@ -7,18 +7,19 @@
   text-overflow: ellipsis;
   display: flex;
   align-items: center;
-  transition: border-color 0.3s, background 0.3s, padding 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: border-color 0.3s, background 0.3s,
+    padding 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
   width: 100%;
   position: relative;
   white-space: nowrap;
   cursor: pointer;
 }
-.vertical-menu{
+.vertical-menu {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-variant: tabular-nums;
-  font-feature-settings: 'tnum', "tnum";
+  font-feature-settings: "tnum", "tnum";
   color: rgba(0, 0, 0, 0.85);
   width: 100%;
   font-size: 14px;
@@ -26,30 +27,31 @@
   list-style: none;
   background: #fff;
   outline: none;
-  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%),
+    0 9px 28px 8px rgb(0 0 0 / 5%);
   transition: background 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   border-right: 1px solid #f0f0f0;
-  .menu-item{
+  .menu-item {
     .vertical-menu-article();
-    &-light{
-      &:hover{
+    &-light {
+      &:hover {
         color: @light-active-font-color;
       }
-      &-selected{
+      &-selected {
         background-color: @light-active-background-color;
         color: @light-active-font-color;
       }
     }
-    &-dark{
-      &:hover{
+    &-dark {
+      &:hover {
         color: @dark-active-font-color;
       }
-      &-selected{
+      &-selected {
         background-color: @dark-active-background-color;
         color: @dark-active-font-color;
       }
     }
-    &-content{
+    &-content {
       padding-left: 16px;
       transition: color 0.3s;
       flex: auto;
@@ -58,28 +60,28 @@
       text-overflow: ellipsis;
     }
   }
-  .sub-menu{
+  .sub-menu {
     .vertical-menu-article();
-    &-light{
-      &:hover{
+    &-light {
+      &:hover {
         color: @light-active-font-color;
       }
-      &-selected{
-        color:@light-active-font-color;
+      &-selected {
+        color: @light-active-font-color;
       }
     }
-    &-dark{
-      &:hover{
+    &-dark {
+      &:hover {
         color: @dark-active-font-color;
       }
-      &-selected{
-        color:@dark-active-font-color;
+      &-selected {
+        color: @dark-active-font-color;
       }
     }
-    &-title{
+    &-title {
       padding-left: 16px;
     }
-    &-arrow{
+    &-arrow {
       position: absolute;
       top: 50%;
       right: 16px;
@@ -87,15 +89,13 @@
       transform: translateY(-50%);
       transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
-    &-popup{
+    &-popup {
       left: 100%;
       top: 0;
       margin-left: 4px;
       user-select: none;
       position: absolute;
-      box-shadow:
-              0 3px 6px -4px #9b9e9e,
-              0 6px 16px 0 #e6e6e6;
+      box-shadow: 0 3px 6px -4px #9b9e9e, 0 6px 16px 0 #e6e6e6;
       font-size: 14px;
       z-index: 9999;
       min-width: 16px;
@@ -104,15 +104,15 @@
       border-radius: 2px;
       display: flex;
       flex-direction: column;
-      &-light{
+      &-light {
         background-color: @light-background-color;
-        color:@light-font-color;
+        color: @light-font-color;
       }
-      &-dark{
+      &-dark {
         background-color: @dark-background-color;
-        color:@dark-font-color;
+        color: @dark-font-color;
       }
-      &-item{
+      &-item {
         margin: 0;
         text-align: left;
         list-style: none;
@@ -121,10 +121,10 @@
         padding: 0 20px;
         border-color: @light-font-color;
         position: relative;
-        &-label{
+        &-label {
           transition: color 0.3s;
         }
-        &-arrow{
+        &-arrow {
           position: absolute;
           top: 50%;
           right: 12px;
@@ -132,24 +132,24 @@
           transform: translateY(-50%);
           transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
-        &-light{
-          &:hover{
+        &-light {
+          &:hover {
             color: @light-active-font-color;
           }
-          &-selected{
+          &-selected {
             color: @light-active-font-color;
-            &-nopopup{
+            &-nopopup {
               background-color: @light-active-background-color;
             }
           }
         }
-        &-dark{
-          &:hover{
+        &-dark {
+          &:hover {
             color: @dark-active-font-color;
           }
-          &-selected{
+          &-selected {
             color: @dark-active-font-color;
-            &-nopopup{
+            &-nopopup {
               background-color: @dark-active-background-color;
             }
           }

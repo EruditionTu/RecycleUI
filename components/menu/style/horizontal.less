@@ -1,15 +1,16 @@
-.horizontal-menu-article{
+.horizontal-menu-article {
   position: relative;
   margin: 0;
   padding: 0 20px;
   white-space: nowrap;
   cursor: pointer;
-  transition: border-color 0.3s, background 0.3s, padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.3s, background 0.3s,
+    padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   height: 100%;
   display: inline-block;
   vertical-align: bottom;
 }
-.horizontal-menu{
+.horizontal-menu {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -20,79 +21,79 @@
   text-align: left;
   list-style: none;
   outline: none;
-  transition: background .3s,width .3s cubic-bezier(.2,0,0,1) 0s;
+  transition: background 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   border: 0;
-  border-bottom: 1px solid rgba(0,0,0,.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: row;
   align-items: center;
   box-shadow: none;
-  .menu-item{
-    &-light{
+  .menu-item {
+    &-light {
       .horizontal-menu-article();
-      &::after{
+      &::after {
         position: absolute;
         right: 20px;
         bottom: 0;
         left: 20px;
         border-bottom: 2px solid transparent;
         transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-        content: '';
+        content: "";
       }
-      &-active{
-        &::after{
+      &-active {
+        &::after {
           border-bottom: 2px solid @light-active-font-color;
         }
       }
-      &:hover{
+      &:hover {
         color: @light-active-font-color;
       }
-      &-selected{
-        &::after{
+      &-selected {
+        &::after {
           border-bottom: 2px solid @light-active-font-color;
         }
         color: @light-active-font-color;
       }
     }
-    &-dark{
+    &-dark {
       .horizontal-menu-article();
-      &:hover{
+      &:hover {
         background-color: @dark-active-background-color;
-        color:@dark-active-font-color;
+        color: @dark-active-font-color;
       }
-      &-selected{
+      &-selected {
         background-color: @dark-active-background-color;
         color: @dark-active-font-color;
       }
     }
-    &-content{
+    &-content {
       transition: color 0.3s;
       user-select: none;
     }
   }
-  .sub-menu{
+  .sub-menu {
     .horizontal-menu-article();
-    &-title{
+    &-title {
       transition: color 0.3s;
       user-select: none;
     }
-    &-light{
-      &:hover{
-        color:@light-active-font-color;
+    &-light {
+      &:hover {
+        color: @light-active-font-color;
       }
-      &-selected{
-        color:@light-active-font-color;
-      }
-    }
-    &-dark{
-      &:hover{
-        color: @dark-active-font-color;
-      }
-      &-selected{
-        color: @dark-active-font-color;
+      &-selected {
+        color: @light-active-font-color;
       }
     }
-    .after{
+    &-dark {
+      &:hover {
+        color: @dark-active-font-color;
+      }
+      &-selected {
+        color: @dark-active-font-color;
+      }
+    }
+    .after {
       display: inline-block;
       position: absolute;
       right: 20px;
@@ -100,22 +101,20 @@
       left: 20px;
       border-bottom: 2px solid transparent;
       transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-      content: '';
-      &-active{
+      content: "";
+      &-active {
         border-bottom: 2px solid @light-active-font-color;
       }
-      &-selected{
+      &-selected {
         border-bottom: 2px solid @light-active-font-color;
       }
     }
-    &-popup{
+    &-popup {
       user-select: none;
       position: absolute;
       left: 0;
       right: auto;
-      box-shadow:
-              0 3px 6px -4px #9b9e9e,
-              0 6px 16px 0 #e6e6e6;
+      box-shadow: 0 3px 6px -4px #9b9e9e, 0 6px 16px 0 #e6e6e6;
       font-size: 14px;
       z-index: 9999;
       min-width: 16px;
@@ -126,21 +125,21 @@
       display: flex;
       flex-direction: column;
       flex: 1;
-      &-light{
+      &-light {
         background-color: @light-background-color;
-        color:@light-font-color;
+        color: @light-font-color;
       }
-      &-dark{
+      &-dark {
         background-color: @dark-background-color;
-        color:@dark-font-color;
+        color: @dark-font-color;
       }
-      &-deep{
+      &-deep {
         position: absolute;
         left: 100%;
         margin-top: -50%;
         margin-left: 5px;
       }
-      &-item{
+      &-item {
         margin: 0;
         text-align: left;
         list-style: none;
@@ -149,10 +148,10 @@
         padding: 0 20px;
         border-color: @light-font-color;
         position: relative;
-        &-label{
+        &-label {
           transition: color 0.3s;
         }
-        &-arrow{
+        &-arrow {
           position: absolute;
           top: 50%;
           right: 12px;
@@ -160,26 +159,26 @@
           transform: translateY(-50%);
           transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
-        &-light{
-          &:hover{
+        &-light {
+          &:hover {
             color: @light-active-font-color;
             border-color: @light-active-font-color;
           }
-          &-selected{
+          &-selected {
             color: @light-active-font-color;
             border-color: @light-active-font-color;
-            &-nopopup{
+            &-nopopup {
               background-color: @light-active-background-color;
             }
           }
         }
-        &-dark{
-          &:hover{
+        &-dark {
+          &:hover {
             color: @dark-active-font-color;
           }
-          &-selected{
+          &-selected {
             color: @dark-active-font-color;
-            &-nopopup{
+            &-nopopup {
               background-color: @dark-active-background-color;
             }
           }

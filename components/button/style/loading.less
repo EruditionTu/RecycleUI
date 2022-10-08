@@ -1,40 +1,40 @@
 @import "mixin.less";
-.common(){
+.common() {
   display: inline-block;
-  border-radius:50%;
-  animation:rotate 0.5s linear infinite;
+  border-radius: 50%;
+  animation: rotate 0.5s linear infinite;
   margin-right: 4px;
-  width:10px;
-  height:10px;
+  width: 10px;
+  height: 10px;
 }
 .rotate-animate {
-  &-whitebg-default{
+  &-whitebg-default {
     .common();
-    .animate-color(@white-base,@blue-base)
+    .animate-color(@white-base,@blue-base);
   }
-  &-whitebg-danger{
+  &-whitebg-danger {
     .common();
-    .animate-color(@white-base,@red-base)
+    .animate-color(@white-base,@red-base);
   }
-  &-primary-default{
+  &-primary-default {
     .common();
     .animate-color(@blue-base,@white-base);
   }
-  &-primary-danger{
+  &-primary-danger {
     .common();
     .animate-color(@red-base,@white-base);
   }
 }
-.animate-color(@bordercolor,@borderTopColor){
-  border:0.2px solid @bordercolor;
+.animate-color(@bordercolor,@borderTopColor) {
+  border: 0.2px solid @bordercolor;
   border-top: 0.2px solid @borderTopColor;
 }
 
-@keyframes rotate{
-  0%{
+@keyframes rotate {
+  0% {
     transform: rotate(0deg);
   }
-  100%{
-    transform:rotate(360deg);
+  100% {
+    transform: rotate(360deg);
   }
 }

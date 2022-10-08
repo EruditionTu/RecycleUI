@@ -1,9 +1,7 @@
 import pluginsFunction from "../plugins";
 import { pluginNames } from "../types/plugins.types";
-const {
-    arrows
-}=pluginsFunction;
+const { arrows } = pluginsFunction;
 
-export const plugins:any={
-    [pluginNames.ARROWS]:arrows
-}
+export const plugins: any = {
+  [pluginNames.ARROWS]: arrows,
+};

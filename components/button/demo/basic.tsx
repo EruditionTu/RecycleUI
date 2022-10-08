@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Button from '../button';
+import * as React from "react";
+import Button from "../button";
 import "../style";
 
 const App: React.FC = () => (
@@ -17,4 +17,3 @@ const App: React.FC = () => (
 );
 
 export default App;
-
