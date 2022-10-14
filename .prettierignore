@@ -1,0 +1,10 @@
+*.html
+*.md
+.prettierignore
+.gitignore
+.eslintignore
+/.idea/
+/.umi/
+/.husky/
+/node_modules/
+/example/node_modules/

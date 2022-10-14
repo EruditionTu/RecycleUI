@@ -8,8 +8,9 @@
     "build:site": "rimraf doc-site && dumi build",
     "preview:site": "npm run build:site && serve doc-site",
     "husky:prepare": "husky install",
-    "precommit":"node script/precommit.js",
-    "commitmsg":"node script/commitmsg.js",
+    "lint:fix": "eslint --ext .js,.jsx,ts,.tsx --quiet --fix",
+    "lint:format": "prettier --loglevel warn --write",
+    "lint":"lint-staged",
     "init:component": "node script/create-component-cli/index.js"
   },
   "devDependencies": {
@@ -40,6 +41,12 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "recoil": "^0.7.2"
+  },
+  "lint-staged":{
+    "*.{js,jsx,ts,tsx}":[
+      "npm run lint:fix",
+      "npm run lint:format"
+    ]
   },
   "config": {
     "commitizen": {
