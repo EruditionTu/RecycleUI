@@ -1,22 +1,14 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript',
-    'prettier'
-  ],
-  overrides: [
-  ],
+  extends: ['plugin:react/recommended', 'standard-with-typescript', 'prettier'],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  plugins: [
-    'react'
-  ],
-  rules: {
-  }
-}
+  plugins: ['react'],
+  rules: {},
+};
