@@ -10,7 +10,7 @@
     "husky:prepare": "husky install",
     "lint:fix": "eslint --ext .js,.jsx,ts,.tsx --quiet --fix",
     "lint:format": "prettier --loglevel warn --write",
-    "lint":"lint-staged",
+    "lint": "lint-staged",
     "init:component": "node script/create-component-cli/index.js"
   },
   "devDependencies": {
@@ -31,7 +31,7 @@
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.8",
     "husky": "^7.0.2",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "^12.5.0",
     "prettier": "^2.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -42,8 +42,8 @@
     "lodash": "^4.17.21",
     "recoil": "^0.7.2"
   },
-  "lint-staged":{
-    "*.{js,jsx,ts,tsx}":[
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
       "npm run lint:fix",
       "npm run lint:format"
     ]
