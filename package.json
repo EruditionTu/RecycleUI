@@ -8,7 +8,7 @@
     "build:site": "rimraf doc-site && dumi build",
     "preview:site": "npm run build:site && serve doc-site",
     "husky:prepare": "husky install",
-    "lint:fix": "eslint --ext .js,.jsx,ts,.tsx --quiet --fix",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --quiet --fix",
     "lint:format": "prettier --loglevel warn --write",
     "lint": "lint-staged",
     "init:component": "node script/create-component-cli/index.js"
