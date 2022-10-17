@@ -2,7 +2,6 @@ module.exports = {
   root: true,
   extends: [
     'airbnb',
-    // 'airbnb-typescript',
     'prettier',
     'plugin:compat/recommended',
     'plugin:react/recommended',
@@ -18,7 +17,6 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
       impliedStrict: true,
@@ -30,10 +28,10 @@ module.exports = {
     },
     polyfills: ['Promise', 'URL'],
   },
-  // parser: '@typescript-eslint/parser',
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
       parserOptions: {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
