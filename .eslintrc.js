@@ -2,10 +2,10 @@ module.exports = {
   root: true,
   extends: [
     'airbnb',
-    'prettier',
     'plugin:compat/recommended',
     'plugin:react/recommended',
     'plugin:import/typescript',
+    'prettier',
     'standard-with-typescript',
   ],
   env: {
@@ -40,11 +40,13 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
         'no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 2,
+        '@typescript-eslint/no-use-before-define': 2,
         '@typescript-eslint/consistent-type-imports': 2,
+        '@typescript-eslint/no-shadow': [2, { ignoreTypeValueShadow: true }],
       },
     },
   ],
-  plugins: ['react', 'babel', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react', 'babel', '@typescript-eslint', 'react-hooks', 'prettier'],
   rules: {
     'react/jsx-one-expression-per-line': 0,
     'react/prop-types': 0,
@@ -80,7 +82,6 @@ module.exports = {
           '**/*.test.js',
           '**/__tests__/*',
           '*.config.js',
-          '**/*.md',
         ],
       },
     ],
@@ -108,9 +109,7 @@ module.exports = {
 
     // https://github.com/typescript-eslint/typescript-eslint/issues/2540#issuecomment-692866111
     'no-use-before-define': 0,
-    '@typescript-eslint/no-use-before-define': 2,
     'no-shadow': 0,
-    '@typescript-eslint/no-shadow': [2, { ignoreTypeValueShadow: true }],
     // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
     'no-undef': 0,
   },
