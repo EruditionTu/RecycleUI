@@ -4,5 +4,15 @@
 /.idea/
 /.umi/
 /.husky/
+/packages/*/demo
 /node_modules/
 /example/node_modules/
+
+
+/docs/
+/packages/common
+/packages/message
+/packages/empty
+/packages/dropdown
+/packages/process
+typings.d.ts

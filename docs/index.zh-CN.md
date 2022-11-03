@@ -1,5 +1,5 @@
 ---
-title: Universal React component library
+title: 通用的React组件库
 full: true
 gapless: true
 ---

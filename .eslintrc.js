@@ -71,8 +71,10 @@ module.exports = {
     'react-hooks/rules-of-hooks': 2, // Checks rules of Hooks
     'react/function-component-definition': 0,
     'react/no-unused-class-component-methods': 0,
+    'react/jsx-no-useless-fragment': 'off',
     'import/extensions': 0,
     'import/no-cycle': 0,
+    'import/no-named-as-default': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {
@@ -94,7 +96,6 @@ module.exports = {
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-for.md
     'jsx-a11y/label-has-for': 0,
 
-    'comma-dangle': ['error', 'always-multiline'],
     'consistent-return': 0, // TODO: remove later
     'no-param-reassign': 0, // TODO: remove later
     'no-underscore-dangle': 0,
@@ -112,5 +113,6 @@ module.exports = {
     'no-shadow': 0,
     // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
     'no-undef': 0,
+    '@typescript-eslint/strict-boolean-expressions': 'off',
   },
 };

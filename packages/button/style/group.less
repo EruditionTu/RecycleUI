@@ -1,0 +1,15 @@
+.button-group{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    &>[class~="button-container"]{
+        margin: 0;
+        border-left: 1px white solid;
+        &:first-child{
+            border-left: 0;
+        }
+        &>[class~="solid"],[class~="transparent"]{
+            border-radius: 0;
+        }
+    }
+}
