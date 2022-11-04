@@ -11,73 +11,61 @@ group:
 
 The button is used to start an instant operation.
 
-## Basic use
+## Button Type
+The most basic buttons have four types.
+* Main Button: used for the main moving point. One operation area can only have one main button. The main button is generally solid.
+* Secondary button: it is used for a group of action points without primary and secondary points. The secondary button is generally empty.
+* Text button: used for the secondary action point. It is a text description without a border background.
+* Link button: generally used for linking, that is, navigating to a location. It is a colored text link without a border background.
+  <code src="./demo/type.tsx"></code>
 
-The most basic button has five states.
-<!-- 
-<code src="./demo/basic.tsx" /> -->
+## Buttons for different scenes
+If the button is the main button solid or the secondary button transparent, there will be four kinds of buttons in the scene.
+* routine：A button in the most common scenario
+* info：It is generally applicable to clicking the button in a certain information scenario
+* danger：It is generally applicable to clicking a button that will perform some dangerous operation
+* warn：It is generally applicable to clicking the button that will cause some impact. The impact can be good or bad, and it is lighter than that of danger
+  <code src="./demo/purpose.tsx"></code>
 
-## Long button
+## Loading
 
-Customize the width and height to configure different size buttons.
+loading configure load status button
 
-<!-- <code src="./demos/index2.tsx" /> -->
+<code src="./demo/loading.tsx"></code>
 
-## Font Button
+## Disabled
 
-Configure the Circle button.
+disabled configure buttons in the disabled state
 
-<!-- <code src="./demos/index3.tsx" /> -->
+<code src="./demo/disabled.tsx"></code>
 
-## Disable button
+## Button Shape
 
-Configure the disabled disable button.
+The shape of the button can only appear in the button whose type is solid and transparent.
 
-<!-- <code src="./demos/index4.tsx" /> -->
+<code src="./demo/shape.tsx"></code>
 
-## Dashed button
-
-Dashed button is configured.
-
-<!-- <code src="./demos/index5.tsx" /> -->
-
-## Loading status
-
-Loading Configure the loading status button.
-
-<!-- <code src="./demos/index6.tsx" /> -->
-
-## Icon button
-
-Customize icon buttons through icon attributes.
-
-<!-- <code src="./demos/index8.tsx" /> -->
-
-## Button group
+## Button Group
 
 Through Button Group Place multiple button groups.
 
-<!-- <code src="./demos/index7.tsx" /> -->
+<code src="./demo/group.tsx"></code>
 
 ## API
 
-| Name | Description | Type | Default |
-| --- | --- | --- | --- |
-| style | Custom styles | `CSSProperties` | `--` |
-| className | class name | `string` | `--` |
-| type | button theme | `primary / danger / warning / info / text` | `primary` |
-| width | width | `number` | `--` |
-| height | height | `number` | `40px` |
-| disabled | disabled state | `boolean` | `false` |
-| circle | font button | `boolean` | `false` |
-| dashed | button border is dashed | `boolean` | `false` |
-| loading | loading state | `boolean` | `false` |
-| icon | Icon button | `ReactNode` | `<></>` |
-| handleClick | Button click callback event | `Function` | `--` |
+| Name        | Describe      | Type                                       | Default   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| type        | button type         | `solid / transparent / text / link`         | `solid` |
+| disabled    | do not use buttons        | `boolean`                                  | `false`   |
+| purpose      | button theme usage   | `routine/info/danger/warn`                   | `routine`   |
+| loading     | leave the button loaded         | `boolean`                                  | `false`   |
+| icon        | the icon of button         | `ReactNode`                                | `<></>`   |
+| shape        | the shape of button         | `circle/rect/round`                                | `rect`   |
+| onClick | button click callback event | `Function`                                 | `--`      |
 
 ## Button Group API
 
-| Name      | Description   | Type            | Default |
-| --------- | ------------- | --------------- | ------- |
-| style     | Custom styles | `CSSProperties` | `--`    |
-| className | class name    | `string`        | `--`    |
+| Name      | Describe | Type            | Default |
+| --------- | ----------- | --------------- | ------- |
+| style     | style  | `CSSProperties` | `--`    |
+| className | class        | `string`        | `--`    |
