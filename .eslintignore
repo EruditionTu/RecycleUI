@@ -11,8 +11,6 @@
 
 /docs/
 /packages/common
-/packages/message
-/packages/empty
 /packages/dropdown
 /packages/process
 typings.d.ts
