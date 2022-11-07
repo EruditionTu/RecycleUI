@@ -8,26 +8,17 @@ const ButtonGroup: FC<PropsWithChildren<ButtonGroupProps>> = (
   const { children } = props;
   const childrenFilter = useMemo(
     () =>
-      (children as any[]).map(childItem => {
-        if (
-          childItem.props.type === 'text' ||
-          childItem.props.type === 'link'
-        ) {
+      (children as any[]).map((childItem) => {
+        if (childItem.props.type === 'text' || childItem.props.type === 'link') {
           return cloneElement(childItem, { type: 'solid' });
         }
-        if (
-          childItem.props.shape === 'circle' ||
-          childItem.props.shape === 'round'
-        ) {
+        if (childItem.props.shape === 'circle' || childItem.props.shape === 'round') {
           return cloneElement(childItem, { shape: 'rect' });
         }
         return childItem;
       }),
     [children],
   );
-  console.log(childrenFilter);
-  return (
-    <div className="button-group">{cloneElement(<>{childrenFilter}</>)}</div>
-  );
+  return <div className="button-group">{cloneElement(<>{childrenFilter}</>)}</div>;
 };
 export default ButtonGroup;

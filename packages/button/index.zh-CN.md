@@ -45,6 +45,10 @@ disabled 配置禁止使用状态的按钮。
 
 <code src="./demo/shape.tsx"></code>
 
+## 按钮图标
+
+<code src="./demo/icon.tsx"></code>
+
 ## 按钮组
 
 通过 Button.Group 放入多个按钮组。

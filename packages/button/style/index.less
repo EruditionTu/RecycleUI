@@ -13,15 +13,18 @@
 @noborder-font-size:16px;
 @default-font-weight:400;
 @default-min-height:32px;
+@default-min-width:32px;
 .button-container{
   display: inline-block;
   margin: 5px;
+  position: relative;
 }
 .button {
   user-select: none;
   font-size: @default-font-size;
   font-weight: @default-font-weight;
   min-height: @default-min-height;
+  min-width: @default-min-width;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -29,12 +32,15 @@
   &[class~="link"],[class~="text"]{
     font-size: @noborder-font-size;
   }
+  &>span+&-title{
+    margin-left: 8px;
+  }
 }
 .danger{
   &[class~="solid"]{
     border: @danger solid 1px;
     background-color: @danger;
-    &>[class~="loading"]{
+    & [class~="loading"]{
       border: 0.2px solid @danger;
       border-top: 0.2px solid @default;
     }
@@ -44,7 +50,7 @@
   &[class~="solid"]{
     border:@routine solid 1px;
     background-color: @routine;
-    &>[class~="loading"]{
+    & [class~="loading"]{
       border: 0.2px solid @routine;
       border-top: 0.2px solid @default;
     }
@@ -54,7 +60,7 @@
   &[class~="solid"]{
     border:@info solid 1px;
     background-color: @info;
-    &>[class~="loading"]{
+    & [class~="loading"]{
       border: 0.2px solid @info;
       border-top: 0.2px solid @default;
     }
@@ -64,7 +70,7 @@
   &[class~="solid"]{
     border:@warn solid 1px;
     background-color: @warn;
-    &>[class~="loading"]{
+    & [class~="loading"]{
       border: 0.2px solid @warn;
       border-top: 0.2px solid @default;
     }
@@ -75,7 +81,7 @@
   border: @transparent-border-color solid 1px;
   border-radius: 5px;
   background-color: @default;
-  &>[class~="loading"]{
+  & [class~="loading"]{
     border: 0.2px solid @default;
     border-top: 0.2px solid black;
   }
@@ -114,18 +120,15 @@
   }
 }
 .rect{
-  padding-left: 1px;
-  padding-right: 17px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .circle{
   border-radius: 100%;
-  padding-right: 14px;
-  padding-top: 1.7px;
-  padding-bottom: 1.7px;
 }
 .round{
   border-radius: @default-min-height;
-  padding-left: 6px;
+  padding-left: 20px;
   padding-right: 20px;
 }
 .text {
@@ -166,7 +169,7 @@
   &[class~="link"]:hover{
     opacity: 1;
   }
-  &>[class~="loading"][class~="loading-icon"]{
+  & [class~="loading"][class~="loading-icon"]{
     border: 0.2px solid @disabled-background-color !important;
     border-top: 0.2px solid @disabled-font-color !important;
   }
@@ -179,6 +182,10 @@
   }
   &[class~="disabled"]{
     opacity: 1;
+  }
+  &-icon-container{
+    position: absolute;
+    left: 0;
   }
 }
 
