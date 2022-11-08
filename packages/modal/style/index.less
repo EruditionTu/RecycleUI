@@ -1,0 +1,116 @@
+@import "../../common/style/index.less";
+
+@recycle-modal-prefix:~'@{recycle-prefix}-modal';
+@recycle-modal-content-top-transform:30%;
+@recycle-modal-content-left-transform:50%;
+@recycle-modal-content-background-color:#fff;
+
+.@{recycle-modal-prefix}{
+  display: block;
+  overflow: hidden;
+  &-fadeModal{
+    &-enter,&-appear{
+      opacity: 0;
+    }
+    &-enter-active,&-appear-active{
+      opacity: 1;
+      transition: opacity 500ms;
+    }
+    &-exit{
+      opacity: 1;
+    }
+    &-exit-active{
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+  }
+  &-fadeContent{
+    &-enter,&-appear{
+      opacity: 0;
+    }
+    &-enter-active,&-appear-active{
+      opacity: 1;
+      transition: opcaity 500ms;
+    }
+    &-exit{
+      opacity: 1;
+    }
+    &-exit-active{
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+  }
+  &-mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(29, 33, 41, 60%);
+    transition: 0.1s linear;
+    &[class~='hidden']{
+      display: hidden;
+    }
+  }
+  &-content{
+    position: absolute;
+    top:@recycle-modal-content-top-transform;
+    left: @recycle-modal-content-left-transform;
+    z-index:1002;
+    width: var(--modal-content-width);
+    overflow-x: auto;
+    background-color: @recycle-modal-content-background-color;
+    border-radius: @recycle-radius-xs;
+    transform: translate(-50%,-50%);
+    padding: 0;
+    &-header{
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+      padding-left: 10px;
+      border-bottom: rgb(221, 221, 221) 0.5px solid;
+      overflow: hidden;
+      &>[class~="title"]{
+        margin: 0;
+        color: @black;
+        height: 42px;
+        line-height: 42px;
+        flex: 1;
+        font-weight: 500;
+        font-size: @recycle-font-lg;
+        vertical-align: middle;
+        user-select: none;
+      }
+      &>[class~='icon']{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        width: 42px;
+        height: 42px;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+    &-body{
+      font-size: @recycle-font-md;
+      word-wrap: break-word;
+      user-select: none;
+      padding: 20px;
+      min-height: 110px;
+      border-bottom: rgb(221, 221, 221) 0.5px solid;
+    }
+    &-footer{
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      overflow: hidden;
+      height: 58px;
+    }
+  }
+  &-center{
+    top:50%
+  }
+}

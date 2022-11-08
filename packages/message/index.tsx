@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import type { MessageType } from './MessageIcon';
 import MessageIcon from './MessageIcon';
@@ -51,9 +51,7 @@ function changeHeight(children: HTMLElement[], position: any) {
   for (const key in children) {
     const child = children[key].childNodes[0] as HTMLElement;
     if (children[key].getAttribute('class')?.startsWith(position)) {
-      child.style[position] = `${
-        Number(child.style[position].split('p')[0]) - 70
-      }px`;
+      child.style[position] = `${Number(child.style[position].split('p')[0]) - 70}px`;
     }
   }
 }
@@ -63,8 +61,7 @@ function changeHeight(children: HTMLElement[], position: any) {
  * @returns
  */
 const Message = (props: MessageProps<string>) => {
-  const { style, content, type, duration, position, clearable, messageBoxId } =
-    props;
+  const { style, content, type, duration, position, clearable, messageBoxId } = props;
   // 隐藏属性的控制值，用来配合实现动画
   const [opac, setOpac] = useState(1);
   // 获取message组件的渲染实例，来通过transform属性设置组件的位置
@@ -102,11 +99,7 @@ const Message = (props: MessageProps<string>) => {
   };
 
   return (
-    <div
-      className={classNames}
-      style={{ opacity: opac, ...style }}
-      ref={messageDom}
-    >
+    <div className={classNames} style={{ opacity: opac, ...style }} ref={messageDom}>
       <MessageIcon type={type} />
       <span className="toast-content">{content}</span>
       {clearable && (
@@ -178,18 +171,12 @@ function addInstance(type: MessageType, props: string | MessageProps<string>) {
   );
 }
 
-const info: Controler = (props: string | MessageProps<string>) =>
-  addInstance('info', props);
-const success: Controler = (props: string | MessageProps<string>) =>
-  addInstance('success', props);
-const error: Controler = (props: string | MessageProps<string>) =>
-  addInstance('error', props);
-const normal: Controler = (props: string | MessageProps<string>) =>
-  addInstance('normal', props);
-const warn: Controler = (props: string | MessageProps<string>) =>
-  addInstance('warn', props);
-const loading: Controler = (props: string | MessageProps<string>) =>
-  addInstance('loading', props);
+const info: Controler = (props: string | MessageProps<string>) => addInstance('info', props);
+const success: Controler = (props: string | MessageProps<string>) => addInstance('success', props);
+const error: Controler = (props: string | MessageProps<string>) => addInstance('error', props);
+const normal: Controler = (props: string | MessageProps<string>) => addInstance('normal', props);
+const warn: Controler = (props: string | MessageProps<string>) => addInstance('warn', props);
+const loading: Controler = (props: string | MessageProps<string>) => addInstance('loading', props);
 const message: MessageControl = {
   info,
   success,

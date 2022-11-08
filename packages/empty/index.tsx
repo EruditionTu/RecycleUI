@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import React from 'react';
 
 export interface EmptyProps {
@@ -30,9 +31,7 @@ const Empty: React.FC<EmptyProps> = React.memo(
           </svg>
         )}
       </div>
-      <div className="empty-description">
-        {props.description ? props.description : '暂无数据'}
-      </div>
+      <div className="empty-description">{props.description ? props.description : '暂无数据'}</div>
       {props.children && <div className="empty-footer">{props.children}</div>}
     </div>
   ),
