@@ -15,7 +15,13 @@ export default () => {
   return (
     <>
       <Button onClick={showModal}>Show Modal</Button>
-      <Modal visible={visible} title="Title" onOk={hiddenModal} onCancel={hiddenModal}>
+      <Modal
+        contentWidth={1000}
+        visible={visible}
+        title="Title"
+        onOk={hiddenModal}
+        onCancel={hiddenModal}
+      >
         <p>The Modal Basic Usage....</p>
         <p>The Modal Basic Usage....</p>
         <p>The Modal Basic Usage....</p>

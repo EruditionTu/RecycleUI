@@ -27,7 +27,7 @@ interface ModalOptions {
   contentStyle?: CSSProperties;
   afterClose?: () => void;
   onCancel?: MouseEventHandler<HTMLElement>;
-  onOk?: MouseEventHandler<HTMLElement>;
+  onOk?: MouseEventHandler<HTMLElement> | (() => Promise<any>);
 }
 interface DialogProps extends ModalOptions {
   type?: ModalType;

@@ -48,6 +48,8 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
   } = props;
 
   const [visible, setVisible] = useState<boolean>(true);
+  const [okLoading, setOkLoading] = useState<boolean>(false);
+  const [cancelLoading, setCancelLoading] = useState<boolean>(false);
 
   const classFirstName = useMemo(() => 'recycle-ui-modal', []);
   const getClassName = useCallback((baseName) => `${classFirstName}-${baseName}`, [classFirstName]);
@@ -64,20 +66,23 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
     (e: any) => {
       const result: any = onOk(e);
       if (result instanceof Promise) {
+        setOkLoading(true);
         result.then(() => {
           setVisible(false);
+          setOkLoading(false);
         });
       } else {
         setVisible(false);
       }
     },
-    [setVisible, onOk],
+    [setVisible, setOkLoading, onOk],
   );
   // callback of click cancelButton、mask、closeIcon
   const cancelClick = useCallback(
     (e: any) => {
       const result: any = onCancel(e);
       if (result instanceof Promise) {
+        setCancelLoading(false);
         result.then(() => {
           setVisible(false);
         });
@@ -85,7 +90,7 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
         setVisible(false);
       }
     },
-    [setVisible, onCancel],
+    [setVisible, setCancelLoading, onCancel],
   );
   const maskClick = useCallback(() => {
     if (maskClosable) {
@@ -114,6 +119,7 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
               type: 'solid',
               purpose: 'routine',
               ...okButtonProps,
+              loading: okLoading,
               onClick: okClick,
             },
           },
@@ -126,6 +132,7 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
               type: 'solid',
               purpose: 'danger',
               ...okButtonProps,
+              loading: okLoading,
               onClick: okClick,
             },
           },
@@ -138,6 +145,7 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
               type: 'solid',
               purpose: 'warn',
               ...okButtonProps,
+              loading: okLoading,
               onClick: okClick,
             },
           },
@@ -150,6 +158,7 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
               type: 'solid',
               purpose: 'info',
               ...okButtonProps,
+              loading: okLoading,
               onClick: okClick,
             },
           },
@@ -161,6 +170,7 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
             props: {
               type: 'transparent',
               ...cancelButtonProps,
+              loading: cancelLoading,
               onClick: cancelClick,
             },
           },
@@ -168,12 +178,23 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
             text: okText || '确定',
             props: {
               ...okButtonProps,
+              loading: okLoading,
               onClick: okClick,
             },
           },
         ];
     }
-  }, [cancelText, okText, cancelButtonProps, okButtonProps, modalType, cancelClick, okClick]);
+  }, [
+    cancelText,
+    okText,
+    cancelButtonProps,
+    okButtonProps,
+    modalType,
+    cancelClick,
+    okClick,
+    okLoading,
+    cancelLoading,
+  ]);
   const TitleIcon = useCallback(() => {
     switch (modalType) {
       case 'success':

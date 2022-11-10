@@ -1,10 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 
-const useDebounce = (
-  fn: Function,
-  delay: number,
-  dep: any[] = [],
-): Function => {
+const useDebounce = (fn: Function, delay: number, dep: any[] = []): Function => {
   const { current } = useRef<{
     fn?: Function;
     timer?: NodeJS.Timeout;
