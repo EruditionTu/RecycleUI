@@ -12,6 +12,9 @@ group:
 
 <code src="./demo/basic.tsx"></code>
 
+## 对话框
+<code src="./demo/dialog.tsx"></code>
+
 ## API
 
 | 参数        | 参数描述      | 类型                                       | 默认   |

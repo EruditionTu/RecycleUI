@@ -10,7 +10,7 @@
 
 
 /docs/
-/packages/common
+/packages/common/hooks
 /packages/dropdown
 /packages/process
 typings.d.ts

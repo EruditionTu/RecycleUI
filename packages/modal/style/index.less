@@ -71,6 +71,9 @@
       padding-left: 10px;
       border-bottom: rgb(221, 221, 221) 0.5px solid;
       overflow: hidden;
+      [class~='info'] &,[class~='success'] &,[class~='confirm'] &,[class~='error'] &,[class~='warning'] &{
+        border-bottom: 0px;
+      }
       &>[class~="title"]{
         margin: 0;
         color: @black;
@@ -81,6 +84,11 @@
         font-size: @recycle-font-lg;
         vertical-align: middle;
         user-select: none;
+        [class~='info'] &,[class~='success'] &,[class~='confirm'] &,[class~='error'] &,[class~='warning'] &{
+          display: flex;
+          justify-content: center;
+          align-items: center;        
+        }
       }
       &>[class~='icon']{
         display: flex;
@@ -101,6 +109,10 @@
       padding: 20px;
       min-height: 110px;
       border-bottom: rgb(221, 221, 221) 0.5px solid;
+      [class~='info'] &,[class~='success'] &,[class~='confirm'] &,[class~='error'] &,[class~='warning'] &{
+        border-bottom: 0px;
+        min-height: 20px;
+      }
     }
     &-footer{
       display: flex;
