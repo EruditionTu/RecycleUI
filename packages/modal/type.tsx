@@ -5,7 +5,7 @@ type ModalContainer = HTMLElement | false;
 type ModalType = 'info' | 'success' | 'error' | 'confirm' | 'warning';
 
 interface ModalOptions {
-  title?: string;
+  title?: ReactNode;
   centered?: boolean;
   contentWidth?: string | number;
   okButtonProps?: ButtonProps;
@@ -25,6 +25,7 @@ interface ModalOptions {
   maskClass?: string;
   contentClass?: string;
   contentStyle?: CSSProperties;
+  modalRender?: (e: ReactNode) => ReactNode;
   afterClose?: () => void;
   onCancel?: MouseEventHandler<HTMLElement>;
   onOk?: MouseEventHandler<HTMLElement> | (() => Promise<any>);

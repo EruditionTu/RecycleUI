@@ -34,6 +34,7 @@ const Modal: FC<PropsWithChildren<ModalProps>> = (
     onOk = function () {},
     onCancel = function () {},
     afterClose = function () {},
+    modalRender,
     content,
     closeIcon,
     footer,
@@ -91,6 +92,58 @@ const Modal: FC<PropsWithChildren<ModalProps>> = (
   // the hook is used to hidden the scroller
   useHiddenScroll('body', visible);
 
+  const Popup = useCallback(
+    () => (
+      <div
+        className={contentClasses}
+        style={contentStyle}
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent clicking the content panel, and the module is closed due to the response of the mask
+        }}
+      >
+        <div className={getClassName('content-header')}>
+          <div className="title">{title}</div>
+          {closable && (
+            <div className="icon">{closeIcon || <CloseOutlined onClick={onCancel} />}</div>
+          )}
+        </div>
+        <div className={getClassName('content-body')}>{content || children}</div>
+        {needFooter && (
+          <div className={getClassName('content-footer')}>
+            {footer ||
+              footerButtons.map((footerItem, index: number) => {
+                return (
+                  <Button {...footerItem.props} key={index}>
+                    {footerItem.text}
+                  </Button>
+                );
+              })}
+          </div>
+        )}
+        <div />
+      </div>
+    ),
+    [
+      contentClasses,
+      contentStyle,
+      title,
+      closable,
+      closeIcon,
+      content,
+      children,
+      needFooter,
+      footer,
+      footerButtons,
+      getClassName,
+      onCancel,
+    ],
+  );
+
+  // this memo is to render the modalRender and transfer the Popup in it
+  const ModalRenderWarpper = useMemo(() => {
+    return typeof modalRender === 'function' ? modalRender(<Popup />) : null;
+  }, [Popup, modalRender]);
+
   return (
     <div
       className={classFirstName}
@@ -132,34 +185,7 @@ const Modal: FC<PropsWithChildren<ModalProps>> = (
               e.style.display = 'none';
             }}
           >
-            <div
-              className={contentClasses}
-              style={contentStyle}
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent clicking the content panel, and the module is closed due to the response of the mask
-              }}
-            >
-              <div className={getClassName('content-header')}>
-                <div className="title">{title}</div>
-                {closable && (
-                  <div className="icon">{closeIcon || <CloseOutlined onClick={onCancel} />}</div>
-                )}
-              </div>
-              <div className={getClassName('content-body')}>{content || children}</div>
-              {needFooter && (
-                <div className={getClassName('content-footer')}>
-                  {footer ||
-                    footerButtons.map((footerItem, index: number) => {
-                      return (
-                        <Button {...footerItem.props} key={index}>
-                          {footerItem.text}
-                        </Button>
-                      );
-                    })}
-                </div>
-              )}
-              <div />
-            </div>
+            {typeof modalRender === 'function' ? ModalRenderWarpper : <Popup />}
           </CSSTransition>
         </div>
       </CSSTransition>

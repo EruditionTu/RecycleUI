@@ -18,10 +18,14 @@ export default () => {
     });
   };
   const showSuccess = () => {
-    Modal.success({
-      title: 'title',
-      content: <h1>Hello World!</h1>,
-    });
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        Modal.success({
+          title: 'title',
+          content: <h1>Hello World!</h1>,
+        });
+      }, i * 500);
+    }
   };
   const showWarn = () => {
     Modal.warning({
@@ -42,7 +46,7 @@ export default () => {
         Show Error Modal
       </Button>
       <Button purpose="info" onClick={showSuccess}>
-        Show Success Modal
+        Show Success Modal(Many Modal!)
       </Button>
       <Button purpose="warn" onClick={showWarn}>
         Show Warn Modal
