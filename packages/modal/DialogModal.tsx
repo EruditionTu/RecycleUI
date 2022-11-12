@@ -17,8 +17,8 @@ import useEventlistener from '../common/util/hooks/useEventlistener';
 import useHiddenScroll from '../common/util/hooks/useHiddenScroll';
 import withDefault from '../common/util/withDefault';
 
-const DialogModal: FC<PropsWithChildren<DialogProps>> = (
-  props: PropsWithChildren<DialogProps>,
+const DialogModal: FC<PropsWithChildren<Omit<DialogProps, 'destroyOnClose'>>> = (
+  props: PropsWithChildren<Omit<DialogProps, 'destroyOnClose'>>,
 ): ReactElement => {
   const {
     contentWidth = '400px',
@@ -31,7 +31,6 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
     needFooter = true,
     maskClosable = true,
     centered = false,
-    destroyOnClose = false,
     title = 'Dialog Modal',
     maskClass = '',
     contentClass = '',
@@ -292,7 +291,6 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
         timeout={200}
         appear
         mountOnEnter
-        unmountOnExit={destroyOnClose}
         classNames={getClassName('fadeModal')}
         onEnter={(e: HTMLElement) => {
           e.style.display = 'block';
@@ -308,7 +306,6 @@ const DialogModal: FC<PropsWithChildren<DialogProps>> = (
             timeout={200}
             appear
             mountOnEnter
-            unmountOnExit={destroyOnClose}
             classNames={getClassName('fadeContent')}
             onEnter={(e: HTMLElement) => {
               e.style.display = 'block';

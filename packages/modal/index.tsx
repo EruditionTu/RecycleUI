@@ -26,15 +26,12 @@ function renderDialog(options: DialogProps) {
   const container = document.body;
   div.setAttribute('class', rootDomClass);
   container.appendChild(div);
-  ReactDOM.render(
-    <DialogModal
-      {..._omit(options, ['afterClose'])}
-      afterClose={() => {
-        container.removeChild(div);
-      }}
-    />,
-    div,
-  );
+  const afterClose = () => {
+    container.removeChild(div);
+    typeof options.afterClose === 'function' && options.afterClose();
+  };
+
+  ReactDOM.render(<DialogModal {..._omit(options, ['afterClose'])} afterClose={afterClose} />, div);
 }
 
 ExportModal.info = (options: ModalOptions) => {
