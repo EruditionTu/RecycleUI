@@ -16,6 +16,6 @@ export default () => (
       </span>
     }
   >
-    <Button type="primary">Create Now</Button>
+    <Button>Create Now</Button>
   </Empty>
 );
