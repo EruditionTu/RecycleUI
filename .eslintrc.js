@@ -33,7 +33,7 @@ module.exports = {
     },
   ],
   rules: {
-    'prettier/prettier': ['error', { trailingComma: 'es5', printWidth: 100 }],
+    'prettier/prettier': ['error', { trailingComma: 'all', printWidth: 100 }],
     'no-case-declarations': 0,
     'no-param-reassign': 0,
     'no-underscore-dangle': 0,
