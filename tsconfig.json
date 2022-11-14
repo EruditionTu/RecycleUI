@@ -4,27 +4,18 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
+    "noImplicitAny": true,
     "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
     "strict": true,
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["packages/*"],
     },
     "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "types",
-      "node_modules/@types"
-    ]
   },
-  "include": [
-    "packages",
-    "docs/components",
-    "docs/siteIndexStyle.ts"
-  ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ]
 }
