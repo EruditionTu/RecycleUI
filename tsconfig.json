@@ -11,7 +11,7 @@
     "sourceMap": true,
     "strict": true,
     "paths": {
-      "@/*": ["packages/*"],
+      "@/*": ["./*"],
     },
     "allowSyntheticDefaultImports": true,
   },

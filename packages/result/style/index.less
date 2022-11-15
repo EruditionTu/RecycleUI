@@ -1,0 +1,41 @@
+@import '../../common/style/index.less';
+
+@recycle-result-prefix:~'@{recycle-prefix}-result';
+
+@recycle-result-subtitle:#00000073;
+
+.@{recycle-result-prefix}{
+    &-container{
+        display: block;
+        & svg{
+            min-width: 72px;
+            min-height: 72px;
+        }
+    }
+    &-icon{
+        text-align: center;
+        vertical-align: middle;
+        margin-bottom:24px;
+    }
+    &-title{
+        color: @black;
+        font-size: @recycle-font-sp;
+        line-height: 1.8;
+        text-align: center;
+    }
+    &-subtitle{
+        color:@recycle-result-subtitle;
+        font-size: @recycle-font-md;
+        line-height: 1.6;
+        text-align: center;
+    }
+    &-extra{
+        margin:24px 0 0;
+        text-align: center; 
+    }
+    &-content{
+        margin-top: 24px;
+        padding: 24px 40px;
+        background-color: #fafafa;
+    }
+}
