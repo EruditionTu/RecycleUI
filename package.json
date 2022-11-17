@@ -1,6 +1,12 @@
 {
   "name": "recycle-ui",
   "version": "0.1.0",
+  "author": {
+    "name": "EruditionTu",
+    "email": "1376490336@qq.com",
+    "url": "https://github.com/EruditionTu"
+  },
+  "contributors": [],
   "description": "A React hooks functional component developed based on React",
   "title": "Recycle UI",
   "scripts": {
