@@ -6,3 +6,5 @@ nav:
 group:
   title: 通用
 ---
+
+<code src="./demo/basic.tsx"/>
