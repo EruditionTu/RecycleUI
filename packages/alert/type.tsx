@@ -10,7 +10,6 @@ interface AlertProps {
   content?: string;
   closeable?: boolean;
   closeElement?: ReactNode;
-
   description?: ReactNode;
   icon?: ReactNode;
   showIcon?: boolean;

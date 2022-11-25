@@ -2,23 +2,25 @@
 
 @recycle-alert-prefix:~'@{recycle-prefix}-alert';
 
-@{recycle-alert-prefix}{
-    display: block;
-    &[class~='success']{
-        background-color: @recycle-success-light-color;
-        border: 1px solid @recycle-success-dark-color;
-    }
-    &[class~='info']{
-        background-color: @recycle-info-light-color;
-        border: 1px solid @recycle-info-dark-color;
-    }
-    &[class~='warn']{
-        background-color: @recycle-warn-light-color;
-        background-color: 1px solid @recycle-warn-dark-color;
-    }
-    &[class~='error']{
-        background-color: @recycle-error-light-color;
-        background-color: 1px solid @recycle-error-light-color;
+.@{recycle-alert-prefix}{
+    &-warpper{
+        display: block;
+        &[class~='success']{
+            background-color: @recycle-success-light-color;
+            border: 1px solid @recycle-success-dark-color;
+        }
+        &[class~='info']{
+            background-color: @recycle-info-light-color;
+            border: 1px solid @recycle-info-dark-color;
+        }
+        &[class~='warn']{
+            background-color: @recycle-warn-light-color;
+            background-color: 1px solid @recycle-warn-dark-color;
+        }
+        &[class~='error']{
+            background-color: @recycle-error-light-color;
+            background-color: 1px solid @recycle-error-light-color;
+        }
     }
     &-content{
 
@@ -27,9 +29,19 @@
 
     }
     &-message{
-
+        display: block;
+        font-size:@recycle-font-lg;
+        color:@black;
+        &+*{
+            margin-top: 8px;
+        }
     }
     &-description{
-
+        display: block;
+        font-size: @recycle-font-md;
+        color:@black;
+        &+*{
+            margin-top: 8px;
+        }
     }
 }

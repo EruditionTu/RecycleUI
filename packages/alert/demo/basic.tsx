@@ -3,5 +3,5 @@ import Alert from '..';
 import '../style';
 
 export default () => {
-  return <Alert />;
+  return <Alert message="Success Tips" />;
 };
