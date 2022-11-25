@@ -2,6 +2,9 @@ import React from 'react';
 import Alert from '..';
 import '../style';
 
-export default () => {
-  return <Alert message="Success Tips" />;
-};
+export default () => (
+  <Alert
+    message="Success Tips"
+    description="Error Description Error Description Error Description Error Description Error Description Error Description"
+  />
+);

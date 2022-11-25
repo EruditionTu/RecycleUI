@@ -5,6 +5,12 @@
 .@{recycle-alert-prefix}{
     &-warpper{
         display: block;
+        padding: 8px 12px;
+        position: relative;
+        align-items: center;
+        word-wrap: break-word;
+        border-radius: 8px;
+        display: flex;
         &[class~='success']{
             background-color: @recycle-success-light-color;
             border: 1px solid @recycle-success-dark-color;
@@ -19,14 +25,19 @@
         }
         &[class~='error']{
             background-color: @recycle-error-light-color;
-            background-color: 1px solid @recycle-error-light-color;
+            background-color: 1px solid @recycle-error-dark-color;
+        }
+        &[class~='withDescription']{
+            align-items: flex-start;
+            padding-inline: 24px;
+            padding-block: 20px;
         }
     }
     &-content{
-
+        flex: 1;
     }
     &-icon{
-
+        margin-right: 8px;
     }
     &-message{
         display: block;
