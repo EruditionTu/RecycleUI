@@ -72,3 +72,17 @@ group:
 ## API
 
 
+| 参数        | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| action        | 自定义操作项	         | `solid / transparent / text / link`         | `solid` |
+| type    | 指定警告提示的样式，有四种选择 `success`、`info`、`warning`、`error`         | `string`                                  | `success`   |
+| banner      | 是否用作顶部公告   | `boolean`                   | `false`   |
+| message     | 警告提示内容         |               `ReactNode`                | `<></>`   |
+| description        | 警告提示的辅助性文字介绍          |           `ReactNode`               | `<></>`   |
+| closeIcon        | 自定义关闭按钮         | `ReactNode`                                | `<></>`   |
+| showCloseIcon | 是否展示关闭按钮 | `boolean`                                 | `false`      |
+| icon | 自定义通知图标 | `ReactNode`                                 | `<></>`      |
+| showIcon | 是否展示通知图标 | `boolean`                                 | `false`      |
+| style     | 自定义样式  | `CSSProperties` | `--`    |
+| className | 类名        | `string`        | `--`    |
+
