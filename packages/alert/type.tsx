@@ -8,7 +8,7 @@ interface AlertProps {
   action?: ReactNode;
   type?: AlertType;
   banner?: boolean;
-  message?: string;
+  message?: ReactNode;
   description?: ReactNode;
   closeIcon?: ReactNode;
   showCloseIcon?: boolean;

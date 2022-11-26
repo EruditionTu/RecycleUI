@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback, useState } from 'react';
-import type { FC, ReactElement } from 'react';
+import type { FC, ReactElement, CSSProperties } from 'react';
 import classNames from 'classnames';
 import type { WithCustomStyle } from '../common/util/toolType';
 import AlertProps from './type';
@@ -21,6 +21,7 @@ const Alert: FC<WithCustomStyle<AlertProps>> = (
     type,
     action,
     icon,
+    banner = false,
     showIcon = false,
     closeIcon,
     showCloseIcon = false,
@@ -31,6 +32,21 @@ const Alert: FC<WithCustomStyle<AlertProps>> = (
     [type],
   );
   const classFirstName = useMemo(() => 'recycle-ui-alert', []);
+  const bannerStyle = useMemo(
+    (): CSSProperties =>
+      banner
+        ? {
+            border: '0px',
+            marginBottom: '0px',
+            borderRadius: 0,
+          }
+        : {},
+    [banner],
+  );
+  const warpperStyle = useMemo(
+    () => (typeof style === 'object' ? { ...style, ...bannerStyle } : bannerStyle),
+    [bannerStyle, style],
+  );
   const getClassName = useCallback(
     (baseName: string) => `${classFirstName}-${baseName}`,
     [classFirstName],
@@ -56,7 +72,7 @@ const Alert: FC<WithCustomStyle<AlertProps>> = (
   const AlertIcon = useCallback(() => {
     switch (alertType) {
       case 'success':
-        return <SuccessIcon style={{ height: '14px', width: '14px' }} />;
+        return <SuccessIcon style={iconStyle} />;
       case 'error':
         return <ErrorIcon style={iconStyle} />;
       case 'info':
@@ -67,10 +83,11 @@ const Alert: FC<WithCustomStyle<AlertProps>> = (
         return <></>;
     }
   }, [alertType]);
+
   return (
     <>
       {showAlert && (
-        <div className={warpperClass} style={style}>
+        <div className={warpperClass} style={warpperStyle}>
           {showIcon && <span className={getClassName('icon')}>{icon || <AlertIcon />}</span>}
           <div className={getClassName('content')}>
             <div className={getClassName('message')}>{message}</div>
