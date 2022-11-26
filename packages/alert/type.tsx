@@ -5,12 +5,13 @@ type AlertType = 'info' | 'warn' | 'success' | 'error';
 type CloseFunctionType = (e: MouseEvent) => void;
 
 interface AlertProps {
+  action?: ReactNode;
   type?: AlertType;
+  banner?: boolean;
   message?: string;
-  content?: string;
-  closeable?: boolean;
-  closeElement?: ReactNode;
   description?: ReactNode;
+  closeIcon?: ReactNode;
+  showCloseIcon?: boolean;
   icon?: ReactNode;
   showIcon?: boolean;
   onClose?: CloseFunctionType;

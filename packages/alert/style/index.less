@@ -11,6 +11,8 @@
         word-wrap: break-word;
         border-radius: 8px;
         display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
         &[class~='success']{
             background-color: @recycle-success-light-color;
             border: 1px solid @recycle-success-dark-color;
@@ -21,11 +23,11 @@
         }
         &[class~='warn']{
             background-color: @recycle-warn-light-color;
-            background-color: 1px solid @recycle-warn-dark-color;
+            border: 1px solid @recycle-warn-dark-color;
         }
         &[class~='error']{
             background-color: @recycle-error-light-color;
-            background-color: 1px solid @recycle-error-dark-color;
+            border: 1px solid @recycle-error-dark-color;
         }
         &[class~='withDescription']{
             align-items: flex-start;
@@ -39,10 +41,15 @@
     &-icon{
         margin-right: 8px;
     }
+    &-closeIcon{
+        margin-left: 8px;
+        cursor: pointer;
+    }
     &-message{
         display: block;
         font-size:@recycle-font-lg;
         color:@black;
+        line-height: @recycle-font-lg;
         &+*{
             margin-top: 8px;
         }

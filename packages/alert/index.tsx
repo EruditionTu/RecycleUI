@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import classNames from 'classnames';
 import type { WithCustomStyle } from '../common/util/toolType';
@@ -13,7 +13,19 @@ import { ReactComponent as CloseIcon } from '@/packages/common/icon/svg/close.sv
 const Alert: FC<WithCustomStyle<AlertProps>> = (
   props: WithCustomStyle<AlertProps>,
 ): ReactElement => {
-  const { className, message, description, type } = props;
+  const {
+    className,
+    style,
+    message,
+    description,
+    type,
+    action,
+    icon,
+    showIcon = false,
+    closeIcon,
+    showCloseIcon = false,
+  } = props;
+  const [showAlert, setShowAlert] = useState<boolean>(true);
   const alertType = useMemo(
     () => withDefault(type, ['info', 'warn', 'success', 'error'], 'info'),
     [type],
@@ -38,6 +50,9 @@ const Alert: FC<WithCustomStyle<AlertProps>> = (
     [message, description],
   );
   const closeIconStyle = useMemo(() => ({ width: '12px', height: '12px' }), []);
+  const clickCloseIcon = useCallback(() => {
+    setShowAlert(false);
+  }, []);
   const AlertIcon = useCallback(() => {
     switch (alertType) {
       case 'success':
@@ -53,18 +68,23 @@ const Alert: FC<WithCustomStyle<AlertProps>> = (
     }
   }, [alertType]);
   return (
-    <div className={warpperClass}>
-      <span className={getClassName('icon')}>
-        <AlertIcon />
-      </span>
-      <div className={getClassName('content')}>
-        <div className={getClassName('message')}>{message}</div>
-        <div className={getClassName('description')}>{description}</div>
-      </div>
-      <span>
-        <CloseIcon style={closeIconStyle} />
-      </span>
-    </div>
+    <>
+      {showAlert && (
+        <div className={warpperClass} style={style}>
+          {showIcon && <span className={getClassName('icon')}>{icon || <AlertIcon />}</span>}
+          <div className={getClassName('content')}>
+            <div className={getClassName('message')}>{message}</div>
+            {description && <div className={getClassName('description')}>{description}</div>}
+          </div>
+          {action && <div className={getClassName('action')}>{action}</div>}
+          {showCloseIcon && (
+            <span className={getClassName('closeIcon')} onClick={clickCloseIcon}>
+              {closeIcon || <CloseIcon style={closeIconStyle} />}
+            </span>
+          )}
+        </div>
+      )}
+    </>
   );
 };
 export default Alert;
