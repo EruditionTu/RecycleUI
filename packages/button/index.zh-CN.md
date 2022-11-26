@@ -66,6 +66,8 @@ disabled 配置禁止使用状态的按钮。
 | icon        | 图标按钮         | `ReactNode`                                | `<></>`   |
 | shape        | 按钮形状         | `circle/rect/round`                                | `rect`   |
 | onClick | 按钮点击回调事件 | `Function`                                 | `--`      |
+| style     | 自定义样式  | `CSSProperties` | `--`    |
+| className | 类名        | `string`        | `--`    |
 
 ## Button Group API
 

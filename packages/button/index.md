@@ -62,6 +62,10 @@ Through Button Group Place multiple button groups.
 | icon        | the icon of button         | `ReactNode`                                | `<></>`   |
 | shape        | the shape of button         | `circle/rect/round`                                | `rect`   |
 | onClick | button click callback event | `Function`                                 | `--`      |
+| style | the inline style | `CSSProperties`                                         | `--`      |
+| className | class | `string`                                         | `--`      |
+
+
 
 ## Button Group API
 

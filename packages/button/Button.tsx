@@ -9,10 +9,10 @@ import type { ButtonShape, ButtonType, ButtonPurpose } from './type';
 
 const LinkNode: FC<ButtonProps> = React.memo(
   (props: PropsWithChildren<ButtonProps>): React.ReactElement => {
-    const { disabled, loading, children, onClick } = props;
+    const { disabled, loading, children, onClick, style, className } = props;
     const classes = useMemo(
       () =>
-        classNames('button', 'link', {
+        classNames('button', 'link', className, {
           disabled,
           loading,
         }),
@@ -20,7 +20,7 @@ const LinkNode: FC<ButtonProps> = React.memo(
     );
     return (
       <div className="button-container">
-        <a className={classes} onClick={onClick}>
+        <a className={classes} onClick={onClick} style={style}>
           <LoadingIcon loading={loading} />
           {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
         </a>
@@ -29,10 +29,10 @@ const LinkNode: FC<ButtonProps> = React.memo(
   },
 );
 const TextNode: FC<ButtonProps> = React.memo((props: ButtonProps): React.ReactElement => {
-  const { disabled, onClick, loading, children } = props;
+  const { disabled, onClick, loading, children, style, className } = props;
   const classes = useMemo(
     () =>
-      classNames('button', 'text', {
+      classNames('button', 'text', className, {
         disabled,
         loading,
       }),
@@ -40,7 +40,7 @@ const TextNode: FC<ButtonProps> = React.memo((props: ButtonProps): React.ReactEl
   );
   return (
     <div className="button-container">
-      <div className={classes} onClick={onClick}>
+      <div className={classes} onClick={onClick} style={style}>
         <LoadingIcon loading={loading} />
         <span>
           {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
@@ -50,7 +50,8 @@ const TextNode: FC<ButtonProps> = React.memo((props: ButtonProps): React.ReactEl
   );
 });
 const ButtonNode: FC<ButtonProps> = React.memo((props: PropsWithChildren<ButtonProps>) => {
-  const { type, shape, disabled, loading, onClick, purpose, children, icon } = props;
+  const { type, shape, disabled, loading, onClick, purpose, children, icon, style, className } =
+    props;
   const typeSet: ButtonType[] = useMemo<ButtonType[]>(() => ['solid', 'transparent'], []);
   const shapeSet: ButtonShape[] = useMemo<ButtonShape[]>(() => ['circle', 'round', 'rect'], []);
 
@@ -64,14 +65,14 @@ const ButtonNode: FC<ButtonProps> = React.memo((props: PropsWithChildren<ButtonP
   );
   const canuse = useMemo(() => !loading && !disabled, [loading, disabled]);
 
-  const classes = classNames('button', buttonShape, buttonType, purpose, {
+  const classes = classNames('button', buttonShape, buttonType, purpose, className, {
     canuse,
     disabled,
     loading,
   });
   return (
     <div className="button-container">
-      <div className={classes} onClick={onClick}>
+      <div className={classes} onClick={onClick} style={style}>
         <div className="loading-icon-container">
           <LoadingIcon loading={loading} />
         </div>

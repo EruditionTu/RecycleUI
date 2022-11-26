@@ -1,11 +1,12 @@
 import type { FC, ReactElement, PropsWithChildren } from 'react';
 import React, { useMemo, cloneElement } from 'react';
+import classNames from 'classnames';
 import type { ButtonGroupProps } from './type';
 
 const ButtonGroup: FC<PropsWithChildren<ButtonGroupProps>> = (
   props: PropsWithChildren<ButtonGroupProps>,
 ): ReactElement => {
-  const { children } = props;
+  const { children, className, style } = props;
   const childrenFilter = useMemo(
     () =>
       (children as any[]).map((childItem) => {
@@ -19,6 +20,10 @@ const ButtonGroup: FC<PropsWithChildren<ButtonGroupProps>> = (
       }),
     [children],
   );
-  return <div className="button-group">{cloneElement(<>{childrenFilter}</>)}</div>;
+  return (
+    <div className={classNames('button-group', className)} style={style}>
+      {cloneElement(<>{childrenFilter}</>)}
+    </div>
+  );
 };
 export default ButtonGroup;
