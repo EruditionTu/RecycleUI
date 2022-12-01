@@ -60,3 +60,4 @@ const usePlacement = ({ triggerRect, contentRect, placement }: IUsePlacementProp
 };
 
 export default usePlacement;
+export { PlacementType };
