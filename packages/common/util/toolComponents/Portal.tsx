@@ -19,14 +19,11 @@ const Portal = forwardRef<PortalRef, PortalProps>((props, ref) => {
 
   if (!initRef.current) {
     containerRef.current = getContainer();
-    parentRef.current = containerRef.current.parentNode;
+    parentRef.current = containerRef.current?.parentNode;
     initRef.current = true;
   }
 
   useEffect(() => {
-    if (containerRef.current?.parentNode === null && parentRef.current !== null) {
-      parentRef.current.appendChild(containerRef.current);
-    }
     return () => {
       containerRef.current?.parentNode?.removeChild(containerRef.current);
     };
