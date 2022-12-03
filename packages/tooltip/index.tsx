@@ -13,8 +13,8 @@ import findChildInDom from '@/packages/common/util/dom/findChildInDom';
 import getRoot from '@/packages/common/util/dom/getRoot';
 import Portal from '@/packages/common/util/toolComponents/Portal';
 import Position from '@/packages/common/util/toolComponents/Position';
-import withDefault from '../common/util/withDefault';
-import isDom from '../common/util/dom/isDom';
+import withDefault from '@/packages/common/util/withDefault';
+import isDom from '@/packages/common/util/dom/isDom';
 
 type WithChildren<T> = T & { children: ReactElement };
 
