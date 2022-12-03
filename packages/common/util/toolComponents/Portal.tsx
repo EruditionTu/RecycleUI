@@ -7,17 +7,17 @@ type PortalRef = {};
 interface PortalProps {
   children?: ReactNode;
   getContainer: () => HTMLElement;
+  destroyTooltipOnHide?: boolean;
 }
 
 const Portal = forwardRef<PortalRef, PortalProps>((props, ref) => {
-  const { children, getContainer } = props;
-
+  const { children, getContainer, destroyTooltipOnHide = false } = props;
   const parentRef = useRef<ParentNode | null>(null);
   const containerRef = useRef<HTMLElement | null>(null);
 
   const initRef = useRef(false);
 
-  if (!initRef.current) {
+  if (!initRef.current || !destroyTooltipOnHide) {
     containerRef.current = getContainer();
     parentRef.current = containerRef.current?.parentNode;
     initRef.current = true;
@@ -25,7 +25,7 @@ const Portal = forwardRef<PortalRef, PortalProps>((props, ref) => {
 
   useEffect(() => {
     return () => {
-      containerRef.current?.parentNode?.removeChild(containerRef.current);
+      if (destroyTooltipOnHide) containerRef.current?.parentNode?.removeChild(containerRef.current);
     };
   }, []);
   return containerRef.current ? createPortal(children, containerRef.current) : null;
