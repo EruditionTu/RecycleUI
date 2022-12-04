@@ -201,68 +201,6 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
         return {};
     }
   }, [withDefaultPlacement]);
-  // tooltip的弹窗
-  const TooltipPopup = useMemo(() => {
-    if (withDefaultDestoryTooltipOnHide) {
-      return (
-        <>
-          {tooltipVisible && (
-            <Portal getContainer={() => container.current as HTMLElement} destroyTooltipOnHide>
-              <Position
-                triggerRef={childrenRef}
-                placement={withDefaultPlacement}
-                {...PositoinExt}
-                pointCenter={withDefaultArrowPointAtCenter}
-              >
-                <div className={getClassName('content')}>
-                  <div
-                    className={arrowClasses}
-                    style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
-                  />
-                  <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
-                    {title}
-                  </div>
-                </div>
-              </Position>
-            </Portal>
-          )}
-        </>
-      );
-    }
-    return (
-      <Portal getContainer={() => container.current as HTMLElement}>
-        <Position
-          triggerRef={childrenRef}
-          placement={withDefaultPlacement}
-          {...PositoinExt}
-          pointCenter={withDefaultArrowPointAtCenter}
-        >
-          <div className={getClassName('content')}>
-            <div
-              className={arrowClasses}
-              style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
-            />
-            <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
-              {title}
-            </div>
-          </div>
-        </Position>
-      </Portal>
-    );
-  }, [
-    withDefaultDestoryTooltipOnHide,
-    withDefaultPlacement,
-    withDefaultArrowPointAtCenter,
-    arrowRelativePositoin,
-    PositoinExt,
-    tooltipVisible,
-    arrowClasses,
-    zIndex,
-    color,
-    title,
-    childrenRef,
-    container,
-  ]);
 
   // tooltip显示于消失的回调，如果可见需要将dom节点加入，至于移除container节点是Portal组件实现的
   useLayoutEffect(() => {
@@ -306,7 +244,49 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
   return (
     <>
       {cloneElement(children, triggerProps)}
-      {cloneElement(TooltipPopup)}
+      {withDefaultDestoryTooltipOnHide ? (
+        <>
+          {tooltipVisible && (
+            <Portal getContainer={() => container.current as HTMLElement} destroyTooltipOnHide>
+              <Position
+                triggerRef={childrenRef}
+                placement={withDefaultPlacement}
+                {...PositoinExt}
+                pointCenter={withDefaultArrowPointAtCenter}
+              >
+                <div className={getClassName('content')}>
+                  <div
+                    className={arrowClasses}
+                    style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
+                  />
+                  <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
+                    {title}
+                  </div>
+                </div>
+              </Position>
+            </Portal>
+          )}
+        </>
+      ) : (
+        <Portal getContainer={() => container.current as HTMLElement}>
+          <Position
+            triggerRef={childrenRef}
+            placement={withDefaultPlacement}
+            {...PositoinExt}
+            pointCenter={withDefaultArrowPointAtCenter}
+          >
+            <div className={getClassName('content')}>
+              <div
+                className={arrowClasses}
+                style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
+              />
+              <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
+                {title}
+              </div>
+            </div>
+          </Position>
+        </Portal>
+      )}
     </>
   );
 };

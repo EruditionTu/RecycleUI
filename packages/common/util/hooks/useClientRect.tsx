@@ -1,5 +1,9 @@
 import { RefObject, useState, useEffect, useMemo } from 'react';
-
+/**
+ * 获取目标元素Rect的hook
+ * @param ele 目标元素
+ * @returns
+ */
 const useClientRect = (ele: RefObject<HTMLElement | null>) => {
   const [clientRect, setClientRect] = useState<DOMRect | null>(null);
   const updateClientRect = useMemo(() => {

@@ -8,12 +8,7 @@ interface Parameter {
   setItemWidth: any;
   trackContainerRef: any;
 }
-const useOnResize = ({
-  width,
-  carouselRef,
-  setItemWidth,
-  trackContainerRef,
-}: Parameter): void => {
+const useOnResize = ({ width, carouselRef, setItemWidth, trackContainerRef }: Parameter): void => {
   const isInitalMount = useRef<Boolean>(true); // 控制获取render之后的dom实例的一个标志位，用ref实现组件生命周期的持久化存储
   const onResize = useCallback(
     _throttle(() => {
