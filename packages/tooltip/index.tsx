@@ -5,6 +5,7 @@ import React, {
   useMemo,
   cloneElement,
   useLayoutEffect,
+  useEffect,
 } from 'react';
 import type { FC, ReactElement } from 'react';
 import classNames from 'classnames';
@@ -280,14 +281,15 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
     onOpenChange(tooltipVisible);
   }, [tooltipVisible, withDefaultDestoryTooltipOnHide, onOpenChange]);
 
-  //   useEffect(
-  //     () => () => {
-  //       if (!withDefaultDestoryTooltipOnHide) {
-  //         container.current?.parentNode?.removeChild(container.current);
-  //       }
-  //     },
-  //     [],
-  //   );
+  // 对于隐藏不销毁的tooltip移除container的dom节点
+  useEffect(
+    () => () => {
+      if (!withDefaultDestoryTooltipOnHide || tooltipVisible) {
+        container.current?.parentNode?.removeChild(container.current);
+      }
+    },
+    [],
+  );
 
   // 初次可见创建tooltip挂载的dom
   if (!initRef.current && tooltipVisible) {
