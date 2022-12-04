@@ -30,7 +30,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
     mouseLeaveDelay = 20,
     placement = 'top',
     defaultOpen = false,
-    arrowPointAtCenter = true,
+    arrowPointAtCenter = false,
     destroyTooltipOnHide = false,
     getPopupContainer = null,
     zIndex = 200,
@@ -96,10 +96,12 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
       ),
     [],
   );
+  // 不显示销毁
   const withDefaultDestoryTooltipOnHide = useMemo(
     () => (typeof destroyTooltipOnHide === 'boolean' ? destroyTooltipOnHide : false),
     [destroyTooltipOnHide],
   );
+  // 角标指向中间
   const withDefaultArrowPointAtCenter = useMemo(
     () => (typeof arrowPointAtCenter === 'boolean' ? arrowPointAtCenter : false),
     [arrowPointAtCenter],
@@ -110,8 +112,14 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
   }, [open, visible]);
   // tooltip角标的class
   const arrowClasses = useMemo(
-    () => classNames(getClassName(withDefaultPlacement), getClassName('arrow'), {}),
-    [placement],
+    () =>
+      classNames(getClassName('arrow'), {
+        [getClassName('top')]: withDefaultPlacement.startsWith('top'),
+        [getClassName('left')]: withDefaultPlacement.startsWith('left'),
+        [getClassName('right')]: withDefaultPlacement.startsWith('right'),
+        [getClassName('bottom')]: withDefaultPlacement.startsWith('right'),
+      }),
+    [withDefaultPlacement],
   );
   // tooltip显示
   const openTooltip = useCallback((): void => {
@@ -173,6 +181,25 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
         return {};
     }
   }, [withDefaultPlacement]);
+  // 角标相对于弹窗的位置
+  const arrowRelativePositoin = useMemo(() => {
+    switch (withDefaultPlacement) {
+      case 'topLeft':
+      case 'bottomLeft':
+        return { left: '25%' };
+      case 'topRight':
+      case 'bottomRight':
+        return { left: '75%' };
+      case 'leftTop':
+      case 'rightTop':
+        return { top: '25%' };
+      case 'leftBottom':
+      case 'rightBottom':
+        return { top: '75%' };
+      default:
+        return {};
+    }
+  }, [withDefaultPlacement]);
   // tooltip的弹窗
   const TooltipPopup = useMemo(() => {
     if (withDefaultDestoryTooltipOnHide) {
@@ -187,7 +214,10 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
                 pointCenter={withDefaultArrowPointAtCenter}
               >
                 <div className={getClassName('content')}>
-                  <div className={arrowClasses} style={{ borderColor: color, zIndex }} />
+                  <div
+                    className={arrowClasses}
+                    style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
+                  />
                   <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
                     {title}
                   </div>
@@ -207,7 +237,10 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
           pointCenter={withDefaultArrowPointAtCenter}
         >
           <div className={getClassName('content')}>
-            <div className={arrowClasses} style={{ borderColor: color, zIndex }} />
+            <div
+              className={arrowClasses}
+              style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
+            />
             <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
               {title}
             </div>
@@ -219,6 +252,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
     withDefaultDestoryTooltipOnHide,
     withDefaultPlacement,
     withDefaultArrowPointAtCenter,
+    arrowRelativePositoin,
     PositoinExt,
     tooltipVisible,
     arrowClasses,
@@ -245,6 +279,15 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
     }
     onOpenChange(tooltipVisible);
   }, [tooltipVisible, withDefaultDestoryTooltipOnHide, onOpenChange]);
+
+  //   useEffect(
+  //     () => () => {
+  //       if (!withDefaultDestoryTooltipOnHide) {
+  //         container.current?.parentNode?.removeChild(container.current);
+  //       }
+  //     },
+  //     [],
+  //   );
 
   // 初次可见创建tooltip挂载的dom
   if (!initRef.current && tooltipVisible) {
