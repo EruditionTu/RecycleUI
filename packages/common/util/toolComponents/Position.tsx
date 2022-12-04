@@ -9,6 +9,7 @@ interface IPositionProps {
   placement?: PlacementType;
   extLeft?: number;
   extTop?: number;
+  pointCenter?: boolean;
 }
 
 const Position = ({
@@ -17,6 +18,7 @@ const Position = ({
   children,
   extLeft = 0,
   extTop = 0,
+  pointCenter = false,
 }: IPositionProps) => {
   const contentEl = useRef<HTMLDivElement>(null);
   const [triggerRect] = useClientRect(triggerRef);
@@ -37,6 +39,7 @@ const Position = ({
     triggerRect: triggerRect || defaultRect,
     contentRect: contentRect || defaultRect,
     placement,
+    pointCenter,
   });
 
   return (
