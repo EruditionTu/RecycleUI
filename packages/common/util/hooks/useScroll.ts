@@ -11,18 +11,17 @@ const useScroll = (
     const handleScroll = (evt: Event) => {
       onScroll(evt);
     };
-
     // dom element 动态创建的场景
     if (ele.current) {
       const parentElements = getScrollParents(ele.current);
 
       parentElements.forEach((parentElement) => {
-        parentElement.addEventListener('scroll', handleScroll);
+        (parentElement as HTMLElement).onscroll = handleScroll;
       });
 
       return function cleanup() {
         parentElements.forEach((parentElement) => {
-          parentElement.removeEventListener('scroll', handleScroll);
+          (parentElement as HTMLElement).onscroll = null;
         });
       };
     }
