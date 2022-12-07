@@ -8,7 +8,7 @@ export default () => {
     fontWeight: 500,
   };
   return (
-    <Tooltip title="tubo" placement="topLeft" open>
+    <Tooltip title="tubo">
       <span style={textStyle}>Tooltip will show on mouse enter.</span>
     </Tooltip>
   );

@@ -31,6 +31,7 @@ export default function useMutationObservable(
     try {
       observeRef.current.observe(targetEl, config);
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
     }
 

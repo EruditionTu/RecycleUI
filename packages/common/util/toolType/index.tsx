@@ -4,4 +4,8 @@ type WithCustomStyle<T> = T & {
   style?: CSSProperties;
   className?: string;
 };
-export { WithCustomStyle };
+
+type WithForwardRef<T> = T & {
+  ref?: any;
+};
+export { WithCustomStyle, WithForwardRef };

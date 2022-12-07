@@ -8,51 +8,85 @@
     &-content{
         position: relative;
     }
-    &-top{
-        &[class~='recycle-ui-tooltip-arrow']{
+    &-top,&-topLeft,&-topRight{
             border-left: @arrow_side_length solid;
             border-left-color: transparent !important;
             border-right: @arrow_side_length solid ;
             border-right-color: transparent !important;
             border-top: @arrow_altitude solid rgba(0, 0, 0, .85);
-            left:50%;
-            top: 100%;
-            transform: translateX(-50%);
-        }
     }
-    &-right{
-        &[class~='recycle-ui-tooltip-arrow']{
-            border-bottom: @arrow_side_length solid;
-            border-bottom-color: transparent !important;
-            border-top: @arrow_side_length solid;
-            border-top-color: transparent !important;
-            border-right: @arrow_altitude solid rgba(0, 0, 0, .85);
-            transform:translateY(-50%) translateX(-100%);
-            top: 50%;
-        }
+    &-top{
+        left:50%;
+        top: 100%;
+        transform: translateX(-50%);
     }
-    &-left{
-        &[class~='recycle-ui-tooltip-arrow']{
-            border-bottom: @arrow_side_length solid;
-            border-bottom-color: transparent !important;
-            border-top: @arrow_side_length solid;
-            border-top-color: transparent !important;
-            border-left: @arrow_altitude solid rgba(0, 0, 0, .85);
-            left:100%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+    &-topLeft{
+        left:5px;
+        top:100%;
+    }
+    &-topRight{
+        right: 5px;
+        top: 100%;
+    }
+    &-bottom,&-bottomLeft,&-bottomRight{
+        border-left: @arrow_side_length solid;
+        border-left-color: transparent !important;
+        border-right: @arrow_side_length solid;
+        border-right-color: transparent !important;
+        border-bottom: @arrow_altitude solid rgba(0, 0, 0, .85);
     }
     &-bottom{
-        &[class~='recycle-ui-tooltip-arrow']{
-            border-left: @arrow_side_length solid;
-            border-left-color: transparent !important;
-            border-right: @arrow_side_length solid;
-            border-right-color: transparent !important;
-            border-bottom: @arrow_altitude solid rgba(0, 0, 0, .85);
-            left:50%;
-            transform:translateY(-100%) translateX(-50%) ;
-        }
+        left:50%;
+        transform:translateX(-50%) ;
+        bottom: 100%;
+    }
+    &-bottomLeft{
+        left:5px;
+        bottom:100%;
+    }
+    &-bottomRight{
+        right:5px;
+        bottom: 100%;
+    }
+    &-right,&-rightTop,&-rightBottom{
+        border-bottom: @arrow_side_length solid;
+        border-bottom-color: transparent !important;
+        border-top: @arrow_side_length solid;
+        border-top-color: transparent !important;
+        border-right: @arrow_altitude solid rgba(0, 0, 0, .85);
+    }
+    &-right{
+        transform:translateY(-50%);
+        right: 100%;
+        top: 50%;
+    }
+    &-rightTop{
+        right: 100%;
+        top:5px;
+    }
+    &-rightBottom{
+        right: 100%;
+        bottom:5px;
+    }
+    &-left,&-leftTop,&-leftBottom{
+        border-bottom: @arrow_side_length solid;
+        border-bottom-color: transparent !important;
+        border-top: @arrow_side_length solid;
+        border-top-color: transparent !important;
+        border-left: @arrow_altitude solid rgba(0, 0, 0, .85);
+    }
+    &-left{
+        left:100%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &-leftTop{
+        left:100%;
+        top:5px;
+    }
+    &-leftBottom{
+        left:100%;
+        bottom: 5px;
     }
     &-arrow{
         display: block;

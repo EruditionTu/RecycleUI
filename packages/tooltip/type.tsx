@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { PlacementType } from '@/packages/common/util/hooks/usePlacement';
+import type { PlacementType } from '@/packages/common/util/getPlacement';
 
 type PopupTrigger = 'hover' | 'click';
 

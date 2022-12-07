@@ -6,11 +6,12 @@ import React, {
   cloneElement,
   useLayoutEffect,
   useEffect,
+  Children,
 } from 'react';
 import type { FC, ReactElement } from 'react';
 import classNames from 'classnames';
+import invariant from 'invariant';
 import type TooltipProps from './type';
-import findChildInDom from '@/packages/common/util/dom/findChildInDom';
 import getRoot from '@/packages/common/util/dom/getRoot';
 import Portal from '@/packages/common/util/toolComponents/Portal';
 import Position from '@/packages/common/util/toolComponents/Position';
@@ -57,21 +58,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
     const rootDom: HTMLElement = isDom(getPopupContainer)
       ? (getPopupContainer as HTMLElement)
       : getRoot();
-    const tooltipRootExisted = findChildInDom(
-      rootDom,
-      (item) => item?.id === 'recycle-ui-popup-root',
-    );
-    if (tooltipRootExisted) {
-      tooltipRoot.current = tooltipRootExisted as HTMLElement;
-      return tooltipRootExisted;
-    }
-    tooltipRoot.current = document.createElement('div');
-    tooltipRoot.current.style.position = 'absolute';
-    tooltipRoot.current.style.top = '0';
-    tooltipRoot.current.style.left = '0';
-    tooltipRoot.current.style.width = '100%';
-    tooltipRoot.current.id = 'recycle-ui-popup-root';
-    rootDom.appendChild(tooltipRoot.current);
+    tooltipRoot.current = rootDom;
     return tooltipRoot.current;
   }, [tooltipRoot, getPopupContainer]);
 
@@ -113,13 +100,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
   }, [open, visible]);
   // tooltip角标的class
   const arrowClasses = useMemo(
-    () =>
-      classNames(getClassName('arrow'), {
-        [getClassName('top')]: withDefaultPlacement.startsWith('top'),
-        [getClassName('left')]: withDefaultPlacement.startsWith('left'),
-        [getClassName('right')]: withDefaultPlacement.startsWith('right'),
-        [getClassName('bottom')]: withDefaultPlacement.startsWith('right'),
-      }),
+    () => classNames(getClassName('arrow'), getClassName(withDefaultPlacement)),
     [withDefaultPlacement],
   );
   // tooltip显示
@@ -158,7 +139,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
       onMouseLeave: hoverClose,
       onClick: clickOpen,
     }),
-    [childrenRef, hoverClose, hoverOpen],
+    [childrenRef, hoverClose, hoverOpen, clickOpen],
   );
   const PositoinExt = useMemo(() => {
     switch (withDefaultPlacement) {
@@ -182,25 +163,6 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
         return {};
     }
   }, [withDefaultPlacement]);
-  // 角标相对于弹窗的位置
-  const arrowRelativePositoin = useMemo(() => {
-    switch (withDefaultPlacement) {
-      case 'topLeft':
-      case 'bottomLeft':
-        return { left: '25%' };
-      case 'topRight':
-      case 'bottomRight':
-        return { left: '75%' };
-      case 'leftTop':
-      case 'rightTop':
-        return { top: '25%' };
-      case 'leftBottom':
-      case 'rightBottom':
-        return { top: '75%' };
-      default:
-        return {};
-    }
-  }, [withDefaultPlacement]);
 
   // tooltip显示于消失的回调，如果可见需要将dom节点加入，至于移除container节点是Portal组件实现的
   useLayoutEffect(() => {
@@ -209,30 +171,37 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
         const tooltipRootDom = tooltipRoot.current || getTooltipRoot();
         tooltipRootDom.appendChild(container.current as HTMLElement);
       } else {
-        (container.current as HTMLElement).style.display = 'block';
+        (container.current as HTMLElement).style.visibility = 'visible';
       }
     } else {
       if (!withDefaultDestoryTooltipOnHide && container.current) {
-        container.current.style.display = 'none';
+        container.current.style.visibility = 'hidden';
       }
     }
     onOpenChange(tooltipVisible);
   }, [tooltipVisible, withDefaultDestoryTooltipOnHide, onOpenChange]);
 
-  // 对于隐藏不销毁的tooltip移除container的dom节点
-  useEffect(
-    () => () => {
+  // 对于隐藏不销毁的tooltip移除container的dom节点，对于无法获取ref的元素报错
+  useEffect(() => {
+    invariant(
+      childrenRef.current instanceof HTMLElement,
+      'The children must be able to receive ref prop of HTMLElement.',
+    );
+    return () => {
       if (!withDefaultDestoryTooltipOnHide || tooltipVisible) {
         container.current?.parentNode?.removeChild(container.current);
       }
-    },
-    [],
-  );
+    };
+  }, []);
 
   // 初次可见创建tooltip挂载的dom
   if (!initRef.current && tooltipVisible) {
     const currentContainer = document.createElement('div');
     currentContainer.className = 'recycle-ui-tooltip';
+    currentContainer.style.position = 'absolute';
+    currentContainer.style.left = '0px';
+    currentContainer.style.top = '0px';
+    currentContainer.style.width = '100%';
     container.current = currentContainer;
     initRef.current = true;
     if (!withDefaultDestoryTooltipOnHide) {
@@ -240,10 +209,9 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
       tooltipRootDom.appendChild(container.current as HTMLElement);
     }
   }
-
   return (
     <>
-      {cloneElement(children, triggerProps)}
+      {cloneElement(Children.only(children), triggerProps)}
       {withDefaultDestoryTooltipOnHide ? (
         <>
           {tooltipVisible && (
@@ -255,10 +223,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
                 pointCenter={withDefaultArrowPointAtCenter}
               >
                 <div className={getClassName('content')}>
-                  <div
-                    className={arrowClasses}
-                    style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
-                  />
+                  <div className={arrowClasses} style={{ borderColor: color, zIndex }} />
                   <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
                     {title}
                   </div>
@@ -276,10 +241,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
             pointCenter={withDefaultArrowPointAtCenter}
           >
             <div className={getClassName('content')}>
-              <div
-                className={arrowClasses}
-                style={{ borderColor: color, zIndex, ...arrowRelativePositoin }}
-              />
+              <div className={arrowClasses} style={{ borderColor: color, zIndex }} />
               <div className={getClassName('inner')} style={{ backgroundColor: color, zIndex }}>
                 {title}
               </div>

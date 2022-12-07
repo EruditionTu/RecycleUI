@@ -1,4 +1,4 @@
-import { RefObject, useLayoutEffect } from 'react';
+import { RefObject, useRef } from 'react';
 import { getScrollParents } from '../dom/getScrollParent';
 
 // Why pass ref object instead of HTMLElement?
@@ -7,7 +7,8 @@ const useScroll = (
   onScroll: (evt: Event) => void,
   deps: any[] = [],
 ) => {
-  useLayoutEffect(() => {
+  const initRef = useRef(false);
+  if (!initRef.current) {
     const handleScroll = (evt: Event) => {
       onScroll(evt);
     };
@@ -18,13 +19,17 @@ const useScroll = (
       parentElements.forEach((parentElement) => {
         (parentElement as HTMLElement).onscroll = handleScroll;
       });
-
-      return function cleanup() {
-        parentElements.forEach((parentElement) => {
-          (parentElement as HTMLElement).onscroll = null;
-        });
-      };
     }
-  }, deps);
+    initRef.current = true;
+  }
+  // useLayoutEffect(() => {
+
+  //     // return function cleanup() {
+  //     //   parentElements.forEach((parentElement) => {
+  //     //     (parentElement as HTMLElement).onscroll = null;
+  //     //   });
+  //     // };
+  //   }
+  // }, deps);
 };
 export default useScroll;

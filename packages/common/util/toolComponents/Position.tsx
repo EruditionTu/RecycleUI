@@ -1,9 +1,8 @@
-import React, { useRef, RefObject, ReactNode } from 'react';
-import type { PlacementType } from '../hooks/usePlacement';
-import useClientRect from '../hooks/useClientRect';
-import usePlacement from '../hooks/usePlacement';
+import React, { useRef, useState, useLayoutEffect } from 'react';
+import type { RefObject, ReactNode } from 'react';
+import type { PlacementType } from '../getPlacement';
 import useResize from '../hooks/useResize';
-import useScroll from '../hooks/useScroll';
+import getPlacement from '../getPlacement';
 
 interface IPositionProps {
   triggerRef: RefObject<HTMLElement | null>;
@@ -23,35 +22,39 @@ const Position = ({
   pointCenter = false,
 }: IPositionProps) => {
   const contentEl = useRef<HTMLDivElement>(null);
-  const [triggerRect, updateTriggerRect] = useClientRect(triggerRef);
-  const [contentRect] = useClientRect(contentEl);
-  const defaultRect: DOMRect = {
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: 0,
-    height: 0,
-    x: 0,
-    y: 0,
-    toJSON: () => {},
-  };
+  const triggerRect = triggerRef.current?.getBoundingClientRect();
+  const contentRect = contentEl.current?.getBoundingClientRect();
 
-  // 给 trigger 元素和它的滚动父节点绑定 scroll 事件，更新它的 ClientRect
-  useScroll(triggerRef, updateTriggerRect);
+  const [flag, setFlag] = useState(false);
+
+  useLayoutEffect(() => {
+    setFlag(!flag);
+  }, [triggerRef.current]);
+
   // 监听 resize 事件，并更新 trigger 元素的 ClientRect
-  useResize(updateTriggerRect);
+  useResize(() =>
+    setFlag((flag) => {
+      return !flag;
+    }),
+  );
   // 根据触发元素和内容元素的 ClientRect，以及摆放位置，计算出内容元素的坐标
-  const position = usePlacement({
-    triggerRect: triggerRect || defaultRect,
-    contentRect: contentRect || defaultRect,
-    placement,
-    pointCenter,
-  });
+  const position =
+    triggerRect && contentRect
+      ? getPlacement({
+          triggerRect,
+          contentRect,
+          placement,
+          pointCenter,
+        })
+      : null;
 
   return (
     <div
-      style={{ position: 'absolute', left: position.left - extLeft, top: position.top - extTop }}
+      style={{
+        position: 'absolute',
+        left: position ? position.left - extLeft : 0,
+        top: position ? position.top - extTop : 0,
+      }}
       ref={contentEl}
     >
       {children}
