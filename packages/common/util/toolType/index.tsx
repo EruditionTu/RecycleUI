@@ -1,11 +1,12 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 
-type WithCustomStyle<T> = T & {
+export type WithCustomStyle<T> = T & {
   style?: CSSProperties;
   className?: string;
 };
 
-type WithForwardRef<T> = T & {
+export type WithForwardRef<T> = T & {
   ref?: any;
 };
-export { WithCustomStyle, WithForwardRef };
+
+export type HTMLDivProps = HTMLAttributes<HTMLDivElement>;
