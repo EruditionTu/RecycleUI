@@ -31,6 +31,7 @@ const Card = forwardRef<HTMLElement, CardWarpperProps>((props, ref) => {
     defaultActiveTabKey,
     tabList,
     tabProps,
+    className = '',
     size = 'default',
     hoverable = false,
     border = true,
@@ -46,8 +47,9 @@ const Card = forwardRef<HTMLElement, CardWarpperProps>((props, ref) => {
       hoverable: typeof hoverable === 'boolean' ? hoverable : false,
       border: typeof border === 'boolean' ? border : false,
       size: withDefault(size, ['default', 'small'], 'default'),
+      className: typeof className === 'string' ? className : '',
     };
-  }, [hoverable, border, size]);
+  }, [hoverable, border, size, className]);
 
   // 加载显示的骨架屏
   const loadingBlock = useMemo(() => <></>, []);
@@ -94,7 +96,7 @@ const Card = forwardRef<HTMLElement, CardWarpperProps>((props, ref) => {
     return containGrid;
   }, [children]);
   const warpperClass = useMemo((): string => {
-    return classNames(prefixCls, {
+    return classNames(prefixCls, propsFilter.className, {
       [`${prefixCls}-hoverable`]: propsFilter.hoverable,
       [`${prefixCls}-bordered`]: propsFilter.border,
       [`${prefixCls}-small`]: propsFilter.size === 'small',
@@ -102,7 +104,6 @@ const Card = forwardRef<HTMLElement, CardWarpperProps>((props, ref) => {
   }, [prefixCls, propsFilter]);
 
   const divProps = omit(others, ['onTabChange']);
-
   return (
     <div {...divProps} className={warpperClass} style={{ width: 300 }}>
       {head}
