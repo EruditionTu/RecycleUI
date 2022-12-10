@@ -8,7 +8,6 @@ import './animation.less';
 
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);
-  console.log('isOpen', isOpen);
   //   function toggleOverlay(e: any) {
   //     setIsOpen(!isOpen);
   //   }
