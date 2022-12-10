@@ -6,6 +6,10 @@ import '../../button/style';
 import '../../card/style';
 import '../style';
 
+const div = document.createElement('div');
+div.id = 'tubowen';
+document.documentElement.appendChild(div);
+
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);
   function toggleOverlay(e: any) {
@@ -14,7 +18,7 @@ export default function Demo() {
   return (
     <div style={{ position: 'relative', minHeight: 200 }}>
       <Button onClick={toggleOverlay}>点击弹出内容</Button>
-      <Overlay usePortal={false} open={isOpen} onClose={toggleOverlay}>
+      <Overlay containerDom={div} open={isOpen} onClose={toggleOverlay}>
         <Card hoverable style={{ width: 500 }}>
           <h3 style={{ marginTop: 0 }}>基础弹出层1</h3>
           <p>

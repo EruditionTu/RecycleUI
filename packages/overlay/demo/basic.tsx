@@ -4,6 +4,7 @@ import Card from '../../card';
 import Overlay from '..';
 import '../../button/style';
 import '../../card/style';
+import '../style';
 
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);

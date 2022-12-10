@@ -6,37 +6,18 @@
 import React, { cloneElement, useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import type { MouseEvent } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { TransitionProps } from 'react-transition-group/Transition';
 import classNames from 'classnames';
-import Portal, { PortalProps } from '../common/components/portal';
+import Portal from '../common/components/portal';
 import type { WithCustomStyle } from '@/packages/common/util/toolType';
-import './style/index.less';
+import type OverlayProps from './type';
 
 const defaultEventCb = () => {};
-
-export interface OverlayProps extends Omit<TransitionProps, 'timeout'> {
-  timeout?: TransitionProps['timeout'];
-  open?: boolean;
-  usePortal?: boolean;
-  maskClosable?: boolean;
-  dialogProps?: React.HTMLProps<HTMLElement>;
-  backdropProps?: React.HTMLProps<HTMLDivElement>;
-  portalProps?: PortalProps;
-  hasBackdrop?: boolean;
-  unmountOnExit?: boolean;
-  transitionName?: string;
-  onEnter?: (node: HTMLElement, isAppearing: boolean) => void;
-  onOpening?: (node: HTMLElement, isAppearing: boolean) => void;
-  onOpened?: (node: HTMLElement, isAppearing: boolean) => void;
-  onClosing?: (node: HTMLElement) => void;
-  onClosed?: (node: HTMLElement | React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  onClose?: (evn: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-}
 
 const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   const {
     style,
     className,
+    containerDom,
     open = false,
     usePortal = true,
     hasBackdrop = true,
@@ -64,8 +45,6 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   const [visible, setVisible] = useState<boolean>();
   const container = useRef<HTMLElement>(null);
   const overlay = useRef(null);
-
-  console.log(isOpen, visible);
 
   const prefixCls = useMemo(() => 'recycle-ui-overlay', []);
 
@@ -95,7 +74,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     if (maskClosable && hasBackdrop) {
       overlayWillClose();
       setIsOpen(false);
-      typeof onClose === 'function' && onClose(e);
+      typeof onClose === 'function' && onClose(e as any);
     }
     backdropProps?.onMouseDown?.(e as any);
   }, []);
@@ -103,7 +82,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   const handleClosed = useCallback(
     (node: HTMLElement | MouseEvent<HTMLButtonElement, MouseEvent>) => {
       setVisible(false);
-      typeof onClosed === 'function' && onClosed(node);
+      typeof onClosed === 'function' && onClosed(node as any);
     },
     [],
   );
@@ -200,7 +179,16 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     </CSSTransition>
   );
   if (visible && usePortal) {
-    return <Portal {...{ ...portalProps }}>{TransitionGroupComp}</Portal>;
+    return (
+      <Portal
+        {...{
+          ...portalProps,
+          container: containerDom instanceof HTMLElement ? containerDom : undefined,
+        }}
+      >
+        {TransitionGroupComp}
+      </Portal>
+    );
   }
   return TransitionGroupComp;
 };

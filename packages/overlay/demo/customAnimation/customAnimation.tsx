@@ -5,6 +5,7 @@ import Overlay from '../..';
 import '../../../button/style';
 import '../../../card/style';
 import './animation.less';
+import '../../style';
 
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);

@@ -102,3 +102,33 @@ group:
 }
 
 ```
+
+## 自定义挂载节点
+
+如果`usePortal`属性为真，那么可以使用containerDom将overlay组件挂载到指定的dom节点下面。
+
+<code src='./demo/customContainer.tsx' />
+
+## API
+
+| 参数        | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| open        | 弹窗是否可见         | `boolean`         | `false` |
+| usePortal    | 是否使用react16的方案Portal，将模态对话框生成到根节点的外面         | `boolean`                                  | `true`   |
+| containerDom      | 对话框生成到节点外面挂载的dom节点   | `HTMLElemet`                   | `document.body`   |
+| maskClosable     | 点击遮盖层是否允许关闭         | `boolean`                                  | `true`   |
+| portalProps        | 设置 Portal 组件属性         | `{container?:HTMLElement}`（目前只有这一个属性，之后可能会加其他属性说不定😂）   | `{}`   |
+| backdropProps | 遮罩层 HTML 属性设置    | `HTMLAttributes`                                | `{}`   |
+| dialogProps | 按钮点击回调事件 | `HTMLAttributes`                                 | `{}`      |
+| unmountOnExit     | 退出动画卸载组件  | `CSSProperties` | `{}`    |
+| hasBackdrop | 是否有背景，是否向<body> 添加样式 `.recycle-ui-overlay-open` 防止滚动条出现 | `boolean`        |`true` |
+| transitionName | `transitionName`可以作为`react-transition-group`的`classNames`的字段传入，自定义动画  | `string`   | `--`  |
+| timeout | 动画的执行时间        | `number`        | `300`    |
+| onClose | 点击遮罩层回调函数，通过这个函数设置 open=false 关闭。onClosed 是弹出框关闭动画执行完成后的回调函数，有明显区别容易混淆。 | `Function`        | `--`    |
+| onEnter	 | 顺序 1，应用 enter 或 appear 后立即触发 `CSSTransition` 回调。        | `Function`        | `--`    |
+| onOpening | 顺序 2，**打开**立即执行，在应用 enter-active 或 appear-active 类后立即触发 `CSSTransition` 回调。| `Function`        | `--`    |
+| onOpened	 | 顺序 3，**打开**动画播放完成执行，在应用 exiting 状态之前启动回调。  | `Function`        | `--`    |
+| onClosing	 | 顺序 4，**关闭**立即执行，应用 exit-active 后立即触发 `CSSTransition` 回调。    | `Function`        | `--`    |
+| onClosed	 | 	顺序 5，**关闭**动画播放完成立即执行，删除 exit 类后立即触发 `CSSTransition` 回调，并将 exit-done 类添加到 DOM 节点。  | `Function`        | `--`    |
+
+支持传递 `CSSTransition` 原生事件。

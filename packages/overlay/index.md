@@ -102,3 +102,33 @@ The animation of this component is encapsulated by the 'react-transition-group' 
 }
 
 ```
+
+## Custom mount node
+
+If the 'usePortal' attribute is true, you can use containerDom to mount the overlay component under the specified dom node.
+
+<code src='./demo/customContainer.tsx' />
+
+## API
+
+| Name        | Describe      | Type                                       | default   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| open        | Whether the pop-up window is visible         | `boolean`         | `false` |
+| usePortal    | Whether to use the react16 scheme Portal to generate the modal dialog box outside the root node         | `boolean`                                  | `true`   |
+| containerDom      | The dialog box generates the dom node mounted outside the node   | `HTMLElemet`                   | `document.body`   |
+| maskClosable     | Click whether the covering layer can be closed         | `boolean`                                  | `true`   |
+| portalProps        | Set Portal Component Properties         | `{container?:HTMLElement}`（At present, there is only one attribute, and other attributes may be added later😂）   | `{}`   |
+| backdropProps | Mask Layer HTML Attribute Settings    | `HTMLAttributes`                                | `{}`   |
+| dialogProps | Button Click Callback Event | `HTMLAttributes`                                 | `{}`      |
+| unmountOnExit     | Exit Animation Unload Component  | `CSSProperties` | `{}`    |
+| hasBackdrop |Whether there is a background, whether to add a style to<body> `recycle-ui-overlay-open ` Prevent scrollbars from appearing | `boolean`        |`true` |
+| transitionName | `transitionName`can be imported as a field of' classNames' of `react-transition-group`, and customized animation  | `string`   | `--`  |
+| timeout | Animation execution time        | `number`        | `300`    |
+| onClose | Click the mask layer callback function, and set open=false to close through this function. OnClosed is a callback function after the pop-up box closes the animation. There are obvious differences and it is easy to confuse. | `Function`        | `--`    |
+| onEnter	 | In order 1, the `CSSTransition` callback is triggered immediately after the application of enter or appearance.        | `Function`        | `--`    |
+| onOpening | Sequence 2, ** Open ** Execute immediately, and trigger the `CSSTransition` callback immediately after the application of the enter active or appearance active class。| `Function`        | `--`    |
+| onOpened	 | Sequence 3: ** Open ** The animation is played and executed, and the callback is started before the exiting status is applied。  | `Function`        | `--`    |
+| onClosing	 | Sequence 4: ** Close ** Execute immediately, and trigger the `CSSTransition` callback immediately after applying exit active。    | `Function`        | `--`    |
+| onClosed	 | 	Sequence 5: ** Close ** The animation will be executed immediately after playing. After deleting the exit class, the `CSSTransition` callback will be triggered immediately, and the exit done class will be added to the DOM node.  | `Function`        | `--`    |
+
+It supports the transmission of `CSSTransition` native events.
