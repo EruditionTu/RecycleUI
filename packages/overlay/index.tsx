@@ -193,3 +193,4 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   return TransitionGroupComp;
 };
 export default Overlay;
+export { OverlayProps };
