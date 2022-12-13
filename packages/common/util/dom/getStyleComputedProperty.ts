@@ -4,12 +4,12 @@
  * @param property 属性键名
  * @returns
  */
-function getStyleComputedProperty(element: Element, property?: string) {
+function getStyleComputedProperty(element: Element, property?: keyof CSSStyleDeclaration) {
   if (element.nodeType !== 1) {
     return [];
   }
   const window = element.ownerDocument!.defaultView!;
-  const css = window.getComputedStyle(element, null);
-  return property ? (css as any)[property] : css;
+  const css: any = (window as Window).getComputedStyle(element, null);
+  return property ? css[property] : css;
 }
 export default getStyleComputedProperty;

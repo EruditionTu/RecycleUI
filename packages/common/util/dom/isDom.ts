@@ -1,5 +1,4 @@
 /**
- * Judge the obj is dom node or not
  * 判断目标节点是否是dom节点
  * @param target 目标节点
  * @returns 目标节点是否是dom节点
