@@ -60,8 +60,10 @@ export default interface OverlayTriggerProps {
   delay?: Delay;
   usePortal?: boolean;
   disabled?: boolean;
-  isOutside?: boolean;
-  isClickOutside?: boolean;
+  triggerOutsideClose?: boolean; // hover模式下，离开trigger元素就会关闭弹窗，包括移到overlay上面也会，为false，那么在overlay上不会关闭
+  clickOverlayClose?: boolean; // click模式下，点击overlay遮盖层会关闭
+  clickTriggerClose?: boolean; // click模式下，点击trigger可以关闭
+  clickOutsideClose?: boolean; // click模式下，点击overlay和trigger之外的可以关闭
   autoAdjustOverflow?: boolean;
   destroyTooltipOnHide?: boolean;
   placement?: Placement;

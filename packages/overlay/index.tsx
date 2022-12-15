@@ -36,7 +36,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     onClosing = defaultEventCb,
     onClosed = defaultEventCb,
     transitionName = 'recycle-ui-overlay',
-    unmountOnExit = true,
+    destroyTooltipOnHide = true,
     timeout = 300,
     children = '',
     ...otherProps
@@ -94,7 +94,11 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       cloneElement(children, {
         ...dialogProps,
         style: { ...children.props.style, ...dialogProps.style },
-        className: classNames(children.props.className, `${prefixCls}-content`),
+        className: classNames(
+          children.props.className,
+          dialogProps.className,
+          `${prefixCls}-content`,
+        ),
         tabIndex: 0,
       })
     ) : (
@@ -120,7 +124,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   }, [visible]);
   const TransitionGroupComp = (
     <CSSTransition
-      unmountOnExit={unmountOnExit}
+      unmountOnExit={destroyTooltipOnHide}
       timeout={timeout}
       classNames={transitionName}
       in={isOpen}

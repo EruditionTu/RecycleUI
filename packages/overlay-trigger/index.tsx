@@ -34,6 +34,10 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       usePortal = true,
       disabled = false,
       autoAdjustOverflow = false,
+      triggerOutsideClose = false,
+      clickOverlayClose = false,
+      clickTriggerClose = true,
+      clickOutsideClose = true,
       trigger = 'hover',
       placement = 'top',
       transitionName = 'recycle-ui-overlay',
@@ -138,6 +142,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       zIndex.current -= 1;
       setIsOpen(false);
     };
+
     /**
      * 手动显示弹窗
      */
@@ -206,6 +211,8 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         // 清除该组件所有定时器
         clearAllTimeouts();
 
+        // 如果鼠标在外面，并且triggerOutsideClose 为真，那么不关闭组件
+        if (!isOutside && triggerOutsideClose) return;
         hoverStateRef.current = 'hide';
         const delay = normalizeDelay(props.delay);
 
@@ -246,8 +253,14 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       [],
     );
 
+    /**
+     * 点击trigger和overlay之外的地方关闭弹窗，
+     * 判断点击的dom是不是trigger节点或者弹窗节点的子节点，
+     * 如果不是，那么将会执行关闭弹窗组件
+     */
     const handleClickoutside = useCallback(
       (e: MouseEvent) => {
+        if (!clickOutsideClose) return;
         const popupDom = popupRef.current;
         const triggerDom = triggerRef.current;
         if (
@@ -261,8 +274,17 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
           setIsOpen(false);
         }
       },
-      [popupRef.current, triggerRef.current],
+      [popupRef.current, triggerRef.current, zIndex.current, clickOutsideClose],
     );
+
+    /**
+     * 点击overlay关闭弹窗
+     */
+    const handleClickOverlyClose = useCallback(() => {
+      if (!clickOverlayClose || !isOpen) return;
+      zIndex.current--;
+      setIsOpen(false);
+    }, [zIndex.current, isOpen, clickOverlayClose]);
 
     /**
      * 如果是点击触发，那么需要给文档绑定mousedown事件，判断
@@ -294,7 +316,9 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       }
     }, [propsFilter.open]);
 
-    // 组件为显示的情况
+    /**
+     * 组件为显示的情况
+     */
     useEffect(() => {
       const style = getStyle({
         placement: overlayStyle.placement || placement,
@@ -315,7 +339,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
     if (propsFilter.trigger === 'click' && !disabled) {
       triggerProps.onClick = (e: any) => {
         const { onClick } = getChildProps() as any;
-        isOpen ? hide() : show();
+        isOpen ? clickTriggerClose && hide() : show();
         if (onClick) onClick(e, !isOpen);
       };
     }
@@ -352,7 +376,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         ...other,
         placement: propsFilter.placement,
         open,
-        dialogProps: {},
+        dialogProps: { onClick: handleClickOverlyClose },
       }),
       [other, propsFilter, open],
     );

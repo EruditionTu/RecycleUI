@@ -11,7 +11,7 @@ const tooltip = (
 );
 
 export default () => (
-  <OverlayTrigger placement="top" trigger="click" overlay={tooltip}>
+  <OverlayTrigger placement="top" trigger="click" overlay={tooltip} clickOutsideClose={false}>
     <span>鼠标移动到此处，点击显示和消失触发事件</span>
   </OverlayTrigger>
 );

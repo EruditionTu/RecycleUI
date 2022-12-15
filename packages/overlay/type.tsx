@@ -1,4 +1,5 @@
 import { TransitionProps } from 'react-transition-group/Transition';
+import type { HTMLProps } from 'react';
 import { PortalProps } from '../common/components/portal';
 
 export default interface OverlayProps extends Omit<TransitionProps, 'timeout'> {
@@ -7,11 +8,11 @@ export default interface OverlayProps extends Omit<TransitionProps, 'timeout'> {
   open?: boolean;
   usePortal?: boolean;
   maskClosable?: boolean;
-  dialogProps?: React.HTMLProps<HTMLElement>;
-  backdropProps?: React.HTMLProps<HTMLDivElement>;
+  dialogProps?: HTMLProps<HTMLElement>;
+  backdropProps?: HTMLProps<HTMLDivElement>;
   portalProps?: PortalProps;
   hasBackdrop?: boolean;
-  unmountOnExit?: boolean;
+  destroyTooltipOnHide?: boolean;
   transitionName?: string;
   onEnter?: (node: HTMLElement, isAppearing: boolean) => void;
   onOpening?: (node: HTMLElement, isAppearing: boolean) => void;
