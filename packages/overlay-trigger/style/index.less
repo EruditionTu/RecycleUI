@@ -1,0 +1,65 @@
+@import '../../common/style/index.less';
+@recycle-overlay-trigger-prefix:~'@{recycle-prefix}-overlay-trigger';
+// @overlay-trigger-prefix:~ "w-overlay-trigger";
+
+.recycle-ui-overlay.@{recycle-overlay-trigger-prefix} {
+  position: absolute;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  overflow: inherit;
+  width: initial;
+  height: initial;
+  .recycle-ui-overlay-container {
+    position: relative;
+    overflow: inherit;
+    &::before {
+      display: none;
+    }
+  }
+  .recycle-ui-overlay-content {
+    margin: 0;
+  }
+  &.rightTop .recycle-ui-overlay-content {
+    transform-origin: left top;
+  }
+  &.right .recycle-ui-overlay-content {
+    transform-origin: left center;
+  }
+  &.rightBottom .recycle-ui-overlay-content {
+    transform-origin: left bottom;
+  }
+  &.topLeft .recycle-ui-overlay-content {
+    transform-origin: bottom left;
+  }
+  &.top .recycle-ui-overlay-content {
+    transform-origin: bottom center;
+  }
+  &.topRight .recycle-ui-overlay-content {
+    transform-origin: bottom right;
+  }
+  &.leftTop .recycle-ui-overlay-content {
+    transform-origin: right top;
+  }
+  &.left .recycle-ui-overlay-content {
+    transform-origin: right center;
+  }
+  &.leftBottom .recycle-ui-overlay-content {
+    transform-origin: right bottom;
+  }
+  &.bottomLeft .recycle-ui-overlay-content {
+    transform-origin: top left;
+  }
+  &.bottom .recycle-ui-overlay-content {
+    transform-origin: top center;
+  }
+  &.bottomRight .recycle-ui-overlay-content {
+    transform-origin: top right;
+  }
+}
+.@{recycle-overlay-trigger-prefix} {
+  &-disabled {
+    cursor: not-allowed;
+  }
+}
