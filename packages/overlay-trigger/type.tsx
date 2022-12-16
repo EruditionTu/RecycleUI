@@ -69,5 +69,4 @@ export default interface OverlayTriggerProps {
   placement?: Placement;
   overlayContainer?: HTMLElement;
   onOpenChange?: (isVisbale: boolean) => void;
-  onEnter?: (node: HTMLElement, isAppearing: boolean) => void;
 }

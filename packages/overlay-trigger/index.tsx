@@ -45,7 +45,6 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       overlay,
       overlayContainer,
       children,
-      onEnter = defaultEventCb,
       onOpenChange = defaultEventCb,
       ...other
     } = props;
@@ -171,7 +170,6 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
      */
     const handleEnter = useCallback(
       (node: HTMLElement, isAppearing: boolean) => {
-        typeof onEnter === 'function' && onEnter(node, isAppearing);
         const style = getStyle({
           placement: propsFilter.placement,
           trigger: triggerRef.current as HTMLElement | IBoundingClientRect,
@@ -191,7 +189,14 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       ],
     );
 
-    function handleShow() {
+    const handleResize = useCallback(() => {
+      if (isOpen) {
+        zIndex.current = -1;
+        setIsOpen(false);
+      }
+    }, [isOpen, zIndex.current]);
+
+    const handleShow = useCallback(() => {
       clearAllTimeouts();
       hoverStateRef.current = 'show';
 
@@ -204,7 +209,13 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         if (hoverStateRef.current === 'show') show();
       }, _delay.show);
       timeoutRef.current.push(handle);
-    }
+    }, [
+      hoverStateRef.current,
+      timeoutRef.current,
+      delay,
+      children,
+      (props.children as JSX.Element)?.props.disabled,
+    ]);
 
     const handleHide = useCallback(
       (isOutside: boolean) => {
@@ -291,13 +302,24 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
      * 点击的是不是trigger或者popup，不是的话就关闭
      */
     useEffect(() => {
-      if (propsFilter.trigger === 'click') {
+      if (propsFilter.trigger === 'click' && isOpen) {
         document?.addEventListener('mousedown', handleClickoutside as any);
       }
       return () => {
         document?.removeEventListener('mousedown', handleClickoutside as any);
       };
-    }, [propsFilter.trigger, handleClickoutside]);
+    }, [propsFilter.trigger, isOpen, handleClickoutside]);
+
+    /**
+     * 添加resize监听，防止窗口变化导致弹窗位置不对
+     */
+    useEffect(() => {
+      if (isOpen) window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, [isOpen]);
+
     /**
      * 初次进入组件，组件的显示与隐藏设置为defaultOpen
      */
@@ -362,12 +384,6 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       triggerProps.onMouseLeave = (e) => {
         handleMouseOverOut(handleHide, e, 'toElement');
       };
-      //
-      // if (overlayProps?.dialogProps) {
-      //   overlayProps.dialogProps!.onMouseLeave = (e) => {
-      //     handleMouseOverOut(handleHide, e, 'toElement');
-      //   };
-      // }
     }
 
     // 遮盖层的属性
