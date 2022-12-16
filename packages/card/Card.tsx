@@ -105,7 +105,7 @@ const Card = forwardRef<HTMLElement, CardWarpperProps>((props, ref) => {
 
   const divProps = omit(others, ['onTabChange']);
   return (
-    <div {...divProps} className={warpperClass} style={{ width: 300 }}>
+    <div {...divProps} className={warpperClass} style={{ width: 300 }} ref={ref as any}>
       {head}
       {coverDom}
       {body}
