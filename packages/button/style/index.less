@@ -20,13 +20,16 @@
   position: relative;
 }
 .button {
+  display: inline-flex;
+  position: relative;
   user-select: none;
   font-size: @default-font-size;
   font-weight: @default-font-weight;
   min-height: @default-min-height;
   min-width: @default-min-width;
   cursor: pointer;
-  display: flex;
+  text-align: center;
+  margin:4px;
   align-items: center;
   justify-content: center;
   &[class~="link"],[class~="text"]{

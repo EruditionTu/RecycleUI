@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '..';
 import {
   SettingOutlined,
   StarOutlined,
@@ -7,6 +6,7 @@ import {
   DeleteOutlined,
   DownOutlined,
 } from '@ant-design/icons';
+import Button from '..';
 import '../style';
 
 const App: React.FC = () => {

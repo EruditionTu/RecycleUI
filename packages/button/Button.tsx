@@ -19,12 +19,10 @@ const LinkNode: FC<ButtonProps> = forwardRef<any, ButtonProps>(
       [disabled, loading],
     );
     return (
-      <div className="button-container">
-        <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-          <LoadingIcon loading={loading} />
-          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-        </a>
-      </div>
+      <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+        <LoadingIcon loading={loading} />
+        {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+      </a>
     );
   },
 );
@@ -40,13 +38,11 @@ const TextNode: FC<ButtonProps> = forwardRef<any, ButtonProps>(
       [disabled, loading],
     );
     return (
-      <div className="button-container">
-        <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-          <LoadingIcon loading={loading} />
-          <span>
-            {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-          </span>
-        </div>
+      <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+        <LoadingIcon loading={loading} />
+        <span>
+          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+        </span>
       </div>
     );
   },
@@ -84,18 +80,16 @@ const ButtonNode: FC<ButtonProps> = forwardRef<any, ButtonProps>((props: ButtonP
     loading,
   });
   return (
-    <div className="button-container">
-      <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-        <div className="loading-icon-container">
-          <LoadingIcon loading={loading} />
-        </div>
-        {icon}
-        {children && (
-          <span className="button-title">
-            {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-          </span>
-        )}
+    <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+      <div className="loading-icon-container">
+        <LoadingIcon loading={loading} />
       </div>
+      {icon}
+      {children && (
+        <span className="button-title">
+          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+        </span>
+      )}
     </div>
   );
 });

@@ -32,33 +32,16 @@ const App: React.FC = () => {
       </div>
       <div style={rowStyle}>
         <p style={titleStyle}>routine：</p>
-        <Button
-          type="solid"
-          purpose="routine"
-          shape={shape}
-          loading={loading}
-          disabled={disabled}
-        >
+        <Button type="solid" purpose="routine" shape={shape} loading={loading} disabled={disabled}>
           Solid
         </Button>
-        <Button
-          type="transparent"
-          shape={shape}
-          loading={loading}
-          disabled={disabled}
-        >
+        <Button type="transparent" shape={shape} loading={loading} disabled={disabled}>
           Transparent
         </Button>
       </div>
       <div style={rowStyle}>
         <p style={titleStyle}>danger：</p>
-        <Button
-          type="solid"
-          purpose="danger"
-          shape={shape}
-          loading={loading}
-          disabled={disabled}
-        >
+        <Button type="solid" purpose="danger" shape={shape} loading={loading} disabled={disabled}>
           Solid
         </Button>
         <Button
@@ -73,13 +56,7 @@ const App: React.FC = () => {
       </div>
       <div style={rowStyle}>
         <p style={titleStyle}>info：</p>
-        <Button
-          type="solid"
-          purpose="info"
-          shape={shape}
-          loading={loading}
-          disabled={disabled}
-        >
+        <Button type="solid" purpose="info" shape={shape} loading={loading} disabled={disabled}>
           Solid
         </Button>
         <Button
@@ -94,13 +71,7 @@ const App: React.FC = () => {
       </div>
       <div style={rowStyle}>
         <p style={titleStyle}>warn：</p>
-        <Button
-          type="solid"
-          purpose="warn"
-          shape={shape}
-          loading={loading}
-          disabled={disabled}
-        >
+        <Button type="solid" purpose="warn" shape={shape} loading={loading} disabled={disabled}>
           Solid
         </Button>
         <Button
@@ -115,13 +86,7 @@ const App: React.FC = () => {
       </div>
       <div style={rowStyle}>
         <p style={titleStyle}>circle:</p>
-        <Button
-          type="solid"
-          purpose="warn"
-          shape="circle"
-          loading={loading}
-          disabled={disabled}
-        >
+        <Button type="solid" purpose="warn" shape="circle" loading={loading} disabled={disabled}>
           S
         </Button>
         <Button

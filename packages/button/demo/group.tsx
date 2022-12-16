@@ -7,16 +7,20 @@ const { Group } = Button;
 export default () => (
   <>
     <Group>
-      <Button shape="circle">start</Button>
-      <Button shape="round">start</Button>
-      <Button type="link" shape="rect">
+      <Button key={1} shape="circle">
         start
       </Button>
-      <Button>start</Button>
+      <Button key={2} shape="round">
+        start
+      </Button>
+      <Button key={3} type="link" shape="rect">
+        start
+      </Button>
+      <Button key={4}>start</Button>
     </Group>
     <Group>
-      <Button icon={<LeftOutlined />}></Button>
-      <Button icon={<RightOutlined />}></Button>
+      <Button key={5} icon={<LeftOutlined />} />
+      <Button key={6} icon={<RightOutlined />} />
     </Group>
   </>
 );
