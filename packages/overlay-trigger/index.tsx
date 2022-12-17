@@ -23,6 +23,8 @@ import contains from '../common/util/dom/contains';
 import getStyle from './util/getStyle';
 import isDom from '@/packages/common/util/dom/isDom';
 
+export { OverlayTriggerProps };
+
 const defaultEventCb = () => {};
 
 const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTriggerProps>>(
