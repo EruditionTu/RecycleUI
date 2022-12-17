@@ -1,22 +1,11 @@
 import type { ReactNode } from 'react';
-import type { PlacementType } from '@/packages/common/util/getPlacement';
+import type { OverlayTriggerProps } from '../overlay-trigger';
 
-type PopupTrigger = 'hover' | 'click';
-
-interface TooltipProps {
-  title: ReactNode;
+interface TooltipProps extends Omit<OverlayTriggerProps, 'overlay'> {
+  visibleArrow?: boolean;
+  content?: ReactNode;
   arrowPointAtCenter?: boolean;
   color?: string;
-  defaultOpen?: boolean;
-  destroyTooltipOnHide?: boolean;
-  getPopupContainer?: HTMLElement;
-  mouseEnterDelay?: number;
-  mouseLeaveDelay?: number;
-  placement?: PlacementType;
-  trigger?: PopupTrigger;
-  open?: boolean;
-  zIndex?: number;
-  onOpenChange?: (visible: boolean) => void;
 }
 
 export default TooltipProps;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Tooltip from '../index';
+import Tooltip from '..';
 import '../style';
 
 export default () => {
@@ -8,7 +8,7 @@ export default () => {
     fontWeight: 500,
   };
   return (
-    <Tooltip title="tubo">
+    <Tooltip content="avatar" placement="topLeft">
       <span style={textStyle}>Tooltip will show on mouse enter.</span>
     </Tooltip>
   );
