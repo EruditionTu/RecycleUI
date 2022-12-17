@@ -28,13 +28,10 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     onEnter = defaultEventCb,
     onEntering = defaultEventCb,
     onEntered = defaultEventCb,
-    onOpening = defaultEventCb,
-    onOpened = defaultEventCb,
+    onExit = defaultEventCb,
     onExiting = defaultEventCb,
     onExited = defaultEventCb,
     onClose = defaultEventCb,
-    onClosing = defaultEventCb,
-    onClosed = defaultEventCb,
     transitionName = 'recycle-ui-overlay',
     destroyTooltipOnHide = true,
     timeout = 300,
@@ -79,10 +76,10 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     backdropProps?.onMouseDown?.(e as any);
   }, []);
 
-  const handleClosed = useCallback(
+  const handleExited = useCallback(
     (node: HTMLElement | MouseEvent<HTMLButtonElement, MouseEvent>) => {
       setVisible(false);
-      typeof onClosed === 'function' && onClosed(node as any);
+      typeof onExited === 'function' && onExited(overlay.current!);
     },
     [],
   );
@@ -133,20 +130,19 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
         onEnter(overlay.current!, isAppering);
       }}
       onEntering={(isAppearing: boolean) => {
-        onOpening(overlay.current!, isAppearing);
-        onEntering(overlay.current);
+        onEntering(overlay.current!, isAppearing);
       }}
       onEntered={(isAppearing: boolean) => {
-        onOpened(overlay.current!, isAppearing);
-        onEntered(overlay.current!);
+        onEntered(overlay.current!, isAppearing);
+      }}
+      onExit={() => {
+        onExit(overlay.current!);
       }}
       onExiting={() => {
-        onClosing(overlay.current!);
         onExiting(overlay.current!);
       }}
       onExited={() => {
-        handleClosed(overlay.current!);
-        onExited(overlay.current!);
+        handleExited(overlay.current!);
       }}
       {...otherProps}
     >

@@ -15,9 +15,10 @@ export default interface OverlayProps extends Omit<TransitionProps, 'timeout'> {
   destroyTooltipOnHide?: boolean;
   transitionName?: string;
   onEnter?: (node: HTMLElement, isAppearing: boolean) => void;
-  onOpening?: (node: HTMLElement, isAppearing: boolean) => void;
-  onOpened?: (node: HTMLElement, isAppearing: boolean) => void;
-  onClosing?: (node: HTMLElement) => void;
-  onClosed?: (node: HTMLElement | React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onEntering?: (node: HTMLElement, isAppearing: boolean) => void;
+  onEntered?: (node: HTMLElement, isAppearing: boolean) => void;
+  onExit?: (node: HTMLElement) => void;
+  onExiting?: (node: HTMLElement) => void;
+  onExited?: (node: HTMLElement) => void;
   onClose?: (evn: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }

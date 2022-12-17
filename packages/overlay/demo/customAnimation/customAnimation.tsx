@@ -9,9 +9,6 @@ import '../../style';
 
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);
-  //   function toggleOverlay(e: any) {
-  //     setIsOpen(!isOpen);
-  //   }
   return (
     <div>
       <Button

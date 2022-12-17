@@ -124,11 +124,12 @@ If the 'usePortal' attribute is true, you can use containerDom to mount the over
 | hasBackdrop |Whether there is a background, whether to add a style to<body> `recycle-ui-overlay-open ` Prevent scrollbars from appearing | `boolean`        |`true` |
 | transitionName | `transitionName`can be imported as a field of' classNames' of `react-transition-group`, and customized animation  | `string`   | `--`  |
 | timeout | Animation execution time        | `number`        | `300`    |
-| onClose | Click the mask layer callback function, and set open=false to close through this function. OnClosed is a callback function after the pop-up box closes the animation. There are obvious differences and it is easy to confuse. | `Function`        | `--`    |
-| onEnter	 | In order 1, the `CSSTransition` callback is triggered immediately after the application of enter or appearance.        | `Function`        | `--`    |
-| onOpening | Sequence 2, ** Open ** Execute immediately, and trigger the `CSSTransition` callback immediately after the application of the enter active or appearance active class。| `Function`        | `--`    |
-| onOpened	 | Sequence 3: ** Open ** The animation is played and executed, and the callback is started before the exiting status is applied。  | `Function`        | `--`    |
-| onClosing	 | Sequence 4: ** Close ** Execute immediately, and trigger the `CSSTransition` callback immediately after applying exit active。    | `Function`        | `--`    |
-| onClosed	 | 	Sequence 5: ** Close ** The animation will be executed immediately after playing. After deleting the exit class, the `CSSTransition` callback will be triggered immediately, and the exit done class will be added to the DOM node.  | `Function`        | `--`    |
+| onClose | Click the mask layer callback function, and set open=false to close through this function. OnClosed is a callback function after the pop-up box closes the animation. There are obvious differences and it is easy to confuse. | `(evn: React.MouseEvent<HTMLElement, MouseEvent>) => void`        | `--`    |
+| onEnter	 | The callback that is triggered before the 'Entering' state is applied. An additional parameter is provided to indicate whether the entry phase ` isApplying` occurs on the initial load | `(node: HTMLElement, isAppearing: boolean) => void`        | `--`    |
+| onEntering | The callback that is triggered after the "Entering" state is applied. An additional parameter is provided to indicate whether the entry phase `isAppearing` occurs on the initial load | `(node: HTMLElement, isAppearing: boolean) => void`        | `--`    |
+| onEntered	 | Callback triggered after the "Entered" state is applied. An additional parameter is provided to indicate whether the entry phase `isAppearing` occurs on the initial load | `(node: HTMLElement, isAppearing: boolean) => void`        | `--`    |
+| onExit	 | The callback that is triggered before the Exiting state is applied. | `(node: HTMLElement) => void`        | `--`    |
+| onExiting	 | 	The callback that is triggered after the Exiting state is applied.  | `(node: HTMLElement) => void`        | `--`    |
+| onExited	 | The callback that is triggered after the Exited state is applied. | `(node: HTMLElement) => void`        | `--`    |
 
 It supports the transmission of `CSSTransition` native events.
