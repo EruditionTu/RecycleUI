@@ -43,7 +43,7 @@ const Tooltip: FC<WithChildren<TooltipProps>> = (
       {...other}
       overlay={
         <div className={tooltipCls}>
-          {visibleArrow && <div className={`${prefixCls}-arrow`} />}
+          {visibleArrow && <div className={classNames(`${prefixCls}-arrow`)} />}
           <div className={`${prefixCls}-inner`}>{props.content}</div>
         </div>
       }

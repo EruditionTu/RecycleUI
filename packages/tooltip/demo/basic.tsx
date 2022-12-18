@@ -8,7 +8,7 @@ export default () => {
     fontWeight: 500,
   };
   return (
-    <Tooltip content="avatar" placement="topLeft">
+    <Tooltip content="文字提示，今天你学习了吗？">
       <span style={textStyle}>Tooltip will show on mouse enter.</span>
     </Tooltip>
   );
