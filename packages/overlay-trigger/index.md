@@ -64,3 +64,4 @@ Set usePortal={false} to generate the modal dialog box into the root node.
 | destroyTooltipOnHide | Close the pop-up window of the covering layer. Whether to destroy the node of the covering layer | `boolean`        | `true`    |
 | placement	 | The position of the cover pop-up window.        | `top|topLeft|topRight|left|leftTop|leftBottom|right|rightTop|rightBottom|bottom|bottomLeft|bottomRight`        | `top`    |
 | onOpenChange | 	Show hidden callbacks.| `Function`        | `--`    |
+| overlay | 	Trigger the pop-up content displayed. | `ReactElement`        | `--`    |

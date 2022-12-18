@@ -63,3 +63,4 @@ group:
 | destroyTooltipOnHide | 遮盖层弹窗关闭是否销毁遮盖层的节点 | `boolean`        | `true`    |
 | placement	 | 遮盖层弹窗的位置。        | `top|topLeft|topRight|left|leftTop|leftBottom|right|rightTop|rightBottom|bottom|bottomLeft|bottomRight`        | `top`    |
 | onOpenChange | 	显示隐藏的回调。| `Function`        | `--`    |
+| overlay | 	触发显示的弹窗内容。 | `ReactElement`        | `--`    |
