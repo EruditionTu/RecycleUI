@@ -1,16 +1,18 @@
-.button-group{
+@import '../../common/style/index.less';
+
+@recycle-button-group-prefix:~'@{recycle-prefix}-button-group';
+.@{recycle-button-group-prefix}{
     display: inline-flex;
     flex-direction: row;
     justify-content: center;
     margin: 5px;
-    &>[class~="button-container"]{
+    & *{
         margin: 0;
-        border-left: 1px white solid;
-        &:first-child{
-            border-left: 0;
+          &:not(:first-child){
+          border-left: 1px white solid;
         }
-        &>[class~="solid"],[class~="transparent"]{
-            border-radius: 0;
+        &>[class~="recycle-ui-button-solid"],[class~="recycle-ui-button-transparent"]{
+          border-radius: 0;
         }
     }
 }

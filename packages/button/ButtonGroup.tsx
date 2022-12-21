@@ -7,6 +7,7 @@ const ButtonGroup: FC<PropsWithChildren<ButtonGroupProps>> = (
   props: PropsWithChildren<ButtonGroupProps>,
 ): ReactElement => {
   const { children, className, style } = props;
+  const prefixCls = useMemo(() => 'recycle-ui-button-group', []);
   const childrenFilter = useMemo(
     () =>
       (children as any[]).map((childItem) => {
@@ -21,7 +22,7 @@ const ButtonGroup: FC<PropsWithChildren<ButtonGroupProps>> = (
     [children],
   );
   return (
-    <div className={classNames('button-group', className)} style={style}>
+    <div className={classNames(prefixCls, className)} style={style}>
       {cloneElement(<>{childrenFilter}</>)}
     </div>
   );
