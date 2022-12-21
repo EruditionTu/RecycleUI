@@ -62,7 +62,7 @@ disabled 配置禁止使用状态的按钮。
 | type        | 按钮类型         | `solid / transparent / text / link`         | `solid` |
 | disabled    | 禁用状态         | `boolean`                                  | `false`   |
 | purpose     | 按钮主题用途（仅对`solid`和`transparent`的按钮有效）   | `routine/info/danger/warn`                   | `routine`   |
-| loadingProps| 加载器的属性（可以参考`Loader`组件的API） | `routine/info/danger/warn` | `routine`   |
+| loadingProps| 加载器的属性（可以参考`Loader`组件的API） | `LoaderProps` | `{}`   |
 | loading     | 加载状态         | `boolean`                                  | `false`   |
 | icon        | 图标按钮（仅对`solid`和`transparent`的按钮有效）         | `ReactNode`                                | `<></>`   |
 | shape        | 按钮形状 （仅对`solid`和`transparent`的按钮有效）        | `circle/rect/round`                                | `rect`   |

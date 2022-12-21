@@ -58,6 +58,7 @@ Through Button Group Place multiple button groups.
 | type        | button type         | `solid / transparent / text / link`         | `solid` |
 | disabled    | do not use buttons        | `boolean`                                  | `false`   |
 | purpose      | button theme usage   | `routine/info/danger/warn`                   | `routine`   |
+| loadingProps| Loader properties (refer to the API of the `Loader` component) | `LoaderProps` | `{}`   |
 | loading     | leave the button loaded         | `boolean`                                  | `false`   |
 | icon        | the icon of button         | `ReactNode`                                | `<></>`   |
 | shape        | the shape of button         | `circle/rect/round`                                | `rect`   |

@@ -15,6 +15,7 @@ const LinkNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
       disabled = false,
       loading = false,
       style = {},
+      loadingProps = {},
       className = '',
       children,
       onClick,
@@ -30,7 +31,7 @@ const LinkNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
       [disabled, loading, prefixCls, className],
     );
     return (
-      <Loader loading={loading}>
+      <Loader {...loadingProps} loading={loading}>
         <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
           {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
         </a>
@@ -44,6 +45,7 @@ const TextNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
       disabled = false,
       loading = false,
       style = {},
+      loadingProps = {},
       className = '',
       children,
       onClick,
@@ -59,7 +61,7 @@ const TextNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
       [disabled, loading, className, prefixCls],
     );
     return (
-      <Loader loading={loading}>
+      <Loader {...loadingProps} loading={loading}>
         <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
           <span>
             {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
@@ -78,6 +80,7 @@ const ButtonNode: FC<ButtonProps> = forwardRef<HTMLDivElement, ButtonProps>(
       loading = false,
       purpose = 'routine',
       style = {},
+      loadingProps = {},
       className = '',
       icon,
       children,
@@ -109,7 +112,7 @@ const ButtonNode: FC<ButtonProps> = forwardRef<HTMLDivElement, ButtonProps>(
       },
     );
     return (
-      <Loader loading={loading}>
+      <Loader {...loadingProps} loading={loading}>
         <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
           {icon && <span className={`${prefixCls}-icon`}>{icon}</span>}
           {children && (

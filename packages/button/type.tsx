@@ -10,7 +10,7 @@ export interface ExtendButtonAttributes {
   shape?: ButtonShape;
   disabled?: boolean;
   loading?: boolean;
-  loadinfProps?: LoaderProps;
+  loadingProps?: LoaderProps;
   icon?: ReactElement;
   onClick?: MouseEventHandler<HTMLElement>;
 }
