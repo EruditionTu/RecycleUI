@@ -72,6 +72,8 @@ disabled 配置禁止使用状态的按钮。
 
 ## Button Group API
 
+⚠ 注意：ButtonGroup中的Button类型只支持，type为solid或者transparent，shape为rect的按钮类型，否则会被转换为默认的`type=soldi,shape=rect`.
+
 | 字段      | 描述 | 类型            | 默认 |
 | --------- | ----------- | --------------- | ------- |
 | style     | 自定义样式  | `CSSProperties` | `--`    |

@@ -51,17 +51,17 @@ Through Button Group Place multiple button groups.
 
 <code src="./demo/group.tsx"></code>
 
-## API
+## Button API
 
 | Name        | Describe      | Type                                       | Default   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
 | type        | button type         | `solid / transparent / text / link`         | `solid` |
 | disabled    | do not use buttons        | `boolean`                                  | `false`   |
-| purpose      | button theme usage   | `routine/info/danger/warn`                   | `routine`   |
+| purpose      | button theme usage（Valid only for `solid` and `transparent` buttons）   | `routine/info/danger/warn`                   | `routine`   |
 | loadingProps| Loader properties (refer to the API of the `Loader` component) | `LoaderProps` | `{}`   |
 | loading     | leave the button loaded         | `boolean`                                  | `false`   |
-| icon        | the icon of button         | `ReactNode`                                | `<></>`   |
-| shape        | the shape of button         | `circle/rect/round`                                | `rect`   |
+| icon        | the icon of button（Valid only for `solid` and `transparent` buttons）         | `ReactNode`                                | `<></>`   |
+| shape        | the shape of button（Valid only for `solid` and `transparent` buttons）         | `circle/rect/round`                                | `rect`   |
 | onClick | button click callback event | `Function`                                 | `--`      |
 | style | the inline style | `CSSProperties`                                         | `--`      |
 | className | class | `string`                                         | `--`      |
@@ -69,6 +69,8 @@ Through Button Group Place multiple button groups.
 
 
 ## Button Group API
+
+⚠ Note: Button types in ButtonGroup only support button `type` with `solid` or `transparent` type and `rect` `shape`. Otherwise, they will be converted to the default `type=soldi, shape=rect`
 
 | Name      | Describe | Type            | Default |
 | --------- | ----------- | --------------- | ------- |
