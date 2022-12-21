@@ -1,113 +1,155 @@
 import type { MouseEvent, FC, ReactElement } from 'react';
-import React, { useCallback, useMemo, cloneElement, memo, forwardRef } from 'react';
+import React, { useCallback, useMemo, cloneElement, forwardRef } from 'react';
 import classNames from 'classnames';
+import invariant from 'invariant';
 import ButtonGroup from './ButtonGroup';
-import LoadingIcon from '../common/icon/loading';
 
 import type ButtonProps from './type';
 import type { ButtonShape, ButtonType, ButtonPurpose } from './type';
+import withDefault from '../common/util/withDefault';
+import Loader from '../loader';
 
-const LinkNode: FC<ButtonProps> = forwardRef<any, ButtonProps>(
+const LinkNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
   (props: ButtonProps, ref): ReactElement => {
-    const { disabled, loading, children, onClick, style, className, ...extProps } = props;
+    const {
+      disabled = false,
+      loading = false,
+      style = {},
+      className = '',
+      children,
+      onClick,
+      ...extProps
+    } = props;
+    const prefixCls = useMemo(() => 'recycle-ui-button', []);
     const classes = useMemo(
       () =>
-        classNames('button', 'link', className, {
-          disabled,
-          loading,
+        classNames(prefixCls, className, `${prefixCls}-link`, {
+          [`${prefixCls}-disabled`]: disabled,
+          [`${prefixCls}-loading`]: loading,
         }),
-      [disabled, loading],
+      [disabled, loading, prefixCls, className],
     );
     return (
-      <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-        <LoadingIcon loading={loading} />
-        {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-      </a>
+      <Loader loading={loading}>
+        <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+        </a>
+      </Loader>
     );
   },
 );
-const TextNode: FC<ButtonProps> = forwardRef<any, ButtonProps>(
+const TextNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
   (props: ButtonProps, ref): ReactElement => {
-    const { disabled, onClick, loading, children, style, className, ...extProps } = props;
+    const {
+      disabled = false,
+      loading = false,
+      style = {},
+      className = '',
+      children,
+      onClick,
+      ...extProps
+    } = props;
+    const prefixCls = useMemo(() => 'recycle-ui-button', []);
     const classes = useMemo(
       () =>
-        classNames('button', 'text', className, {
-          disabled,
-          loading,
+        classNames(prefixCls, `${prefixCls}-text`, className, {
+          [`${prefixCls}-disabled`]: disabled,
+          [`${prefixCls}-loading`]: loading,
         }),
-      [disabled, loading],
+      [disabled, loading, className, prefixCls],
     );
     return (
-      <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-        <LoadingIcon loading={loading} />
-        <span>
-          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-        </span>
-      </div>
+      <Loader loading={loading}>
+        <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+          <span>
+            {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+          </span>
+        </div>
+      </Loader>
     );
   },
 );
-const ButtonNode: FC<ButtonProps> = forwardRef<any, ButtonProps>((props: ButtonProps, ref) => {
-  const {
-    type,
-    shape,
-    disabled,
-    loading,
-    onClick,
-    purpose,
-    children,
-    icon,
-    style,
-    className,
-    ...extProps
-  } = props;
-  const typeSet: ButtonType[] = useMemo<ButtonType[]>(() => ['solid', 'transparent'], []);
-  const shapeSet: ButtonShape[] = useMemo<ButtonShape[]>(() => ['circle', 'round', 'rect'], []);
+const ButtonNode: FC<ButtonProps> = forwardRef<HTMLDivElement, ButtonProps>(
+  (props: ButtonProps, ref) => {
+    const {
+      type = 'solid',
+      shape = 'rect',
+      disabled = false,
+      loading = false,
+      purpose = 'routine',
+      style = {},
+      className = '',
+      icon,
+      children,
+      onClick,
+      ...extProps
+    } = props;
+    const prefixCls = useMemo(() => 'recycle-ui-button', []);
 
-  const buttonType = useMemo(
-    () => (type != null && typeSet.includes(type) ? type : 'solid'),
-    [type, typeSet],
-  );
-  const buttonShape = useMemo(
-    () => (shape != null && shapeSet.includes(shape) ? shape : 'rect'),
-    [shape, shapeSet],
-  );
-  const canuse = useMemo(() => !loading && !disabled, [loading, disabled]);
+    const buttonShape = useMemo(() => {
+      invariant(
+        shape === 'circle' || shape === 'rect' || shape === 'round',
+        'shape should be one of circle、rect and round,default value is rect ',
+      );
+      return withDefault(shape, ['circle', 'round', 'rect'], 'rect');
+    }, [shape]);
+    const canuse = useMemo(() => !loading && !disabled, [loading, disabled]);
 
-  const classes = classNames('button', buttonShape, buttonType, purpose, className, {
-    canuse,
-    disabled,
-    loading,
-  });
-  return (
-    <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-      <div className="loading-icon-container">
-        <LoadingIcon loading={loading} />
-      </div>
-      {icon}
-      {children && (
-        <span className="button-title">
-          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-        </span>
-      )}
-    </div>
-  );
-});
+    const classes = classNames(
+      prefixCls,
+      `${prefixCls}-${buttonShape}`,
+      `${prefixCls}-${type}`,
+      `${prefixCls}-${purpose}`,
+      className,
+      {
+        [`${prefixCls}-icon-only`]: icon && !children,
+        [`${prefixCls}-canuse`]: canuse,
+        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-loading`]: loading,
+      },
+    );
+    return (
+      <Loader loading={loading}>
+        <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+          {icon && <span className={`${prefixCls}-icon`}>{icon}</span>}
+          {children && (
+            <span className={`${prefixCls}-button-title`}>
+              {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+            </span>
+          )}
+        </div>
+      </Loader>
+    );
+  },
+);
 const Button: FC<ButtonProps> = forwardRef<any, ButtonProps>(
   (
     /** 这里没有定义为FC是因为在使用时出现了children不是“IntrinsicAttributes & ButtonProps”上的属性的问题，但我不想污染ButtonProps */
     props: ButtonProps,
     ref,
   ): React.ReactElement => {
-    const { type, purpose, disabled, loading, onClick } = props;
-    const purposeSet: ButtonPurpose[] = useMemo<ButtonPurpose[]>(
-      () => ['danger', 'info', 'routine', 'warn'],
-      [],
-    );
-    const buttonPurpose = useMemo(
-      () => (purpose && purposeSet.includes(purpose) ? purpose : 'routine'),
-      [purpose, purposeSet],
-    );
+    const {
+      type = 'solid',
+      purpose = 'routine',
+      disabled = false,
+      loading = false,
+      onClick,
+    } = props;
+
+    const buttonPurpose = useMemo(() => {
+      invariant(
+        purpose === 'danger' || purpose === 'info' || purpose === 'routine' || purpose === 'warn',
+        'purpose should be one of danger、info、routine and warn,default value is routine ',
+      );
+      return withDefault(purpose, ['danger', 'info', 'routine', 'warn'], 'routine');
+    }, [purpose]);
+    const buttonType = useMemo(() => {
+      invariant(
+        type === 'link' || type === 'solid' || type === 'text' || type === 'transparent',
+        'type should be one of link、solid、text and transparnt,default value is solid ',
+      );
+      return withDefault(type, ['link', 'text', 'solid', 'transparent'], 'solid');
+    }, [type]);
     const clickCallback = useCallback(
       (event: MouseEvent<HTMLElement>): void => {
         let cb: Function = () => {};
@@ -130,6 +172,7 @@ const Button: FC<ButtonProps> = forwardRef<any, ButtonProps>(
       () => ({
         ...props,
         purpose: buttonPurpose,
+        type: buttonType,
         onClick: clickCallback,
         ref,
       }),
@@ -148,7 +191,7 @@ const Button: FC<ButtonProps> = forwardRef<any, ButtonProps>(
 interface ButtonWarpperInterface extends FC<ButtonProps> {
   Group: typeof ButtonGroup;
 }
-const ButtonWarpper: ButtonWarpperInterface = memo(Button) as unknown as ButtonWarpperInterface;
+const ButtonWarpper: ButtonWarpperInterface = Button as unknown as ButtonWarpperInterface;
 ButtonWarpper.Group = ButtonGroup;
 export default ButtonWarpper;
 export { ButtonProps, ButtonShape, ButtonType, ButtonPurpose };

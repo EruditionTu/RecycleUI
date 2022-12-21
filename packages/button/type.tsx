@@ -1,5 +1,6 @@
 import type { MouseEventHandler, CSSProperties, ReactElement, ButtonHTMLAttributes } from 'react';
-import type { WithForwardRef } from '@/packages/common/util/toolType';
+import type { WithForwardRef } from '@/packages/common/util/type';
+import type { LoaderProps } from '../loader/index';
 
 type NativeButtonAttributes = Omit<ButtonHTMLAttributes<HTMLElement>, 'type'>;
 
@@ -9,6 +10,7 @@ export interface ExtendButtonAttributes {
   shape?: ButtonShape;
   disabled?: boolean;
   loading?: boolean;
+  loadinfProps?: LoaderProps;
   icon?: ReactElement;
   onClick?: MouseEventHandler<HTMLElement>;
 }

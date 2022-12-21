@@ -1,6 +1,6 @@
 import { TransitionProps } from 'react-transition-group/Transition';
 import type { HTMLProps } from 'react';
-import { PortalProps } from '../common/components/portal';
+import { PortalProps } from '../common/components/Portal';
 
 export default interface OverlayProps extends Omit<TransitionProps, 'timeout'> {
   timeout?: TransitionProps['timeout'];

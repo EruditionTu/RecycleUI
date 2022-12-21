@@ -60,11 +60,12 @@ const Loader: FC<LoaderProps> = (props: LoaderProps) => {
       {children &&
         React.cloneElement(children as ReactElement, {
           ...(children as ReactElement).props,
-          className: classNames(`${prefixCls}-warp`, {
+          className: classNames(`${prefixCls}-warp`, (children as ReactElement).props?.className, {
             [`${prefixCls}-blur`]: loading,
           }),
         })}
     </div>
   );
 };
+export { LoaderProps };
 export default Loader;

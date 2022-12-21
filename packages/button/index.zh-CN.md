@@ -55,16 +55,17 @@ disabled 配置禁止使用状态的按钮。
 
 <code src="./demo/group.tsx"></code>
 
-## API
+## Button API
 
 | 参数        | 参数描述      | 类型                                       | 默认   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
 | type        | 按钮类型         | `solid / transparent / text / link`         | `solid` |
 | disabled    | 禁用状态         | `boolean`                                  | `false`   |
-| purpose      | 按钮主题用途   | `routine/info/danger/warn`                   | `routine`   |
+| purpose     | 按钮主题用途（仅对`solid`和`transparent`的按钮有效）   | `routine/info/danger/warn`                   | `routine`   |
+| loadingProps| 加载器的属性（可以参考`Loader`组件的API） | `routine/info/danger/warn` | `routine`   |
 | loading     | 加载状态         | `boolean`                                  | `false`   |
-| icon        | 图标按钮         | `ReactNode`                                | `<></>`   |
-| shape        | 按钮形状         | `circle/rect/round`                                | `rect`   |
+| icon        | 图标按钮（仅对`solid`和`transparent`的按钮有效）         | `ReactNode`                                | `<></>`   |
+| shape        | 按钮形状 （仅对`solid`和`transparent`的按钮有效）        | `circle/rect/round`                                | `rect`   |
 | onClick | 按钮点击回调事件 | `Function`                                 | `--`      |
 | style     | 自定义样式  | `CSSProperties` | `--`    |
 | className | 类名        | `string`        | `--`    |

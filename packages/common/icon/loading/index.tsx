@@ -16,7 +16,7 @@ const LoadingIcon: FC<LoadingIconProps> = (props: LoadingIconProps) => {
   const classes = useMemo(
     () =>
       classNames('loading-icon', {
-        loading: loading,
+        loading,
       }),
     [props],
   );

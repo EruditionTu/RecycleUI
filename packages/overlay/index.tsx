@@ -7,8 +7,8 @@ import React, { cloneElement, useEffect, useRef, useState, useMemo, useCallback 
 import type { MouseEvent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
-import Portal from '../common/components/portal';
-import type { WithCustomStyle } from '@/packages/common/util/toolType';
+import Portal from '../common/components/Portal';
+import type { WithCustomStyle } from '@/packages/common/util/type';
 import type OverlayProps from './type';
 
 const defaultEventCb = () => {};
