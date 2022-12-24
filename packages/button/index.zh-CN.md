@@ -47,6 +47,8 @@ disabled 配置禁止使用状态的按钮。
 
 ## 按钮图标
 
+通过icon字段可以设置button按钮的图标。
+
 <code src="./demo/icon.tsx"></code>
 
 ## 按钮组

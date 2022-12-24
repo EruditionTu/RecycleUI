@@ -45,6 +45,12 @@ The shape of the button can only appear in the button whose type is solid and tr
 
 <code src="./demo/shape.tsx"></code>
 
+## Button Icon
+
+The `icon` of the button can be set through the `icon` field.
+
+<code src="./demo/icon.tsx"></code>
+
 ## Button Group
 
 Through Button Group Place multiple button groups.
