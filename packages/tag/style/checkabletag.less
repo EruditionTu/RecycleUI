@@ -1,0 +1,25 @@
+@import '../../common/style/index.less';
+
+@recycle-checkable-tag-prefix:~'@{recycle-prefix}-checkable-tag';
+
+.@{recycle-checkable-tag-prefix}{
+    color:@recycle-ui-black;
+    padding: 2px 8px;
+    margin-right: 4px;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.2s linear;
+    background:transparent;
+    border-radius: 4px;
+    &[class~='recycle-ui-checkable-tag-not-checked']:hover{
+        background: rgba(0,0,0,0.02);
+        color:@routine;
+    }
+    &-checked{
+        color:@recycle-ui-white;
+        background-color: @routine;
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+}

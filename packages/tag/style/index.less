@@ -1,0 +1,82 @@
+@import '../../common//style/index.less';
+
+@recycle-tag-prefix:~'@{recycle-prefix}-tag';
+
+.@{recycle-tag-prefix}{
+  cursor: text;
+  display: inline-flex;
+  font-size: 12px;
+  font-variant: tabular-nums;
+  transition: all 0.3s;
+  user-select: none;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  border-width: 1px;
+  border-style: solid; 
+  border-radius: 4px;
+  transition: 0.2s linear;
+  & a{
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: color .3s;
+  }
+  &-light{
+    color: @recycle-ui-black;
+    border-color:#d9d9d9;
+    background-color: #fafafa;
+    & a{
+      color: @recycle-ui-black;
+    }
+  }
+  &-dark{ 
+    color:@recycle-ui-white;
+    & a{
+      color:@recycle-ui-white;
+    }
+  }
+  &-small {
+    padding: 0 5px;
+    height: 16px;
+    line-height: 16px;
+  }
+  &-default {
+    padding: 0 7px;
+    height: 20px;
+    line-height: 20px;
+  }
+  &-large {
+    padding: 0 7px;
+    height: 24px;
+    line-height: 24px;
+  }
+  &-hidden{
+    display: none;
+  }
+  &-icon{
+    margin-right: 7px;
+  }
+  &-close-icon {
+    cursor: pointer;
+    position: relative;
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 3px;
+    [class~='recycle-ui-tag-light'] &{
+      color:#969494;
+    }
+    [class~='recycle-ui-tag-dark'] &{
+      color:@recycle-ui-white;
+    }
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+  &-disabled{
+    opacity: 0.75;
+    pointer-events: none;
+  }
+}
