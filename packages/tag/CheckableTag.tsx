@@ -6,7 +6,15 @@ import { CheckableTagProps } from './type';
 import withDefault from '@/packages/common/util/withDefault';
 
 const CheckableTag = forwardRef<HTMLDivElement, CheckableTagProps>((props, ref): ReactElement => {
-  const { size = 'default', checked = false, children, className, style, onChange } = props;
+  const {
+    size = 'default',
+    checked = false,
+    children,
+    className,
+    style,
+    onChange,
+    ...others
+  } = props;
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -40,7 +48,7 @@ const CheckableTag = forwardRef<HTMLDivElement, CheckableTagProps>((props, ref):
     setIsChecked((checked) => !checked);
   }, []);
   return (
-    <span onClick={handleClick} className={checkableTagClass} style={style}>
+    <span onClick={handleClick} className={checkableTagClass} style={style} {...others}>
       {children}
     </span>
   );

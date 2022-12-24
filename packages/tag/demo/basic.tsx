@@ -1,28 +1,23 @@
 import React from 'react';
-import type { MouseEvent } from 'react';
 import Tag from '..';
 import '../style';
 
-const log = (e: MouseEvent<HTMLElement>) => {
-  console.log(e);
+const close = () => {
+  alert('关闭tag');
 };
 
-const preventDefault = (e: MouseEvent<HTMLElement>) => {
+const preventDefault = (e: any) => {
   e.preventDefault();
-  console.log('Clicked! But prevent default.');
+  alert('禁止关闭tag');
 };
 
 export default () => (
   <>
-    <Tag disabled>Tag 1</Tag>
-    <Tag disabled>
-      <a href="https://github.com/ant-design/ant-design/issues/1862">Link</a>
+    <Tag closable onClose={close}>
+      Tag 1
     </Tag>
-    <Tag closable disabled onClose={log}>
+    <Tag closable effect="dark" onClose={preventDefault}>
       Tag 2
-    </Tag>
-    <Tag closable onClose={preventDefault}>
-      Prevent Default
     </Tag>
   </>
 );
