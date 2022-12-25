@@ -123,6 +123,8 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
             <span style={{ color }} className={chosedCls} {...lastItemProps}>
               {character}
             </span>
+            {/*
+             */}
             <span className={`${prefixCls}-bg`}>{character}</span>
           </span>
         );
