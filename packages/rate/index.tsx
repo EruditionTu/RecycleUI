@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState, useMemo, forwardRef } from 'react';
 import type { ReactElement, MouseEvent, HTMLAttributes } from 'react';
+import { StarFilled } from '@ant-design/icons';
 import classNames from 'classnames';
 import type RateProps from './type';
 
@@ -11,7 +12,7 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
     allowHalf = false,
     allowClear = false,
     disabled = false,
-    character = '★',
+    character = <StarFilled />,
     value,
     defaultValue,
     className = '',
@@ -77,12 +78,12 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
   // 鼠标点击更新评分
   const onClick = useCallback(
     (e: MouseEvent<HTMLElement>, idx: number, isLast: boolean = false) => {
-      if (readonly || isLast) return;
+      if (readonly || (isLast && allowClear)) return;
       const currentValue = getValue(e, idx);
       updateRate(currentValue);
       typeof onChange === 'function' && onChange(currentValue);
     },
-    [onChange, updateRate, readonly],
+    [onChange, updateRate, readonly, allowClear],
   );
 
   const clickClear = useCallback(() => {
