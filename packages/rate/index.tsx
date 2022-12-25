@@ -12,7 +12,6 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
     readonly = false,
     allowHalf = false,
     allowClear = false,
-    disabled = false,
     character = <StarFilled />,
     tooltips,
     value,
@@ -28,13 +27,7 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
 
   const prefixCls = useMemo(() => 'recycle-ui-rate', []);
 
-  const rateClass = useMemo(
-    () =>
-      classNames(prefixCls, className, {
-        [`${prefixCls}-disabled`]: disabled,
-      }),
-    [prefixCls, disabled],
-  );
+  const rateClass = useMemo(() => classNames(prefixCls, className), [prefixCls]);
 
   const tooltipLists = useMemo((): string[] => {
     if (Array.isArray(tooltips)) return tooltips;

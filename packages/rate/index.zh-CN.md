@@ -59,3 +59,18 @@ group:
 
 <code src='./demo/custom.tsx' />
 
+## API
+
+| 参数        | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| allowClear        | 是否允许再次点击后清除         | `boolean`         | `false` |
+| allowHalf    | 是否允许半选         | `boolean`                                  | `false`   |
+| count      | star 总数   | `number`                   | `5`   |
+| defaultValue     | 默认值         | `number`                                  | ``   |
+| value        | 当前数，受控值         | `number`   | ``   |
+| tooltips | 自定义每项的提示信息    | `string[] | string`           | ``   |
+| readonly | 只读，无法进行交互 | `boolean`                   | `false`      |
+| character     | 退出动画卸载组件  | `ReactNode | ((index: number) => ReactNode)` | `<StarFilled />`    |
+| onChange | 	数值改变时的回调，传递当前值 | `(value: number) => void`        |`` |
+| onHoverChange | 鼠标经过时数值变化的回调  | `(value: number) => void`   | ``  |
+

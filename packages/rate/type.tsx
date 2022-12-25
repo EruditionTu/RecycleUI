@@ -5,7 +5,6 @@ interface RateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   allowHalf?: boolean;
   count?: number;
   defaultValue?: number;
-  disabled?: boolean;
   tooltips?: string[] | string;
   value?: number;
   readonly?: boolean;
