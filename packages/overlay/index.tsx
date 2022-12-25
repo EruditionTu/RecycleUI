@@ -178,8 +178,8 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       )}
     </CSSTransition>
   );
-  if (visible && usePortal) {
-    return (
+  if (usePortal) {
+    return visible ? (
       <Portal
         {...{
           ...portalProps,
@@ -188,7 +188,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       >
         {TransitionGroupComp}
       </Portal>
-    );
+    ) : null;
   }
   return TransitionGroupComp;
 };
