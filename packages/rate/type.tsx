@@ -6,10 +6,10 @@ interface RateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   count?: number;
   defaultValue?: number;
   disabled?: boolean;
-  tooltip?: string[];
+  tooltips?: string[] | string;
   value?: number;
   readonly?: boolean;
-  character?: ReactNode;
+  character?: ReactNode | ((index: number) => ReactNode);
   onChange?: (value: number) => void;
   onHoverChange?: (value: number) => void;
 }

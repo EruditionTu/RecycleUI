@@ -3,6 +3,7 @@ import type { ReactElement, MouseEvent, HTMLAttributes } from 'react';
 import { StarFilled } from '@ant-design/icons';
 import classNames from 'classnames';
 import type RateProps from './type';
+import Tooltip from '../tooltip';
 
 const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement => {
   const {
@@ -13,6 +14,7 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
     allowClear = false,
     disabled = false,
     character = <StarFilled />,
+    tooltips,
     value,
     defaultValue,
     className = '',
@@ -33,6 +35,11 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
       }),
     [prefixCls, disabled],
   );
+
+  const tooltipLists = useMemo((): string[] => {
+    if (Array.isArray(tooltips)) return tooltips;
+    return new Array(count).fill(tooltips);
+  }, [tooltips, count]);
 
   const updateRate = useCallback(
     (nextRate: number) => {
@@ -88,6 +95,7 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
 
   const clickClear = useCallback(() => {
     if (!allowClear) return;
+    setHoverCount(-1);
     updateRate(0);
   }, [allowClear, updateRate]);
 
@@ -119,14 +127,25 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
           props.onMouseMove = (e: MouseEvent<HTMLElement>) => onMouseMove(e, idx);
           if (isLast) lastItemProps.onClick = clickClear;
         }
-        return (
+        return idx < tooltipLists.length && typeof tooltipLists[idx] === 'string' ? (
+          <Tooltip content={tooltipLists[idx]} key={idx} usePortal>
+            <span key={idx} {...props}>
+              <span style={{ color }} className={chosedCls} {...lastItemProps}>
+                {typeof character === 'function' ? character(idx) : character}
+              </span>
+              <span className={`${prefixCls}-bg`}>
+                {typeof character === 'function' ? character(idx) : character}
+              </span>
+            </span>
+          </Tooltip>
+        ) : (
           <span key={idx} {...props}>
             <span style={{ color }} className={chosedCls} {...lastItemProps}>
-              {character}
+              {typeof character === 'function' ? character(idx) : character}
             </span>
-            {/*
-             */}
-            <span className={`${prefixCls}-bg`}>{character}</span>
+            <span className={`${prefixCls}-bg`}>
+              {typeof character === 'function' ? character(idx) : character}
+            </span>
           </span>
         );
       })}
