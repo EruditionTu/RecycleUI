@@ -12,7 +12,7 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
     allowClear = false,
     disabled = false,
     character = '★',
-    value = 0,
+    value,
     defaultValue,
     className = '',
     style = {},
@@ -38,7 +38,6 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
       if (!allowClear && nextRate < 1) {
         setRate(1);
       }
-      console.log(nextRate);
       setRate(nextRate);
     },
     [allowClear],
@@ -89,9 +88,10 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
   const clickClear = useCallback(() => {
     if (!allowClear) return;
     updateRate(0);
-  }, [allowClear]);
+  }, [allowClear, updateRate]);
 
   useEffect(() => {
+    if (typeof value === 'undefined') return;
     if (value !== rate) {
       updateRate(value);
     }
