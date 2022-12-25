@@ -70,7 +70,8 @@ group:
 | value        | 当前数，受控值         | `number`   | ``   |
 | tooltips | 自定义每项的提示信息    | `string[] | string`           | ``   |
 | readonly | 只读，无法进行交互 | `boolean`                   | `false`      |
-| character     | 退出动画卸载组件  | `ReactNode | ((index: number) => ReactNode)` | `<StarFilled />`    |
+| character     | 自定义字符  | `ReactNode | ((index: number) => ReactNode)` | `<StarFilled />`    |
 | onChange | 	数值改变时的回调，传递当前值 | `(value: number) => void`        |`` |
 | onHoverChange | 鼠标经过时数值变化的回调  | `(value: number) => void`   | ``  |
-
+| style | 	自定义样式对象 | `CSSProperties`        |`{}` |
+| className | 自定义样式类名  | `string`   | ``  |
