@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useCallback, useState, useMemo, forwardRef } from 'react';
 import type { ReactElement, MouseEvent, HTMLAttributes } from 'react';
 import classNames from 'classnames';
@@ -11,7 +9,7 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
     count = 5,
     readonly = false,
     allowHalf = false,
-    allowClear = true,
+    allowClear = false,
     disabled = false,
     character = '★',
     value = 0,
@@ -35,16 +33,25 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
     [prefixCls, disabled],
   );
 
+  const updateRate = useCallback(
+    (nextRate: number) => {
+      if (!allowClear && nextRate < 1) {
+        setRate(1);
+      }
+      console.log(nextRate);
+      setRate(nextRate);
+    },
+    [allowClear],
+  );
+
   // 根据鼠标响应事件和鼠标放置的元素的下标确定当前的value
   const getValue = useCallback(
     (e: MouseEvent<HTMLElement>, idx: number) => {
-      e.persist();
       let currentValue = idx;
       const isLeft =
         e.clientX - e.currentTarget.getBoundingClientRect().left <=
         e.currentTarget.getBoundingClientRect().width / 2;
       if (allowHalf) {
-        e.persist();
         currentValue = isLeft ? idx + 0.5 : idx + 1;
       } else {
         currentValue = idx + 1;
@@ -70,18 +77,23 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
 
   // 鼠标点击更新评分
   const onClick = useCallback(
-    (e: MouseEvent<HTMLElement>, idx: number) => {
-      if (readonly) return;
+    (e: MouseEvent<HTMLElement>, idx: number, isLast: boolean = false) => {
+      if (readonly || isLast) return;
       const currentValue = getValue(e, idx);
-      setRate(currentValue);
+      updateRate(currentValue);
       typeof onChange === 'function' && onChange(currentValue);
     },
-    [onChange, readonly],
+    [onChange, updateRate, readonly],
   );
+
+  const clickClear = useCallback(() => {
+    if (!allowClear) return;
+    updateRate(0);
+  }, [allowClear]);
 
   useEffect(() => {
     if (value !== rate) {
-      setRate(value);
+      updateRate(value);
     }
   }, [value]);
 
@@ -92,19 +104,23 @@ const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement =>
         const halfon =
           (rate <= idx + 0.5 && Math.ceil(rate) - 1 === idx && hoverCount === -1) ||
           hoverCount === idx + 0.5;
+        // 当前元素是否是最后一个，渲染一半或者恰好整个
+        const isLast = halfon || idx === rate - 1;
         const chosedCls = classNames(`${prefixCls}-chosed-item`, {
           [`${prefixCls}-star-on`]: idx + 1 <= rate && hoverCount === -1,
           [`${prefixCls}-hover-on`]: idx + 1 <= hoverCount,
           [`${prefixCls}-half-on`]: halfon,
         });
         const props: HTMLAttributes<HTMLSpanElement> = {};
+        const lastItemProps: HTMLAttributes<HTMLSpanElement> = {};
         if (!readonly) {
-          props.onClick = (e: MouseEvent<HTMLElement>) => onClick(e, idx);
+          props.onClick = (e: MouseEvent<HTMLElement>) => onClick(e, idx, isLast);
           props.onMouseMove = (e: MouseEvent<HTMLElement>) => onMouseMove(e, idx);
+          if (isLast) lastItemProps.onClick = clickClear;
         }
         return (
           <span key={idx} {...props}>
-            <span style={{ color }} className={chosedCls}>
+            <span style={{ color }} className={chosedCls} {...lastItemProps}>
               {character}
             </span>
             <span className={`${prefixCls}-bg`}>{character}</span>
