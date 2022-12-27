@@ -33,7 +33,7 @@ Loader加载器的最基本使用。
 
 | 参数        | 参数描述      | 类型                                       | 默认   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
-| size        | 加载图标尺寸         | `small|default|large`         | `default` |
+| size        | 加载图标尺寸         | `small | default | large `         | `default` |
 | loading    | 是否显示加载状态         | `boolean`                                  | `false`   |
 | indicator      | 	加载指示符，可以加载一个 Icon 动画   | `ReactNode`                   | `--`   |
 | tip     | 当作为包裹元素时，可以自定义描述文案         | `string`                                  | `--`   |

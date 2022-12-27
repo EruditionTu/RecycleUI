@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, { useMemo, cloneElement } from 'react';
 import type { FC, ReactElement } from 'react';
 import type LoaderProps from './type';
 import useHiddenScroll from '../common/util/hooks/useHiddenScroll';
@@ -29,7 +29,11 @@ const Loader: FC<LoaderProps> = (props: LoaderProps) => {
   const tipsView = useMemo(
     () => (
       <div
-        className={classNames(`${prefixCls}-tips`, { [`${prefixCls}-fullscreen`]: fullscreen })}
+        className={classNames(`${prefixCls}-tips`, {
+          [`${prefixCls}-fullscreen`]: fullscreen,
+          [`${prefixCls}-has-children`]: children,
+          [`${prefixCls}-no-children`]: !children,
+        })}
         style={{ color, backgroundColor: bgColor }}
       >
         <div className={`${prefixCls}-tips-nested`}>
@@ -58,7 +62,7 @@ const Loader: FC<LoaderProps> = (props: LoaderProps) => {
     <div className={loaderCls} {...other}>
       {(loading || fullscreen) && tipsView}
       {children &&
-        React.cloneElement(children as ReactElement, {
+        cloneElement(children as ReactElement, {
           ...(children as ReactElement).props,
           className: classNames(`${prefixCls}-warp`, (children as ReactElement).props?.className, {
             [`${prefixCls}-blur`]: loading,

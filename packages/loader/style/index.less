@@ -54,7 +54,12 @@
     width: 100%;
     z-index: 4;
     font-weight: 400;
-    &:before {
+  }
+  &-tips:not(:last-child) {
+    position: absolute;
+  }
+  &-has-children{
+    &::before{
       content: ' ';
       display: inline-block;
       height: 100%;
@@ -62,13 +67,14 @@
       vertical-align: middle;
     }
   }
-  &-tips:not(:last-child) {
-    position: absolute;
+  &-no-children{
+    font-size: 0;
   }
   &-text {
     display: inline-block;
     margin-left: 5px;
     vertical-align: middle;
+    font-size: 14px;
   }
   &-vertical {
     display: block;
@@ -82,6 +88,12 @@
     bottom: 0px;
     left: 0px;
     z-index: 99999;
+    & [class~='recycle-ui-loader-tips-nested']{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
   }
 }
 
