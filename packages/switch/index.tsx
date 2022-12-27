@@ -18,7 +18,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     loading,
     label,
     disabled,
-    checked = false,
+    defaultChecked,
+    checked,
     size = 'default',
     className = '',
     style = {},
@@ -26,14 +27,14 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     onClick,
     ...others
   } = props;
-  const [isChecked, setIsChecked] = useState<boolean>(checked);
+  const [isChecked, setIsChecked] = useState<boolean>(!!defaultChecked);
   const prefixCls = useMemo(() => 'recycle-ui-switch', []);
   const switchClass = useMemo(
     () => classNames(prefixCls, `${prefixCls}-${size}`, className),
     [prefixCls, size, isChecked],
   );
   useLayoutEffect(() => {
-    if (disabled || loading) return;
+    if (disabled || loading || typeof checked === 'undefined') return;
     if (checked !== isChecked) {
       setIsChecked(checked);
     }

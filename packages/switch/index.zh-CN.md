@@ -9,6 +9,8 @@ group:
 
 # Switch 开关
 
+开关选择器。
+
 ## 何时使用
 
 * 需要表示开关状态/两种状态之间的切换时；
@@ -38,7 +40,25 @@ size="small" 表示小号开关，size="large"表示大号开关，size="default
 
 <code src='./demo/size.tsx'/>
 
-## 加载
+## 加载中
+
+标识开关操作仍在执行中。
+
+<code src='./demo/loader.tsx' />
 
 ## API
 
+| 参数      | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| className        | switch标签的样式类         | `string`         | `--` |
+| style    | switch标签的style样式         | `CSSProperties`               | `{}`   |
+| label        | switch的文本描述         | `ReactNode`         | `--` |
+| size    | switch的大小控制         | `large|default|small`               | `default`   |
+| checked	      | 指定当前是否选中   | `boolean`                   | `false`   |
+| defaultChecked     | 初始是否选中         | `boolean`          | `false`|
+| disabled        | 是否禁用       | `boolean` | `false`   |
+| checkedChildren | 选中时的内容 | `ReactNode`   | `--`      |
+| unCheckedChildren    | 非选中时的内容  | `ReactNode` | `--`    |
+| loading     | 加载中的开关  | `boolean` | `false`    |
+| onClick     | 点击时的回调函数  | `(checked?: boolean, event?: MouseEvent<HTMLElement>) => void` | `--`    |
+| onChange     | 变化时的回调函数  | `(checked?: boolean) => void` | `--`    |

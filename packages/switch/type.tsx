@@ -4,11 +4,11 @@ interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | '
   label?: ReactNode;
   size?: 'large' | 'default' | 'small';
   checked?: boolean;
-  disabled?: boolean;
-  checkedChildren?: string;
-  unCheckedChildren?: string;
-  loading?: boolean;
   defaultChecked?: boolean;
+  disabled?: boolean;
+  checkedChildren?: ReactNode;
+  unCheckedChildren?: ReactNode;
+  loading?: boolean;
   onClick?: (checked?: boolean, event?: MouseEvent<HTMLElement>) => void;
   onChange?: (checked?: boolean) => void;
 }
