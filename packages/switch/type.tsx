@@ -1,12 +1,16 @@
-import type { RadioAbstractProps } from '../common/components/RadioAbstract';
+import type { HTMLAttributes, ReactNode, MouseEvent } from 'react';
 
-interface SwitchProps extends Omit<RadioAbstractProps, 'onClick' | 'onChange'> {
+interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onChange'> {
+  label?: ReactNode;
+  size?: 'large' | 'default' | 'small';
+  checked?: boolean;
+  disabled?: boolean;
   checkedChildren?: string;
   unCheckedChildren?: string;
   loading?: boolean;
   defaultChecked?: boolean;
-  onClick?: (checked?: boolean, event?: Event) => void;
-  onChange?: (checked?: boolean, event?: Event) => void;
+  onClick?: (checked?: boolean, event?: MouseEvent<HTMLElement>) => void;
+  onChange?: (checked?: boolean) => void;
 }
 
 export default SwitchProps;

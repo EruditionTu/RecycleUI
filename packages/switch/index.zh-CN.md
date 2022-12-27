@@ -37,3 +37,8 @@ Switch 失效状态。
 size="small" 表示小号开关，size="large"表示大号开关，size="default"表示默认中等大小。
 
 <code src='./demo/size.tsx'/>
+
+## 加载
+
+## API
+
