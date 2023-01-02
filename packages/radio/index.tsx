@@ -1,8 +1,17 @@
-import React, { useMemo } from 'react';
-import RadioAbstract, { RadioAbstractProps } from '../common/components/RadioAbstract';
+import type { FC } from 'react';
+import Radio from './Radio';
+import RadioGroup from './RadioGroup';
+import RadioButton from './RadioButton';
+import type RadioProps from './type';
 
-const Radio = React.forwardRef<HTMLInputElement, RadioAbstractProps>((props, ref) => {
-  const prefixCls = useMemo(() => 'recycle-ui-radio', []);
-  return <RadioAbstract ref={ref} prefixCls={prefixCls} {...props} />;
-});
-export default Radio;
+interface RadioComponents extends FC<RadioProps> {
+  Group: typeof RadioGroup;
+  Button: typeof RadioButton;
+}
+const RadioWarpper: RadioComponents = Radio as unknown as RadioComponents;
+RadioWarpper.Group = RadioGroup;
+RadioWarpper.Button = RadioButton;
+
+export * from './type';
+
+export default RadioWarpper;

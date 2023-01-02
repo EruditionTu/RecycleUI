@@ -1,47 +1,44 @@
 import React, {
-  useMemo,
-  forwardRef,
   useState,
+  useMemo,
   useLayoutEffect,
   useEffect,
   useCallback,
+  forwardRef,
 } from 'react';
 import type { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import _omit from 'lodash/omit';
-import { RadioButtonProps } from './type';
+import RadioProps from './type';
 
-const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
+const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const {
-    disabled,
-    value,
+    disabled = false,
+    value = '',
     size = 'default',
     checked,
     defaultChecked,
     className = '',
     style = {},
     children,
-    buttonStyle = 'solid',
-    onCheckedChange,
     onChange,
+    onCheckedChange,
     ...other
   } = props;
+
   const [isChecked, setIsChecked] = useState<boolean>(
     // eslint-disable-next-line prettier/prettier
     checked === undefined || checked === null ? !!defaultChecked : checked,
   );
-  console.log(buttonStyle);
-  const prefixCls = useMemo(() => 'recycle-ui-radio-button', []);
-  const radioBtnCls = useMemo(
+
+  const prefixCls = useMemo(() => 'recycle-ui-radio', []);
+
+  const radioCls = useMemo(
     () =>
       classNames(prefixCls, className, `${prefixCls}-${size}`, {
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-${buttonStyle}-unchecked`]: !isChecked,
-        [`${prefixCls}-${buttonStyle}-checked`]: isChecked,
-        [`${prefixCls}-disabled-checked`]: isChecked && disabled,
-        [`${prefixCls}-disabled-unchecked`]: !isChecked && disabled,
+        disabled,
       }),
-    [isChecked, prefixCls, className, buttonStyle, size, disabled],
+    [className, disabled, prefixCls, size],
   );
   useLayoutEffect(() => {
     if (disabled) return;
@@ -63,10 +60,11 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
     },
     [checked, onChange, disabled],
   );
+
   const label = children || value;
+
   return (
-    <label className={radioBtnCls} style={style}>
-      {label && <span>{children}</span>}
+    <label className={radioCls} style={style}>
       <input
         type="radio"
         value={value}
@@ -75,9 +73,9 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
         onChange={handleChange}
         ref={ref}
         {..._omit(other, 'buttonStyle')}
-        style={{ height: 0, width: 0, opacity: 0, pointerEvents: 'none' }}
       />
+      {label && <div className={`${prefixCls}-text`}>{label}</div>}
     </label>
   );
 });
-export default RadioButton;
+export default Radio;

@@ -1,0 +1,61 @@
+@import '../../common/style/index.less';
+
+@recycle-radio-group-prefix:~'@{recycle-prefix}-radio-group';
+
+.@{recycle-radio-group-prefix}{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, .88);
+    font-size: 0;
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &>label{
+        border-radius: 0;
+        //一开始使用before来代替border渲染，解决方案之后再思考吧😎
+        // &:first-child{
+        //     border-right: 0;
+        // }
+        // &:last-child{
+        //     border-left: 0;
+        // }
+    }
+    // &>:not(:first-child){
+    //     &[class~="recycle-ui-radio-button-outline-checked"]::before,
+    //     &[class~="recycle-ui-radio-button-solid-checked"]::before{
+    //         position: absolute;
+    //         inset-block-start: -1px;
+    //         inset-inline-start: -1px;
+    //         display: block;
+    //         box-sizing: content-box;
+    //         width: 1px;
+    //         height: 100%;
+    //         padding-block: 1px;
+    //         padding-inline: 0;
+    //         background-color: @routine;
+    //         transition: all .3s;
+    //         content: "";
+    //     }
+    // }
+    &>[class~='recycle-ui-radio-button']:first-child{
+        border-left: 1px solid #d9d9d9;
+        border-right: 1px solid #d9d9d9;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        &[class~="recycle-ui-radio-button-outline-checked"],
+        &[class~="recycle-ui-radio-button-solid-checked"]{
+            border-color: @routine;
+        }
+    }
+    &>[class~='recycle-ui-radio-button']:last-child{
+        border-right: 1px solid #d9d9d9;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        &[class~="recycle-ui-radio-button-outline-checked"]:last-child,
+        &[class~="recycle-ui-radio-button-solid-checked"]:last-child{
+            border-right-color: @routine;
+        }
+    }
+}
