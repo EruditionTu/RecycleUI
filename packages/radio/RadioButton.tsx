@@ -30,7 +30,6 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
     // eslint-disable-next-line prettier/prettier
     checked === undefined || checked === null ? !!defaultChecked : checked,
   );
-  console.log(buttonStyle);
   const prefixCls = useMemo(() => 'recycle-ui-radio-button', []);
   const radioBtnCls = useMemo(
     () =>

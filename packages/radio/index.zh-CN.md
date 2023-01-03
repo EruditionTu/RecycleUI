@@ -66,7 +66,41 @@ Radio不可用。
 
 ## Radio API
 
+| 参数        | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| onCheckChange        | 当Radio选中状态发生变化的回调         | `(nextChecked: boolean) => void`         | `` |
+| size    | Radio的大小         | `small、default、large`                                  | `default`   |
+| checked      | 当前Radio是否选中   | `boolean`                   | `false`   |
+| defaultChecked     | 当前Radio初始的选择状态         | `boolean`                                  | `false`   |
+| value        | Radio的值         | `any`   | ``   |
+| className | Radio的className    | `string`           | ``   |
+| style | Radio的style样式 | `CSSProperties`                   | `{}`      |
+
 ## Radio.Button API
+
+| 参数        | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| onCheckChange        | 当Radio选中状态发生变化的回调         | `(nextChecked: boolean) => void`         | `` |
+| size    | Radio的大小         | `small、default、large`                                  | `default`   |
+| checked      | 当前Radio是否选中   | `boolean`                   | `false`   |
+| defaultChecked     | 当前Radio初始的选择状态         |`boolean`                                  | `false`   |
+| value        | Radio的值         | `any`   | ``   |
+| className | Radio的className    | `string`           | ``   |
+| style | Radio的style样式 | `CSSProperties`                   | `{}`      |
+| buttonStyle | Radio.Button的样式，看是镂空还是实底的 | `solid、outline`                   | `solid`      |
 
 
 ## Radio.Group API
+
+| 参数        | 参数描述      | 类型                                       | 默认   |
+| ----------- | ---------------- | ------------------------------------------ | --------- |
+| value        | Radio.Group当前选中的值         | `any`         | `` |
+| defaultValue    | Radio.Group初次默认选中的值         | `any` | ``   |
+| buttonStyle      | Radio.Group中Radio.Button的样式，镂空还是实底   |     `solid、outline`                   | `solid`   |
+| disabled     | Radio.Group中的Radio是否可用         |   `boolean`                                  | `false`   |
+| name        | RadioGroup 下所有 `input[type="radio"]` 的 name 属性        |  `string`   | ``   |
+| options | 	以配置形式设置子元素    |  `Array<{ label: ReactNode; value: string; disabled?: boolean; }>、string[]`  |   `` |
+| optionType | 用于设置 Radio options 类型 | `default、button`                   |    `default`      |
+| size |Radio的大小 | `small、default、large`                   |    `default`      |
+| onValueChange | Radio.Group所选中的值发生变化时的回调函数 |   `(value: any) => void`                   | ``      |
+| onChange | Radio.Group下面的Radio的onChange的回调函数 |   `(e: ChangeEvent<HTMLInputElement>) => void`                   | ``      |
