@@ -1,10 +1,10 @@
-import React, { forwardRef, isValidElement, createElement, useMemo } from 'react';
+import React, { forwardRef, isValidElement, cloneElement, useMemo } from 'react';
 import classNames from 'classnames';
 import { RefElement, BreadcrumbItemProps } from './type';
 
 const BreadcrumbItem = forwardRef<RefElement, BreadcrumbItemProps>((props, ref) => {
-  const { className = '', tagName: TagName = 'span', active, separator, ...other } = props;
-  const isElm = isValidElement(separator);
+  const { className = '', active, separator, haveSeparator, href, children, ...other } = props;
+  const isElm = isValidElement(separator) || typeof separator === 'string';
   const prefixCls = useMemo(() => 'recycle-ui-breadcrumb-item', []);
   const breadcrumbCls = useMemo(
     () =>
@@ -16,19 +16,22 @@ const BreadcrumbItem = forwardRef<RefElement, BreadcrumbItemProps>((props, ref) 
     [active, className, separator, isElm, prefixCls],
   );
   const otherProps = { className: breadcrumbCls, ...other };
-  if (!isElm) {
-    otherProps['data-separator'] = separator;
-  }
-  return createElement(
-    TagName,
-    {
-      ...otherProps,
-      ref,
-    },
-    <>
-      {isElm && <span className={`${prefixCls}-separator`}>{separator}</span>}
-      {props.children}
-    </>,
+  return (
+    <span ref={ref} {...otherProps}>
+      {haveSeparator &&
+        (isElm ? (
+          <span className={`${prefixCls}-separator`}>{separator}</span>
+        ) : (
+          <span className={`${prefixCls}-separator`}>/</span>
+        ))}
+      {typeof href !== 'string' ? (
+        <span className={`${prefixCls}-text`}>{children}</span>
+      ) : (
+        <a href={href} className={`${prefixCls}-text`}>
+          {cloneElement(<>{children}</>)}
+        </a>
+      )}
+    </span>
   );
 });
 

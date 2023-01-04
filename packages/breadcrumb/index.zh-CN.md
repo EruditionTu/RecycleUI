@@ -18,3 +18,7 @@ group:
 * 当需要向上导航的功能时。
 
 <code src='./demo/basic.tsx' />
+
+<code src='./demo/withIcon.tsx'/>
+
+<code src='./demo/customSeq.tsx'/>

@@ -1,15 +1,15 @@
-import React, { useMemo, forwardRef } from 'react';
+import React, { useMemo, forwardRef, cloneElement, Children } from 'react';
 import classNames from 'classnames';
 import type BreadcrumbProps from './type';
 
 const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>((props, ref) => {
-  const { className, separator = '/', ...other } = props;
+  const { className, separator = '/', children, ...other } = props;
   const prefixCls = useMemo(() => 'recycle-ui-breadcrumb', []);
-  const breadcrumbCls = useMemo(() => classNames(prefixCls, className), []);
+  const breadcrumbCls = useMemo(() => classNames(prefixCls, className), [prefixCls, className]);
   return (
     <div {...{ className: breadcrumbCls, ...other }} ref={ref}>
-      {React.Children.map(props.children, (element: any) => {
-        return React.cloneElement(element, { separator, ...element.props });
+      {Children.map(children, (element: any, idx: number) => {
+        return cloneElement(element, { separator, ...element.props, haveSeparator: idx !== 0 });
       })}
     </div>
   );

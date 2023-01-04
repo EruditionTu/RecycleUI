@@ -4,14 +4,10 @@ import '../style';
 
 const App: React.FC = () => (
   <Breadcrumb>
-    <Breadcrumb.Item>Home</Breadcrumb.Item>
-    <Breadcrumb.Item>
-      <a href="">Application Center</a>
-    </Breadcrumb.Item>
-    <Breadcrumb.Item>
-      <a href="">Application List</a>
-    </Breadcrumb.Item>
-    <Breadcrumb.Item>An Application</Breadcrumb.Item>
+    <Breadcrumb.Item>首页</Breadcrumb.Item>
+    <Breadcrumb.Item>活动管理</Breadcrumb.Item>
+    <Breadcrumb.Item>活动列表</Breadcrumb.Item>
+    <Breadcrumb.Item active>活动详情</Breadcrumb.Item>
   </Breadcrumb>
 );
 
