@@ -11,7 +11,6 @@ export interface BreadcrumbItemProps extends ElementTag {
   haveSeparator?: boolean;
   href?: string;
   separator?: JSX.Element | string;
-  active?: boolean;
 }
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
