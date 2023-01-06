@@ -1,0 +1,58 @@
+@import '../../common/style/index.less';
+
+@recycle-checkbox-prefix:~'@{recycle-prefix}-checkbox';
+
+.@{recycle-checkbox-prefix} {
+  display: inline-block;
+  cursor: pointer;
+  &-content{
+    display: flex;
+    align-items: center;
+  }
+  &-actived,
+  &-noActived,
+  &-disabled{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: @recycle-font-sm;
+    height: @recycle-font-sm;
+    margin-left: 5px;
+    padding: 7px;
+    box-sizing: border-box;
+    transition: 0.2s linear;
+    border-radius: 5px;
+  }
+  &-disabled {
+    border: 1px solid #858585;
+    cursor: not-allowed;
+  }
+  &-actived{
+    color:@recycle-ui-white;
+    background: @routine;
+    border: 1px solid @routine;
+  }
+  &-noActived{
+    color: @recycle-ui-white;
+    background: @recycle-ui-white;
+    border: 1px solid rgb(175, 172, 172);
+    &:hover{
+      border: 1px solid #afacac;
+    }
+  }
+  &-text{
+    margin-left: 5px;
+    font-size: @recycle-font-sm;
+    user-select: none;
+  }
+  .disabled{
+    cursor: not-allowed;
+  }
+  &-disabled-checkbox{
+    cursor: not-allowed;
+    opacity: 0.3;
+    .recycle-ui-checkbox-disabled{
+      border: 1px solid #858585;
+    }
+  }
+}
