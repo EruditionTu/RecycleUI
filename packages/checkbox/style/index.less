@@ -12,7 +12,7 @@
   &-actived,
   &-noActived,
   &-disabled{
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: @recycle-font-sm;
@@ -31,6 +31,9 @@
     color:@recycle-ui-white;
     background: @routine;
     border: 1px solid @routine;
+    &[class~='recycle-ui-checkbox-disabled']{
+      background-color: #858585;
+    }
   }
   &-noActived{
     color: @recycle-ui-white;

@@ -6,6 +6,7 @@ import CheckboxProps from './type';
 
 const CheckBox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   const {
+    name,
     children,
     className = '',
     style = {},
@@ -32,7 +33,13 @@ const CheckBox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   );
 
   const checkBoxDom = {
-    disabled: <div className={`${prefixCls}-disabled`} />,
+    disabled: checkStatus ? (
+      <div className={`${prefixCls}-actived ${prefixCls}-disabled`}>
+        <CheckOutlined style={{ fontSize: '12px' }} />
+      </div>
+    ) : (
+      <div className={`${prefixCls}-disabled`} />
+    ),
     actived: (
       <div className={`${prefixCls}-actived`}>
         <CheckOutlined style={{ fontSize: '12px' }} />
@@ -73,19 +80,21 @@ const CheckBox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
       return checkBoxDom.actived;
     }
     return checkBoxDom.noActived;
-  }, [checkStatus, checked]);
+  }, [checkStatus, checked, disabled]);
 
   return (
     <label className={checkboxCls} style={style} ref={ref as any}>
       <div className={`${prefixCls}-content`}>
         {renderCheckBoxDom}
-        <div
-          className={classNames(`${prefixCls}-text`, {
-            disabled,
-          })}
-        >
-          {children}
-        </div>
+        {children && (
+          <div
+            className={classNames(`${prefixCls}-text`, {
+              disabled,
+            })}
+          >
+            {children}
+          </div>
+        )}
       </div>
       <input
         type="checkbox"
@@ -93,7 +102,8 @@ const CheckBox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
         value={value}
         checked={checkStatus}
         onChange={handleChange}
-        style={{ height: 0, width: 0, opacity: 0, pointerEvents: 'none' }}
+        name={name}
+        style={{ height: 0, width: 0, opacity: 0, pointerEvents: 'none', position: 'absolute' }}
         {...other}
       />
     </label>

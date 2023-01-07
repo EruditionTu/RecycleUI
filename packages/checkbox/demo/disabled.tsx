@@ -1,11 +1,13 @@
 import React from 'react';
-import CheckBox from '../Checkbox';
+import Checkbox from '../Checkbox';
 import '../style';
 
-export default function TimePickerDemo1() {
+export default function () {
   return (
-    <CheckBox style={{ padding: '5px 0' }} disabled>
-      Apple
-    </CheckBox>
+    <>
+      <Checkbox defaultChecked={false} disabled />
+      <br />
+      <Checkbox defaultChecked disabled />
+    </>
   );
 }
