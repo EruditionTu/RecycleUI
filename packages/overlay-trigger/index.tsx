@@ -14,7 +14,7 @@ import React, {
 import type { MouseEvent, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import Overlay from '../overlay';
-import { OverlayProps } from '../overlay';
+import type { OverlayProps } from '../overlay';
 import type OverlayTriggerProps from './type';
 import type { OverlayTriggerRef, OverlayStyle, TriggerProps, Delay } from './type';
 import type { IBoundingClientRect } from '../common/util/dom/getBoundingClientRect';
@@ -23,7 +23,7 @@ import contains from '../common/util/dom/contains';
 import getStyle from './util/getStyle';
 import isDom from '@/packages/common/util/dom/isDom';
 
-export { OverlayTriggerProps };
+export { OverlayTriggerRef, OverlayStyle, TriggerProps, Delay, OverlayTriggerProps };
 
 const defaultEventCb = () => {};
 
