@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import classNames from 'classnames';
 import CardProps from './type';
 import Grid from './Grid';
-import type { WithCustomStyle, WithForwardRef } from '../common/util/toolType';
+import type { WithCustomStyle, WithForwardRef } from '../common/util/type';
 import omit from '../common/util/omit';
 import withDefault from '../common/util/withDefault';
 
@@ -105,7 +105,7 @@ const Card = forwardRef<HTMLElement, CardWarpperProps>((props, ref) => {
 
   const divProps = omit(others, ['onTabChange']);
   return (
-    <div {...divProps} className={warpperClass} style={{ width: 300 }} ref={ref as any}>
+    <div className={warpperClass} style={{ width: 300 }} {...divProps} ref={ref as any}>
       {head}
       {coverDom}
       {body}

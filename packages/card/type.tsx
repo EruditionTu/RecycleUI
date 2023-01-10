@@ -1,5 +1,5 @@
 import type { ReactNode, CSSProperties } from 'react';
-import type { HTMLDivProps } from '../common/util/toolType';
+import type { HTMLDivProps } from '../common/util/type';
 
 export interface CardGridProps {
   hoverable?: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import type { CardGridProps } from './type';
-import type { WithCustomStyle } from '../common/util/toolType/index';
+import type { WithCustomStyle } from '../common/util/type/index';
 
 const Grid: FC<WithCustomStyle<CardGridProps>> = ({
   style = {},
