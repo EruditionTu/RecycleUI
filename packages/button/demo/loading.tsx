@@ -54,7 +54,7 @@ export default () => {
       </Button>
       <Button
         type="link"
-        loading={loading}
+        loading
         onClick={() => {
           alert('hello world');
         }}
@@ -63,7 +63,7 @@ export default () => {
       </Button>
       <Button
         type="text"
-        loading={loading}
+        loading
         onClick={() => {
           alert('hello world');
         }}

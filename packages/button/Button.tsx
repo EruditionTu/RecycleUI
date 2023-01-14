@@ -2,6 +2,7 @@ import type { MouseEvent, FC, ReactElement } from 'react';
 import React, { useCallback, useMemo, cloneElement, forwardRef } from 'react';
 import classNames from 'classnames';
 import invariant from 'invariant';
+import omit from 'lodash/omit';
 import ButtonGroup from './ButtonGroup';
 
 import type ButtonProps from './type';
@@ -31,11 +32,28 @@ const LinkNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
       [disabled, loading, prefixCls, className],
     );
     return (
-      <Loader {...loadingProps} loading={loading}>
-        <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-        </a>
-      </Loader>
+      <a className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+        <Loader
+          size="small"
+          {...omit(loadingProps, 'style')}
+          style={{ ...loadingProps.style, position: 'absolute', zIndex: 6 }}
+          loading={loading}
+        />
+        {loading && !disabled && (
+          <div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              opacity: '0.6',
+              zIndex: 5,
+              // 注意暗黑模式下的遮盖层的颜色
+              backgroundColor: '#fff',
+            }}
+          />
+        )}
+        {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+      </a>
     );
   },
 );
@@ -61,13 +79,29 @@ const TextNode: FC<ButtonProps> = forwardRef<HTMLElement, ButtonProps>(
       [disabled, loading, className, prefixCls],
     );
     return (
-      <Loader {...loadingProps} loading={loading}>
-        <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-          <span>
-            {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-          </span>
-        </div>
-      </Loader>
+      <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
+        <Loader
+          size="small"
+          {...omit(loadingProps, 'style')}
+          style={{ ...loadingProps.style, position: 'absolute', zIndex: 6 }}
+          loading={loading}
+        />
+        {loading && !disabled && (
+          <div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              opacity: '0.6',
+              zIndex: 5,
+              backgroundColor: '#fff',
+            }}
+          />
+        )}
+        <span>
+          {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+        </span>
+      </div>
     );
   },
 );
@@ -85,7 +119,7 @@ const ButtonNode: FC<ButtonProps> = forwardRef<HTMLDivElement, ButtonProps>(
       icon,
       children,
       onClick,
-      ...extProps
+      ...other
     } = props;
     const prefixCls = useMemo(() => 'recycle-ui-button', []);
 
@@ -112,16 +146,28 @@ const ButtonNode: FC<ButtonProps> = forwardRef<HTMLDivElement, ButtonProps>(
       },
     );
     return (
-      <Loader {...loadingProps} loading={loading}>
-        <div className={classes} onClick={onClick} style={style} ref={ref} {...extProps}>
-          {icon && <span className={`${prefixCls}-icon`}>{icon}</span>}
-          {children && (
-            <span className={`${prefixCls}-button-title`}>
-              {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
-            </span>
-          )}
-        </div>
-      </Loader>
+      <div className={classes} onClick={onClick} style={style} ref={ref} {...other}>
+        <Loader {...loadingProps} loading={loading} style={{ position: 'absolute', zIndex: 6 }} />
+        {loading && !disabled && (
+          <div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              opacity: '0.6',
+              zIndex: 5,
+              background: '#fff',
+              border: 'solid #fff 1px',
+            }}
+          />
+        )}
+        {icon && <span className={`${prefixCls}-icon`}>{icon}</span>}
+        {children && (
+          <span className={`${prefixCls}-button-title`}>
+            {cloneElement(<>{children}</>) /** 将ReactNode类型的children转换为ReactElement */}
+          </span>
+        )}
+      </div>
     );
   },
 );
