@@ -224,7 +224,6 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         // 清除该组件所有定时器
         clearAllTimeouts();
         // 如果鼠标在外面，并且hoverOverlayClose 为假，那么不关闭组件
-        // console.log('isOutside', isOutside);
         if (!isOutside && !hoverOverlayClose) return;
         hoverStateRef.current = 'hide';
         const delay = normalizeDelay(props.delay);
@@ -260,7 +259,6 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         ) {
           isOutside = false;
         }
-        console.log('isOutside', isOutside);
         if ((!related || related !== target) && !contains(target, related)) {
           handler(isOutside, e);
         }
@@ -396,7 +394,13 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       triggerProps.onMouseLeave = (e) => {
         handleMouseOverOut(handleHide, e, 'toElement');
       };
-      if (overlayProps.dialogProps) {
+      if (overlayProps.dialogProps && !hoverOverlayClose) {
+        overlayProps.dialogProps.onMouseOver = (e) => {
+          handleMouseOverOut(handleShow, e, 'fromElement');
+        };
+        overlayProps.dialogProps.onMouseEnter = (e) => {
+          handleMouseOverOut(handleShow, e, 'fromElement');
+        };
         overlayProps.dialogProps.onMouseLeave = (e) => {
           handleMouseOverOut(handleHide, e, 'toElement');
         };
