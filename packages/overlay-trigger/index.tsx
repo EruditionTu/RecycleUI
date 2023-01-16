@@ -28,7 +28,7 @@ export { OverlayTriggerRef, OverlayStyle, TriggerProps, Delay, OverlayTriggerPro
 const defaultEventCb = () => {};
 
 const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTriggerProps>>(
-  (props, ref) => {
+  (props: PropsWithChildren<OverlayTriggerProps>, ref) => {
     const {
       open,
       destroyTooltipOnHide = false,
@@ -36,7 +36,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       usePortal = true,
       disabled = false,
       autoAdjustOverflow = false,
-      triggerOutsideClose = false,
+      hoverOverlayClose = true,
       clickOverlayClose = false,
       clickTriggerClose = true,
       clickOutsideClose = true,
@@ -223,9 +223,9 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       (isOutside: boolean) => {
         // 清除该组件所有定时器
         clearAllTimeouts();
-
-        // 如果鼠标在外面，并且triggerOutsideClose 为真，那么不关闭组件
-        if (!isOutside && triggerOutsideClose) return;
+        // 如果鼠标在外面，并且hoverOverlayClose 为假，那么不关闭组件
+        // console.log('isOutside', isOutside);
+        if (!isOutside && !hoverOverlayClose) return;
         hoverStateRef.current = 'hide';
         const delay = normalizeDelay(props.delay);
 
@@ -239,7 +239,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         }, delay.hide);
         timeoutRef.current.push(handle);
       },
-      [hoverStateRef.current],
+      [hoverStateRef.current, hoverOverlayClose, delay, timeoutRef.current],
     );
 
     /**
@@ -252,6 +252,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       (handler: Function, e: MouseEvent, relatedNative: 'fromElement' | 'toElement') => {
         const target = e.currentTarget as HTMLElement;
         const related = (e.relatedTarget || (e.nativeEvent as any)[relatedNative]) as HTMLElement;
+
         let isOutside = true;
         if (
           (popupRef.current && contains(popupRef.current, related)) ||
@@ -259,6 +260,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         ) {
           isOutside = false;
         }
+        console.log('isOutside', isOutside);
         if ((!related || related !== target) && !contains(target, related)) {
           handler(isOutside, e);
         }
@@ -359,6 +361,14 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
 
     // 包裹一下传递给children的参数
     const triggerProps: TriggerProps = {};
+
+    const overlayProps: OverlayProps = {
+      ...other,
+      placement: propsFilter.placement,
+      open,
+      dialogProps: { onClick: handleClickOverlyClose, ...other.dialogProps },
+    };
+
     // 点击触发trigger弹窗
     if (propsFilter.trigger === 'click' && !disabled) {
       triggerProps.onClick = (e: any) => {
@@ -386,18 +396,15 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
       triggerProps.onMouseLeave = (e) => {
         handleMouseOverOut(handleHide, e, 'toElement');
       };
+      if (overlayProps.dialogProps) {
+        overlayProps.dialogProps.onMouseLeave = (e) => {
+          handleMouseOverOut(handleHide, e, 'toElement');
+        };
+        overlayProps.dialogProps.onMouseOut = (e: any) => {
+          handleMouseOverOut(handleHide, e, 'toElement');
+        };
+      }
     }
-
-    // 遮盖层的属性
-    const overlayProps = useMemo(
-      (): OverlayProps => ({
-        ...other,
-        placement: propsFilter.placement,
-        open,
-        dialogProps: { onClick: handleClickOverlyClose },
-      }),
-      [other, propsFilter, open],
-    );
 
     return (
       <>
@@ -411,7 +418,7 @@ const OverlayTrigger = forwardRef<OverlayTriggerRef, PropsWithChildren<OverlayTr
         })}
         <Overlay
           {...overlayProps}
-          style={{ ...overlayStyle }}
+          style={{ ...overlayStyle, ...overlayProps.style }}
           open={isOpen}
           hasBackdrop={false}
           onEnter={handleEnter}

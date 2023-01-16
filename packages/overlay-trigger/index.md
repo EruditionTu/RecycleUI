@@ -56,7 +56,7 @@ Set usePortal={false} to generate the modal dialog box into the root node.
 | trigger        | Whether the covering pop-up layer is turned on by default         | `click|hover|focus` | `hover`   |
 | delay | Opening or closing delay (if it is a number type number, the opening and closing delay are all this number, which can also be customized through the object)    | `number|{show?:number,hide?:number}`                                | ``   |
 | disabled | Disable pop-up target | `boolean`                                 | `false`      |
-| triggerOutsideClose     | In hover mode, if you leave the trigger element, the pop-up window will be closed, including moving to overlay. If it is false, the pop-up window will not be closed on overlay  | `boolean` | `true`    |
+| hoverOverlayClose     | In hover mode, if you leave the trigger element, the pop-up window will be closed, including moving to overlay. If it is false, the pop-up window will not be closed on overlay  | `boolean` | `true`    |
 | clickOverlayClose | In click mode, clicking the overlay mask will close | `boolean`        |`false` |
 | clickTriggerClose | In click mode, click trigger to close        | `boolean`        | `true`    |
 | clickOutsideClose | In click mode, click other than overlay and trigger to close        | `boolean`        | `true`    |

@@ -1,6 +1,5 @@
 import type { ReactElement } from 'react';
-// import type { OverlayProps } from '../overlay';
-
+import OverlayProps from '../overlay/type';
 /**
  * 延时打开关闭的时间
  */
@@ -51,7 +50,7 @@ export type OverlayTriggerRef = {
   overlayRef: React.MutableRefObject<HTMLElement | undefined>;
 };
 
-export default interface OverlayTriggerProps {
+export default interface OverlayTriggerProps extends OverlayProps {
   overlay?: ReactElement;
   transitionName?: string;
   open?: boolean;
@@ -60,7 +59,7 @@ export default interface OverlayTriggerProps {
   delay?: Delay;
   usePortal?: boolean;
   disabled?: boolean;
-  triggerOutsideClose?: boolean; // hover模式下，离开trigger元素就会关闭弹窗，包括移到overlay上面也会，为false，那么在overlay上不会关闭
+  hoverOverlayClose?: boolean; // hover模式下，离开trigger元素就会关闭弹窗，包括移到overlay上面也会，为false，那么在overlay上不会关闭
   clickOverlayClose?: boolean; // click模式下，点击overlay遮盖层会关闭
   clickTriggerClose?: boolean; // click模式下，点击trigger可以关闭
   clickOutsideClose?: boolean; // click模式下，点击overlay和trigger之外的可以关闭

@@ -7,6 +7,7 @@ import React, { cloneElement, useEffect, useRef, useState, useMemo, useCallback 
 import type { MouseEvent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
+import omit from 'lodash/omit';
 import Portal from '../common/components/Portal';
 import type { WithCustomStyle } from '@/packages/common/util/type';
 import type OverlayProps from './type';
@@ -33,15 +34,17 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     onExited = defaultEventCb,
     onClose = defaultEventCb,
     transitionName = 'recycle-ui-overlay',
-    destroyTooltipOnHide = true,
+    destroyTooltipOnHide = false,
     timeout = 300,
     children = '',
-    ...otherProps
+    ...other
   } = props;
   const [isOpen, setIsOpen] = useState<boolean>();
   const [visible, setVisible] = useState<boolean>();
+  const firstRender = useRef<boolean>(true);
   const container = useRef<HTMLElement>(null);
   const overlay = useRef(null);
+  // console.log(dialogProps);
 
   const prefixCls = useMemo(() => 'recycle-ui-overlay', []);
 
@@ -89,19 +92,13 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   const OverlayComp =
     typeof children === 'object' ? (
       cloneElement(children, {
-        ...dialogProps,
-        style: { ...children.props.style, ...dialogProps.style },
-        className: classNames(
-          children.props.className,
-          dialogProps.className,
-          `${prefixCls}-content`,
-        ),
+        ...omit(dialogProps, 'style', 'className'),
+        style: { ...children.props.style },
+        className: classNames(children.props.className, `${prefixCls}-content`),
         tabIndex: 0,
       })
     ) : (
-      <span {...dialogProps} className={`${prefixCls}-content`}>
-        {children}
-      </span>
+      <span className={`${prefixCls}-content`}>{children}</span>
     );
   useEffect(() => {
     if (isOpen !== open && open) {
@@ -119,6 +116,11 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       setIsOpen(true);
     }
   }, [visible]);
+
+  if (visible && firstRender.current) {
+    firstRender.current = false;
+  }
+
   const TransitionGroupComp = (
     <CSSTransition
       unmountOnExit={destroyTooltipOnHide}
@@ -144,13 +146,13 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       onExited={() => {
         handleExited(overlay.current!);
       }}
-      {...otherProps}
+      {...other}
     >
       {(status: any) => (
         <div
-          style={style}
+          style={{ ...style, ...dialogProps.style }}
           ref={overlay}
-          className={classNames(prefixCls, className, {
+          className={classNames(prefixCls, className, dialogProps.className, {
             [`${prefixCls}-inline`]: !usePortal,
             [`${prefixCls}-enter-done`]: isOpen,
           })}
@@ -178,8 +180,11 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       )}
     </CSSTransition>
   );
+  if (containerDom instanceof HTMLElement) {
+    containerDom.className = 'recycle-ui-portal';
+  }
   if (usePortal) {
-    return visible ? (
+    return !firstRender.current ? (
       <Portal
         {...{
           ...portalProps,
@@ -190,7 +195,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       </Portal>
     ) : null;
   }
-  return TransitionGroupComp;
+  return !firstRender.current ? TransitionGroupComp : null;
 };
 export default Overlay;
 export { OverlayProps };

@@ -55,7 +55,7 @@ group:
 | trigger        | 触发弹窗的方式         | `click|hover|focus` | `hover`   |
 | delay | 打开或者关闭的延时（如果是一个number类型的数字，那么打开关闭延时都是这个数，还可以通过对象自定义）    | `number|{show?:number,hide?:number}`                                | ``   |
 | disabled | 是否禁用弹出目标 | `boolean`                                 | `false`      |
-| triggerOutsideClose     | hover模式下，离开trigger元素就会关闭弹窗，包括移到overlay上面也会，为false，那么在overlay上不会关闭  | `boolean` | `true`    |
+| hoverOverlayClose     | hover模式下，离开trigger元素就会关闭弹窗，包括移到overlay上面也会，为false，那么在overlay上不会关闭  | `boolean` | `true`    |
 | clickOverlayClose | click模式下，点击overlay遮盖层会关闭 | `boolean`        |`false` |
 | clickTriggerClose | click模式下，点击trigger可以关闭        | `boolean`        | `true`    |
 | clickOutsideClose | click模式下，点击overlay和trigger之外的可以关闭        | `boolean`        | `true`    |
