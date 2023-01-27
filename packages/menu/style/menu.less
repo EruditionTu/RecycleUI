@@ -1,0 +1,48 @@
+@import '../../common/style/index.less';
+
+@menu-dark-theme-bg:#001529;
+@menu-dark-theme-fontColor:rgba(225,225,225,.65);
+@menu-light-theme-bg:#fff;
+@menu-light-theme-fontColor:rgba(0, 0, 0, 0.88);
+
+@recycle-menu-prefix:~'@{recycle-prefix}-menu';                                                       
+
+.@{recycle-menu-prefix} {
+  font-size: 0;
+  margin: 0 !important;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 100%;
+  text-align: left;
+  transition: width 0.2s, min-width 0.2s, max-width 0.2s, height 0.2s, min-height 0.2s, max-height 0.2s;
+  &-horizontal{
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content:flex-start;
+    align-items:center;
+    border-bottom: solid 1px rgba(5,5,5,.06);
+  }
+  &-dark{
+    color: @menu-dark-theme-fontColor;
+    background-color: @menu-dark-theme-bg;
+    & [class~='recycle-ui-menu-item']:not(.recycle-ui-menu-item-vertical-active){
+      &:hover{
+        color: @recycle-ui-white;
+      }
+    }
+  }
+  &-light{
+    &:not(.recycle-ui-menu-horizontal){
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    color: @menu-light-theme-fontColor;
+    background-color: @menu-light-theme-bg;
+    &:not(.recycle-ui-menu-horizontal) [class~='recycle-ui-menu-item']:not(.recycle-ui-menu-item-vertical-active){
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.06);
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+@import '../../common/style/index.less';
+
+@recycle-menuitem-prefix:~'@{recycle-prefix}-menu-item';     
+
+@menu-dark-theme-bg:#001529;
+@menu-dark-theme-fontColor:rgba(225,225,225,.65);
+@menu-light-theme-bg:#fff;
+@menu-light-theme-fontColor:rgba(0, 0, 0, 0.88);
+
+.@{recycle-menuitem-prefix} {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  font-size: @recycle-font-md;
+  text-decoration: none;
+  line-height:40px;
+  height: 40px;
+  user-select: none;
+  transition: initial;
+  transition: background-color 0.3s;
+  list-style: none;
+  & > * {
+    margin-right: 7px;
+  }
+  &:first-of-type {
+    border-top: none;
+  }
+  a:not([href]) {
+    color: inherit;
+  }
+  &:hover{
+    cursor: pointer;
+  }
+  &-horizontal{
+    margin-top: 1px;
+    margin-left: 12px;
+    white-space: nowrap;
+    &::after{
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color .3s cubic-bezier(.645,.045,.355,1);
+      content: "";
+    }
+    &[class~='recycle-ui-menu-item-disabled']{
+      &::after{
+        border-bottom-color: inherit  !important;
+      }
+    }
+    [class~='recycle-ui-menu-light'] &-active{
+      color: @routine;
+      &::after{
+        border-bottom-color: @routine;
+      }
+    }
+    [class~='recycle-ui-menu-light'] &-active-sub{
+      color: @routine;
+      &::after{
+        border-bottom-color: @routine;
+      }
+    }
+    [class~='recycle-ui-menu-light'] &:hover{
+      &::after{
+        border-bottom-color: @routine;
+      } 
+    }
+  }
+  &-vertical{
+    margin:5px 0;
+    min-width: 150px;
+    border-radius: 8px;
+    & > :last-child {
+      margin-right: 10px;
+    }
+  // 当light模式下的menuitem被激活的样式
+  [class~='recycle-ui-menu-light'] &-active  {
+    color: @routine;
+    text-decoration: none;
+    background-color: #e6f4ff;
+  }
+  [class~='recycle-ui-submenu-light'] &-active {
+    color: @routine;
+    text-decoration: none;
+    background-color: #e6f4ff;
+  }
+  [class~='recycle-ui-menu-light'] &-active-sub {
+    color: @routine;
+    text-decoration: none;
+  }
+  [class~='recycle-ui-submenu-light'] &-active-sub {
+    color: @routine;
+    text-decoration: none;
+  }
+
+  //当dark模式下的menuitem被激活的样式
+  [class~='recycle-ui-menu-dark'] &-active  {
+    color: @recycle-ui-white;
+    text-decoration: none;
+    background-color: @routine;
+  }
+  [class~='recycle-ui-submenu-dark'] &-active {
+    color: @recycle-ui-white;
+    text-decoration: none;
+    background-color: @routine;
+  }
+  [class~='recycle-ui-menu-dark'] &-active-sub {
+    color: @recycle-ui-white;
+    text-decoration: none;
+  }
+  [class~='recycle-ui-submenu-dark'] &-active-sub {
+    color: @recycle-ui-white;
+    text-decoration: none;
+  }
+  }
+  
+
+
+  // label文本的样式
+  &-text{
+    transition: color .3s;
+    padding: 0 4px;
+    flex-grow: 1;
+  }
+  [class~='recycle-ui-menu-item'] &-text{
+    margin:0 4px;
+  }
+  [class~='recycle-ui-submenu'] &-text{
+    text-align: center;
+  }
+  [class~='recycle-ui-submenu-inline'] &-text{
+    text-align: left;
+  }
+
+
+  // icon标签的样式
+  &-icon{
+    height: 100%;
+    text-align: center;
+    width: 16px;
+  }
+
+
+  &-disabled{
+    cursor: not-allowed;
+    opacity: 0.7;
+    [class~='recycle-ui-menu-dark'] &{
+      background-color: rgba(255,255,255,0.5);
+    }
+    [class~='recycle-ui-menu-dark'] &:hover{
+      color:rgba(255,255,255,0.65) !important;
+      cursor: not-allowed;
+    }
+    [class~='recycle-ui-menu-light'] &{
+      color:rgba(0,0,0,.25);
+    }
+    [class~='recycle-ui-menu-light'] &:hover{
+      background-color: inherit !important;
+      cursor: not-allowed;
+    }
+  }
+
+  &-inline-collapsed{
+    overflow: hidden;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin:5px 0px;
+    cursor: pointer;
+    transition: all linear 0.3s;
+    min-width: 50px;
+    [class~='recycle-ui-menu-light'] &:not(.recycle-ui-menu-item-inline-collapsed-active):hover{
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+    [class~='recycle-ui-menu-light'] &-active{
+      color: @routine;
+      text-decoration: none;
+      background-color: #e6f4ff;
+    }
+    [class~='recycle-ui-menu-light'] &-sub-active{
+      color:@menu-light-theme-fontColor;
+    }
+    [class~='recycle-ui-menu-dark'] &:hover{
+      color:@recycle-ui-white;
+    }
+    [class~='recycle-ui-menu-dark'] &-active{
+      color: @recycle-ui-white;
+      text-decoration: none;
+      background-color: @routine;
+    }
+    [class~='recycle-ui-menu-dark'] &-sub-active{
+      color: @recycle-ui-white;
+      text-decoration: none;
+    }
+    &-icon{
+      height: 40px;
+      line-height: 40px;
+    }
+
+  }
+  
+  &-group{
+    &-title{
+      [class~='recycle-ui-menu-light'] &{
+        color: rgba(0, 0, 0,0.45);
+      }
+      padding: 8px 16px;
+      font-size: 14px;
+      line-height: 1.5714285714285714;
+      transition: all .3s;
+    }
+    &-lists{
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
