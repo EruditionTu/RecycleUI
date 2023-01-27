@@ -3,3 +3,4 @@ import './menuItem.less';
 import './subMenu.less';
 import '../../overlay-trigger/style';
 import '../../tooltip/style';
+import '../../divider/style';

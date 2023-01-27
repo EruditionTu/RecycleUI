@@ -7,6 +7,7 @@ import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
 import type MenuProps from './type';
 import MenuGroup from './MenuGroup';
+import MenuDivider from './MenuDiveder';
 import type { MenuValue, MenuContextProps, InlineSubMenuContextProps, ItemType } from './type';
 
 function initSelectedMenuItem(defaultSelectedKeys: Array<MenuValue>): Set<MenuValue> {
@@ -189,10 +190,12 @@ interface MenuComponents extends FC<MenuProps> {
   Item: typeof MenuItem;
   SubMenu: typeof SubMenu;
   Group: typeof MenuGroup;
+  Divider: typeof MenuDivider;
 }
 const MenuWarpper: MenuComponents = MenuWithContext as unknown as MenuComponents;
 MenuWarpper.Item = MenuItem;
 MenuWarpper.SubMenu = SubMenu;
 MenuWarpper.Group = MenuGroup;
+MenuWarpper.Divider = MenuDivider;
 
 export default MenuWarpper;

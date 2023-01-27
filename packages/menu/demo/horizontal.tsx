@@ -4,8 +4,8 @@ import '../style';
 
 const App: React.FC = () => (
   <Menu mode="horizontal">
-    <Menu.Item label="重新加载" key="tubowen" disabled />
-    {/* <Menu.Divider /> */}
+    <Menu.Item label="重新加载" />
+    <Menu.Divider />
     <Menu.SubMenu label="选项">
       <Menu.SubMenu label="火影">
         <Menu.Item label="鸣人" />
