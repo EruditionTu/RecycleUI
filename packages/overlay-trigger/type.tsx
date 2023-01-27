@@ -44,12 +44,6 @@ export interface TriggerProps {
   onMouseLeave?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
-export type OverlayTriggerRef = {
-  hide: () => void;
-  show: () => void;
-  overlayRef: React.MutableRefObject<HTMLElement | undefined>;
-};
-
 export default interface OverlayTriggerProps extends OverlayProps {
   overlay?: ReactElement;
   transitionName?: string;

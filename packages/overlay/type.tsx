@@ -14,6 +14,7 @@ export default interface OverlayProps extends Omit<TransitionProps, 'timeout'> {
   hasBackdrop?: boolean;
   destroyTooltipOnHide?: boolean;
   transitionName?: string;
+  forceRenderDom?: boolean;
   onEnter?: (node: HTMLElement, isAppearing: boolean) => void;
   onEntering?: (node: HTMLElement, isAppearing: boolean) => void;
   onEntered?: (node: HTMLElement, isAppearing: boolean) => void;

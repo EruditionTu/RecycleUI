@@ -23,6 +23,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     usePortal = true,
     hasBackdrop = true,
     maskClosable = true,
+    forceRenderDom = false,
     backdropProps = {},
     dialogProps = {},
     portalProps = {},
@@ -44,7 +45,6 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   const firstRender = useRef<boolean>(true);
   const container = useRef<HTMLElement>(null);
   const overlay = useRef(null);
-  // console.log(dialogProps);
 
   const prefixCls = useMemo(() => 'recycle-ui-overlay', []);
 
@@ -92,7 +92,6 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   const OverlayComp =
     typeof children === 'object' ? (
       cloneElement(children, {
-        ...omit(dialogProps, 'style', 'className'),
         style: { ...children.props.style },
         className: classNames(children.props.className, `${prefixCls}-content`),
         tabIndex: 0,
@@ -122,6 +121,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
   }
 
   const TransitionGroupComp = (
+    // @ts-ignore
     <CSSTransition
       unmountOnExit={destroyTooltipOnHide}
       timeout={timeout}
@@ -150,6 +150,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     >
       {(status: any) => (
         <div
+          {...omit(dialogProps, 'style', 'className')}
           style={{ ...style, ...dialogProps.style }}
           ref={overlay}
           className={classNames(prefixCls, className, dialogProps.className, {
@@ -184,7 +185,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
     containerDom.className = 'recycle-ui-portal';
   }
   if (usePortal) {
-    return !firstRender.current ? (
+    return forceRenderDom || !firstRender.current ? (
       <Portal
         {...{
           ...portalProps,
@@ -195,7 +196,7 @@ const Overlay = (props: WithCustomStyle<OverlayProps>) => {
       </Portal>
     ) : null;
   }
-  return !firstRender.current ? TransitionGroupComp : null;
+  return forceRenderDom || !firstRender.current ? TransitionGroupComp : null;
 };
 export default Overlay;
 export { OverlayProps };
