@@ -7,10 +7,16 @@ import type {
   SetStateAction,
 } from 'react';
 
-export type ItemType = (
-  | (MenuItemProps & { type: 'item' })
-  | (SubMenuProps & { type: 'submenu' })
-) & { key: any; value: any };
+export type ItemType =
+  | (Omit<MenuItemProps, 'type'> & { type: 'Item' | {}; key?: any; value?: any })
+  | (Omit<SubMenuProps, 'type'> & {
+      type: 'SubMenu' | {};
+      key?: any;
+      value?: any;
+      children?: ItemType[];
+    })
+  | (Omit<MenuGroupProps, 'type'> & { type: 'Group' | {}; children?: ItemType[] })
+  | { type: 'Divider' | {}; dashed?: boolean };
 
 /**
  * 菜单项的唯一标识值的类型
@@ -66,7 +72,7 @@ export interface SubMenuProps extends Omit<HTMLProps<HTMLLIElement>, 'label'> {
    *
    * @default light
    */
-  theme?: 'light' | 'dark';
+  theme?: 'light' | 'dark' | {};
   /**
    * 是否禁用当前子菜单
    *
@@ -165,6 +171,12 @@ export interface MenuContextProps {
     domEvent: any;
   }) => void;
   /**
+   * Inline 的SubMenu 展开/关闭的回调,仅在inline模式下生效
+   * @param openKeys
+   * @returns
+   */
+  onOpenChange: (openKeys: Array<MenuValue>) => void;
+  /**
    * 自定义展开图标
    *
    * @default undefined
@@ -229,7 +241,7 @@ export interface MenuContextProps {
    *
    * @default light
    */
-  theme: 'light' | 'dark';
+  theme: 'light' | 'dark' | {};
   /**
    * 被选中的MenuItem集合
    *
@@ -363,7 +375,7 @@ interface MenuProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onClick' | '
    * 菜单主题颜色
    * @default light
    */
-  theme?: 'light' | 'dark';
+  theme?: 'light' | 'dark' | {};
   /**
    * SubMenu 展开/关闭的触发行为，非inline
    *

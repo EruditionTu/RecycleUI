@@ -14,13 +14,14 @@ function initSelectedMenuItem(defaultSelectedKeys: Array<MenuValue>): Set<MenuVa
   return defaultSelectedKeys instanceof Array ? new Set(defaultSelectedKeys) : new Set();
 }
 
-function initOpenSubMenu(defaultOpenKeys: Array<MenuValue>): Map<MenuValue, number> {
-  if (!(defaultOpenKeys instanceof Array)) return new Map();
-  const openMap: Map<MenuValue, number> = new Map();
-  defaultOpenKeys.forEach((key: MenuValue) => {
-    openMap.set(key, openMap.has(key) ? openMap.get(key)! + 1 : 1);
-  });
-  return openMap;
+function initOpenSubMenu(defaultOpenKeys: Array<MenuValue>): Set<MenuValue> {
+  return defaultOpenKeys instanceof Array ? new Set(defaultOpenKeys) : new Set();
+  // if (!(defaultOpenKeys instanceof Array)) return new Map();
+  // const openMap: Map<MenuValue, number> = new Map();
+  // defaultOpenKeys.forEach((key: MenuValue) => {
+  //   openMap.set(key, openMap.has(key) ? openMap.get(key)! + 1 : 1);
+  // });
+  // return openMap;
 }
 
 /**
@@ -66,24 +67,18 @@ const MenuWithContext = forwardRef<HTMLUListElement, MenuProps>((props, ref) => 
   /**
    * 沿途被选中的SubMenu
    */
-  const [selectedSubMenu, setSelectedSubMenu] = useState<Map<MenuValue, number>>(
-    initOpenSubMenu(defaultOpenKeys),
-  );
+  const [selectedSubMenu, setSelectedSubMenu] = useState<Map<MenuValue, number>>(new Map());
   /**
    * 展开inline模式的子菜单
    */
-  const [activeInlineKey, setActiveInlineKey] = useState<Set<MenuValue>>(new Set());
+  const [activeInlineKey, setActiveInlineKey] = useState<Set<MenuValue>>(
+    initOpenSubMenu(defaultOpenKeys),
+  );
 
   /**
    * 当activeInlineKey发生变化时，触发openKeys的变化
    */
 
-  useEffect(
-    () => () => {
-      typeof onOpenChange === 'function' && onOpenChange(Array.from(activeInlineKey));
-    },
-    [activeInlineKey],
-  );
   const menuContextValue = useMemo(
     (): MenuContextProps => ({
       activeKey,
@@ -106,6 +101,7 @@ const MenuWithContext = forwardRef<HTMLUListElement, MenuProps>((props, ref) => 
       onClick,
       onDeselect,
       onSelect,
+      onOpenChange,
     }),
     [
       activeKey,
@@ -136,36 +132,34 @@ const MenuWithContext = forwardRef<HTMLUListElement, MenuProps>((props, ref) => 
     }),
     [inlineSubMenuContext, setInlineSubMenuContext],
   );
-  useEffect(
-    () => () => {
-      if (openKeys instanceof Array) {
-        setActiveInlineKey(() => {
-          return new Set(openKeys);
-        });
-      }
-    },
-    [openKeys],
-  );
-  useEffect(
-    () => () => {
-      if (selectedKeys instanceof Array) {
-        setActiveKey(() => {
-          return new Set(selectedKeys);
-        });
-      }
-    },
-    [selectedKeys],
-  );
+  useEffect(() => {
+    if (openKeys instanceof Array) {
+      setActiveInlineKey(() => {
+        return new Set(openKeys);
+      });
+    }
+  }, [openKeys]);
+  useEffect(() => {
+    if (selectedKeys instanceof Array) {
+      setActiveKey(() => {
+        return new Set(selectedKeys);
+      });
+    }
+  }, [selectedKeys]);
   const TransformItems = useCallback(() => {
     if (items instanceof Array && items.length !== 0) {
       return items.map((item: ItemType) => {
         const otherPorps = _omit(item, 'type');
         // eslint-disable-next-line default-case
         switch (item.type) {
-          case 'item':
+          case 'Item':
             return <MenuItem {...(otherPorps as any)} />;
-          case 'submenu':
+          case 'SubMenu':
             return <SubMenu {...(otherPorps as any)} />;
+          case 'Group':
+            return <MenuGroup {...(otherPorps as any)} />;
+          case 'Divider':
+            return <MenuDivider {...otherPorps} />;
           default:
             return <></>;
         }
@@ -177,7 +171,9 @@ const MenuWithContext = forwardRef<HTMLUListElement, MenuProps>((props, ref) => 
     <MenuContext.Provider value={menuContextValue}>
       <InlineSubMenuContext.Provider value={inlineSubMenuContextValue}>
         {items instanceof Array && items.length !== 0 ? (
-          TransformItems()
+          <Menu {...other} ref={ref}>
+            {TransformItems()}
+          </Menu>
         ) : (
           <Menu {...other} ref={ref} />
         )}

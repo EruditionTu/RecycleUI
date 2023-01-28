@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import Menu from '..';
 import '../style';
 
 function getItem(
   label: React.ReactNode,
-  key: React.Key | null,
+  key: React.Key,
   icon: React.ReactNode,
   children: any,
   type: string,
@@ -25,30 +25,13 @@ const items = [
     'sub1',
     <MailOutlined />,
     [
-      getItem(
-        'Item 1',
-        null,
-        null,
-        [
-          getItem('Option 1', '1', undefined, undefined, 'Item'),
-          getItem('Option 2', '2', undefined, undefined, 'Item'),
-        ],
-        'Group',
-      ),
-      getItem(
-        'Item 2',
-        null,
-        null,
-        [
-          getItem('Option 3', '3', undefined, undefined, 'Item'),
-          getItem('Option 4', '4', undefined, undefined, 'Item'),
-        ],
-        'Group',
-      ),
+      getItem('Option 1', '1', undefined, undefined, 'Item'),
+      getItem('Option 2', '2', undefined, undefined, 'Item'),
+      getItem('Option 3', '3', undefined, undefined, 'Item'),
+      getItem('Option 4', '4', undefined, undefined, 'Item'),
     ],
     'SubMenu',
   ),
-
   getItem(
     'Navigation Two',
     'sub2',
@@ -69,7 +52,6 @@ const items = [
     ],
     'SubMenu',
   ),
-
   getItem(
     'Navigation Three',
     'sub4',
@@ -84,13 +66,30 @@ const items = [
   ),
 ];
 
-const onClick = (e: any) => {
-  // eslint-disable-next-line no-console
-  console.log('click', e);
-};
+// submenu keys of first level
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
-const App: React.FC = () => (
-  <Menu onClick={onClick} style={{ width: 256 }} mode="vertical" items={items} />
-);
+const App: React.FC = () => {
+  const [openKeys, setOpenKeys] = useState(['sub1']);
+
+  const onOpenChange = (keys: any) => {
+    const latestOpenKey = keys.find((key: any) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
+
+  return (
+    <Menu
+      mode="inline"
+      openKeys={openKeys}
+      onOpenChange={onOpenChange}
+      style={{ width: 256 }}
+      items={items}
+    />
+  );
+};
 
 export default App;

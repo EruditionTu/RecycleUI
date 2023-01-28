@@ -52,7 +52,7 @@ const AfterIcon = ({
   );
 };
 
-const SubMenu = forwardRef<
+const SubMenu: any = forwardRef<
   HTMLLIElement,
   SubMenuProps & {
     /**
@@ -99,6 +99,7 @@ const SubMenu = forwardRef<
     subMenuOpenDelay,
     subMenuCloseDelay,
     expandIcon,
+    onOpenChange,
   } = useContext(MenuContext);
   const { inlineSubMenuDom, state, setInlineSubMenuState } = useContext(InlineSubMenuContext);
   const prefixCls = useMemo(() => 'recycle-ui-submenu', []);
@@ -126,10 +127,11 @@ const SubMenu = forwardRef<
         setActiveInlineKey((isActived: Set<MenuValue>) => {
           const newIsActived: Set<MenuValue> = new Set<MenuValue>(isActived);
           open ? newIsActived.add(value) : newIsActived.delete(value);
+          typeof onOpenChange === 'function' && onOpenChange(Array.from(newIsActived));
           return newIsActived;
         });
     },
-    [activeInlineKey, setActiveInlineKey, value, disabled, onLabelClick],
+    [activeInlineKey, setActiveInlineKey, value, disabled, onLabelClick, onOpenChange],
   );
   useEffect(() => {
     if (mode !== 'inline' || inlineCollapsed) return;
@@ -201,7 +203,7 @@ const SubMenu = forwardRef<
     );
   }
   return (
-    <li
+    <div
       ref={(e) => {
         warpperRef.current = e && e;
         return ref;
@@ -246,7 +248,7 @@ const SubMenu = forwardRef<
           className={classNames(`${prefixCls}-title`, className, {})}
         />
       </OverlayTrigger>
-    </li>
+    </div>
   );
 });
 export default SubMenu;

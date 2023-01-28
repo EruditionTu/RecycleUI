@@ -21,6 +21,7 @@ const MenuContext = createContext<MenuContextProps>({
   onClick: () => {},
   onDeselect: () => {},
   onSelect: () => {},
+  onOpenChange: () => {},
   expandIcon: undefined,
 });
 export const InlineSubMenuContext = createContext<InlineSubMenuContextProps>({
