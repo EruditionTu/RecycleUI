@@ -1,11 +1,4 @@
-import React, {
-  forwardRef,
-  useMemo,
-  useState,
-  useCallback,
-  useLayoutEffect,
-  useEffect,
-} from 'react';
+import React, { forwardRef, useMemo, useState, useCallback, useLayoutEffect } from 'react';
 import type { MouseEvent } from 'react';
 import classNames from 'classnames';
 import type SwitchProps from './type';
@@ -36,16 +29,17 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
   useLayoutEffect(() => {
     if (disabled || loading || typeof checked === 'undefined') return;
     if (checked !== isChecked) {
+      typeof onChange === 'function' && onChange(isChecked);
       setIsChecked(checked);
     }
   }, [checked, disabled, loading]);
-  useEffect(() => {
-    typeof onChange === 'function' && onChange(isChecked);
-  }, [isChecked, onChange]);
   const handledClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
       if (disabled || loading) return;
-      setIsChecked((o) => !o);
+      setIsChecked((o) => {
+        typeof onChange === 'function' && onChange(o);
+        return !o;
+      });
       typeof onClick === 'function' && onClick(isChecked, e);
     },
     [isChecked, onClick, disabled, loading],
