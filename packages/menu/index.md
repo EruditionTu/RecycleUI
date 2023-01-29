@@ -78,65 +78,64 @@ Show the dynamic switching mode (between inline and vertical).
 
 | Name      | Description      | Type                                       | Default   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
-| className        | 根节点的class样式 | `string`         | ` ` |
-| defaultOpenKeys        | inline模式初始展开的 SubMenu 菜单项 key 数组 | `string[]`         | `--` |
-| defaultOpenKeys    | 初始选中的菜单项 key 数组   | `string[]` | `--`   |
-| expendIcon        | 自定义展开图标         | `ReactNode`    | `--` |
-| forceSubMenuRender    | 在子菜单展示之前就渲染进 DOM（子菜单为弹窗形式时） | `boolean` | `false`   |
-| inlineCollapsed	      | inline 时菜单是否收起状态   | `boolean`                   | `false`   |
-| inlineIndent     | inline 模式的菜单缩进宽度    | `number` | `24`|
-| items        | 菜单内容       | `ItemType[]` | `[]`   |
-| mode | 菜单类型，现在支持垂直、水平、和内嵌模式三种 | `vertical\horizontal\inline`   | `inline`      |
-| multiple    | 是否允许多选  | `boolean` | `false`    |
-| openKeys     | inline模式当前展开的 SubMenu 菜单项 key 数组  | `string[]` | `[]` |
-| overflowedIndicator     | 用于自定义 Menu 水平空间不足时的省略收缩的图标  | `ReactNode` | `...`    |
-| selectable     | 是否允许选中  | `boolean` | `true`    |
-| selectedKeys     | 当前选中的菜单项 key 数组  | `string[]` | `[]`    |
-| style     | 根节点样式  | `CSSProperties` | `{}`    |
-| subMenuCloseDelay     | 非inline模式，且触发模式为hover时用户鼠标离开子菜单后关闭延时，单位：毫秒  | `number` | `300`    |
-| subMenuOpenDelay     | 非inline模式，且触发模式为hover时用户鼠标进入子菜单后开启延时，单位：毫秒  | `number` | `300`    |
-| theme     | 主题颜色  | `light\dark` | `light`    |
-| triggerSubMenuAction     | 非inline模式的SubMenu 展开/关闭的触发行为  | `hover\click` | `hover`    |
-| onClick     | 点击 MenuItem 调用此函数  | `function({ item, key, keyPath, domEvent })` | `()=>{}`    |
-| onDeselect     | 取消选中时调用，仅在 multiple 生效  | `function({ item, key, keyPath, selectedKeys, domEvent })` | `()=>{}`    |
-| onOpenChange     | inline模式下SubMenu 展开/关闭的回调，且openKeys不能触发这个函数的执行  | `function(openKeys: string[])` | `()=>{}`    |
-| onSelect     | 	被选中时调用  | `function({ item, key, keyPath, selectedKeys, domEvent })` | `()=>{}`    |
+| className        |The class style of the root node  | `string`         | ` ` |
+| defaultOpenKeys        | Array with the keys of default opened sub menus when menu if inline mode| `string[]`         | `--` |
+defaultSelectedKeys    | Array with the keys of default selected menu items   | `string[]` | `--`   |
+| expendIcon        | custom expand icon of submenu        | `ReactNode`    | `--` |
+| forceSubMenuRender    | Render submenu into DOM before it becomes visible when menu is not inline mode| `boolean` | `false`   |
+| inlineCollapsed	      | Specifies the collapsed status when menu is inline mode   | `boolean`                   | `false`   |
+| inlineIndent     | Indent (in pixels) of inline menu items on each level    | `number` | `24`|
+| items        | 	Menu item content       | `ItemType[]` | `[]`   |
+| mode | Type of menu | `vertical\horizontal\inline`   | `inline`      |
+| multiple    | Allows selection of multiple items  | `boolean` | `false`    |
+| openKeys     | Array with the keys of currently opened sub-menus when menu is inline mode  | `string[]` | `[]` |
+| overflowedIndicator     | Customized the ellipsis icon when menu is collapsed horizontally  | `ReactNode` | `...`    |
+| selectable     | Allows selecting menu items  | `boolean` | `true`    |
+| selectedKeys     | Array with the keys of currently selected menu items  | `string[]` | `[]`    |
+| style     | Root node style  | `CSSProperties` | `{}`    |
+| subMenuCloseDelay     |  When the user's mouse leaves the submenu in non-inline mode and the trigger mode is hover, the closing delay is in milliseconds | `number` | `300`    |
+| subMenuOpenDelay     | When the user's mouse enters the submenu in non-inline mode and the trigger mode is hover, the start delay is in milliseconds  | `number` | `300`    |
+| theme     | Color theme of the menu  | `light\dark` | `light`    |
+| triggerSubMenuAction     | Which action can trigger submenu open/close  | `hover\click` | `hover`    |
+| onClick     | Called when a menu item is clicked  | `function({ item, key, keyPath, domEvent })` | `()=>{}`    |
+| onDeselect     |Called when a menu item is deselected (multiple mode only)  | `function({ item, key, keyPath, selectedKeys, domEvent })` | `()=>{}`    |
+| onOpenChange     | Callback for SubMenu expansion/closing in inline mode, and openKeys cannot trigger the execution of this function  | `function(openKeys: string[])` | `()=>{}`    |
+| onSelect     | 	Called when selected  | `function({ item, key, keyPath, selectedKeys, domEvent })` | `()=>{}`    |
 
 ### MenuItem API
 
-| 参数      | 参数描述      | 类型                                       | 默认   |
+| Name      | Description      | Type                                      | Default   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
-| disabled    | 是否禁用   | `boolean` | `false`   |
-| icon        | 菜单图标         | `ReactNode`    | `--` |
-| value    | item 的唯一标志（也可以使用key作为唯一标识，key的优先级会更高，否则组件内部会自己生成一个，耗费性能） | `string\number` | `--`   |
-| label    | 菜单项标题 | `ReactNode` | `--`   |
-| title    | 设置收缩时展示的悬浮标题 | `string` | ` `   |
+| disabled    | Whether menu item is disabled   | `boolean` | `false`   |
+| icon        | The icon of the menu item         | `ReactNode`    | `--` |
+| value    | Unique identifier of item (key can also be used as the unique identifier, and the priority of key will be higher, otherwise the component will generate one by itself, which will consume performance) | `string\number` | `--`   |
+| label    | Menu label | `ReactNode` | `--`   |
+| title    | Set display title for collapsed item | `string` | ` `   |
 
 ### SubMenu API
 
-| 参数      | 参数描述      | 类型                                       | 默认   |
+| Name      | Desscription      | Type                                       | Default   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
-| disabled    | 是否禁用   | `boolean` | `false`   |
-| icon        | 菜单图标         | `ReactNode`    | `--` |
-| value    | item 的唯一标志（也可以使用key作为唯一标识，key的优先级会更高，否则组件内部会自己生成一个，耗费性能） | `string\number` | `--`   |
-| label    | 菜单项标题 | `ReactNode` | `--`   |
-| title    | 设置收缩时展示的悬浮标题 | `string` | ` `   |
-| popupClassName    | 子菜单样式，mode="inline" 时无效 | `string` | `--`   |
-| popupStyle    | 子菜单样式，mode="inline" 时无效 | `CSSProperties` | ` {}`   |
-| onTitleClick    | 点击子菜单标题 | `function({ key, domEvent })` | `()=>{}`   |
-| theme    | 设置子菜单的主题，默认从 Menu 上继承 | `light\dark` | `light`   |
+| disabled    | Whether sub-menu is disabled   | `boolean` | `false`   |
+| icon        |    	Icon of sub menu      | `ReactNode`    | `--` |
+| value    | Unique identifier of item (key can also be used as the unique identifier, and the priority of key will be higher, otherwise the component will generate one by itself, which will consume performance) | `string\number` | `--`   |
+| label    | Menu label | `ReactNode` | `--`   |
+| popupClassName    |Sub-menu class name, not working when mode="inline" | `string` | `--`   |
+| popupStyle    | Sub-menu style, not working when mode="inline" | `CSSProperties` | ` {}`   |
+| onTitleClick    | 	Callback executed when the sub-menu title is clicked | `function({ key, domEvent })` | `()=>{}`   |
+| theme    | Color theme of the SubMenu (inherits from Menu by default) | `light\dark` | `light`   |
 
 
 ### MenuGroup API
 
-| 参数      | 参数描述      | 类型                                       | 默认   |
+| Name      | Description      | Type                                       | Default   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
-| label    | 分组标题   | `ReactNode` | `--`   |
+| label    | The title of the group  | `ReactNode` | `--`   |
 
 ### MenuDivider API
-| 参数      | 参数描述      | 类型                                       | 默认   |
+| Name      | Description      | Type                                       | Default   |
 | ----------- | ---------------- | ------------------------------------------ | --------- |
-| dashed    | 是否虚线   | `boolean` | `false`   |
+| dashed    | Whether line is dashed   | `boolean` | `false`   |
 
 ⚠，same key error。
 
