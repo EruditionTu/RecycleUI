@@ -13,5 +13,6 @@ RadioWarpper.Group = RadioGroup;
 RadioWarpper.Button = RadioButton;
 
 export * from './type';
+export { RadioProps };
 
 export default RadioWarpper;

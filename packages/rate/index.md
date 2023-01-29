@@ -1,5 +1,5 @@
 ---
-title: Tag
+title: Rate
 nav:
   title: Components
   path: /components
