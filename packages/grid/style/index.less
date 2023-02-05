@@ -1,0 +1,159 @@
+@import '../../common/style/index.less';
+
+@recycle-grid-prefix:~'@{recycle-prefix}-grid';
+
+@col-prefix-cls:~'@{recycle-grid-prefix}-col';
+@row-prefix-cls:~'@{recycle-grid-prefix}-row';
+
+
+@grid-columns: 24;
+
+.loop-grid-columns(@index, @class) when (@index > 0) {
+    .@{col-prefix-cls}@{class}-@{index} {
+      display: block;
+      flex: 0 0 percentage((@index / @grid-columns));
+      max-width: percentage((@index / @grid-columns));
+    }
+    .@{col-prefix-cls}@{class}-push-@{index} {
+      left: percentage((@index / @grid-columns));
+    }
+    .@{col-prefix-cls}@{class}-pull-@{index} {
+      right: percentage((@index / @grid-columns));
+    }
+    .@{col-prefix-cls}@{class}-offset-@{index} {
+      margin-left: percentage((@index / @grid-columns));
+    }
+    .@{col-prefix-cls}@{class}-order-@{index} {
+      order: @index;
+    }
+    .loop-grid-columns((@index - 1), @class);
+}
+  
+.loop-grid-columns(@index, @class) when (@index = 0) {
+    .@{col-prefix-cls}@{class}-@{index} {
+        display: none;
+    }
+    .@{col-prefix-cls}-push-@{index} {
+      left: auto;
+    }
+    .@{col-prefix-cls}-pull-@{index} {
+      right: auto;
+    }
+    .@{col-prefix-cls}@{class}-push-@{index} {
+      left: auto;
+    }
+    .@{col-prefix-cls}@{class}-pull-@{index} {
+      right: auto;
+    }
+    .@{col-prefix-cls}@{class}-offset-@{index} {
+      margin-left: 0;
+    }
+    .@{col-prefix-cls}@{class}-order-@{index} {
+      order: 0;
+    }
+}
+  
+.make-grid(@class: ~'') {
+    .loop-grid-columns(@grid-columns, @class);
+}
+
+.@{recycle-grid-prefix}{
+    &-row{
+        display: flex;
+        flex-flow: row wrap;
+        min-width: 0;
+        &::before,
+        &::after {
+          display: flex;
+        }
+      
+        // No wrap of flex
+        &-no-wrap {
+          flex-wrap: nowrap;
+        }
+        &-start{
+            justify-content: flex-start;
+        }
+        &-center{
+            justify-content:center;
+        }
+        &-end{
+            justify-content: end;
+        }
+        &-space-between{
+            justify-content: space-between;
+        }
+        &-space-around{
+            justify-content: space-around;
+        }
+        &-space-evenly{
+            justify-content: space-evenly;
+        }
+        // 顶部对齐
+        &-top {
+            align-items: flex-start;
+        }
+        &-middle {
+            align-items: center;
+        }
+        &-bottom {
+            align-items: flex-end;
+        }
+    }
+    &-col{
+        position: relative;
+        max-width: 100%;
+        min-height: 1px;
+    }
+}
+
+
+.make-grid();
+
+// Extra small grid
+//
+// Columns, offsets, pushes, and pulls for extra small devices like
+// smartphones.
+
+.make-grid(-xs);
+
+// Small grid
+//
+// Columns, offsets, pushes, and pulls for the small device range, from phones
+// to tablets.
+
+@media (min-width: @screen-sm-min) {
+  .make-grid(-sm);
+}
+
+// Medium grid
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
+
+@media (min-width: @screen-md-min) {
+  .make-grid(-md);
+}
+
+// Large grid
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
+
+@media (min-width: @screen-lg-min) {
+  .make-grid(-lg);
+}
+
+// Extra Large grid
+//
+// Columns, offsets, pushes, and pulls for the full hd device range.
+
+@media (min-width: @screen-xl-min) {
+  .make-grid(-xl);
+}
+
+// Extra Extra Large grid
+//
+// Columns, offsets, pushes, and pulls for the full hd device range.
+
+@media (min-width: @screen-xxl-min) {
+  .make-grid(-xxl);
+}
