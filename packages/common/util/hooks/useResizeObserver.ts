@@ -1,35 +1,29 @@
 import { useRef, useEffect } from 'react';
 import debounce from 'lodash/debounce';
 
-const DEFAULT_OPTIONS = {
-  debounceTime: 0,
-  config: {
-    attributes: true,
-    childList: true,
-    characterData: true,
-    subtree: true,
-  } as MutationObserverInit,
-};
+// const DEFAULT_OPTIONS = {};
 
-export default function useMutationObservable(
+export default function useResizeOberver(
   targetEl: HTMLElement | null,
-  cb: MutationCallback,
-  options = DEFAULT_OPTIONS,
+  cb: ResizeObserverCallback,
+  options: { config?: ResizeObserverOptions; debounceTime?: number },
+  canObserve = true,
 ) {
-  const observeRef = useRef<any>(null);
+  const observeRef = useRef<ResizeObserver>();
   useEffect(() => {
     if (!cb || typeof cb !== 'function') return;
     const { debounceTime } = options;
-    observeRef.current = new MutationObserver(debounceTime > 0 ? debounce(cb, debounceTime) : cb);
+    observeRef.current = new ResizeObserver(
+      (debounceTime || 0) > 0 ? debounce(cb, debounceTime) : cb,
+    );
   }, [cb, options, targetEl]);
 
   useEffect(() => {
-    // console.log(targetEl);
     if (!targetEl || !targetEl?.nodeType) return;
 
     const { config } = options;
     try {
-      observeRef.current.observe(targetEl, config);
+      if (canObserve) observeRef.current?.observe(targetEl, config);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
@@ -37,7 +31,7 @@ export default function useMutationObservable(
   }, [targetEl, options]);
   useEffect(
     () => () => {
-      observeRef.current.disconnect();
+      observeRef.current?.disconnect();
     },
     [],
   );

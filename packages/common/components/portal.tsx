@@ -45,6 +45,7 @@ export default function Portal(props: PortalProps) {
   }
   if (!defaultNode.current) {
     defaultNode.current = document.createElement('div');
+    defaultNode.current.className = 'recycle-ui-portal';
     containerRef.current.appendChild(defaultNode.current);
   }
   return createPortal(children, defaultNode.current);
