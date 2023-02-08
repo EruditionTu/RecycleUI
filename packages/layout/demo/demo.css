@@ -1,0 +1,32 @@
+#layout-basic .recycle-ui-layout-content{
+    min-height: 120px;
+    color: #fff;
+    line-height: 120px;
+    background: rgba(16, 142, 233, 1);
+    text-align: center;
+}
+
+#layout-basic .recycle-ui-layout-header,#layout-basic .recycle-ui-layout-footer{
+    color: #fff; 
+    background: #7dbcea; 
+    text-align: center;
+}
+
+#layout-basic .recycle-ui-layout-sider,#layout-basic .recycle-ui-layout-sider-children{
+    color: #fff;
+    line-height: 120px;
+    background: #3ba0e9;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+#layout-customtrigger .trigger{
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
