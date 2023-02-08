@@ -35,8 +35,8 @@ You can set image as other pictures.
 
 ## API
 
-| Name       | describe                                          |
-| ----------- | --------------------------------------------- |
-| description | Custom description content     |
-| image       | Set Display Picture    |
-| imageStyle  | Set the style of the picture, which only takes effect when a custom image is passed in |
+| Name       | Description                                    |  Type  |   Default   |
+| ----------- | --------------------------------------------- |--------|-------------|
+| description | Custom description content     |`ReactNode` |  `--`  |
+| image       | Set Display Picture    |`ReactNode` |  `--`  |
+| imageStyle  | Set the style of the picture, which only takes effect when a custom image is passed in |`CSSProperties`|`{}`|
