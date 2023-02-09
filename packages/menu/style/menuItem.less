@@ -40,6 +40,7 @@
     margin-top: 1px;
     margin-left: 12px;
     white-space: nowrap;
+    height: 100%;
     &::after{
       position: absolute;
       width: 100%;
@@ -69,6 +70,14 @@
       &::after{
         border-bottom-color: @routine;
       } 
+    }
+
+    [class~='recycle-ui-menu-dark'] &-active{
+      background-color: @routine;
+      color:@recycle-ui-white;
+    }
+    [class~='recycle-ui-menu-dark'] &-active-sub{
+      color:@recycle-ui-white;
     }
   }
   &-vertical{
@@ -126,15 +135,20 @@
     transition: color .3s;
     padding: 0 4px;
     flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
   [class~='recycle-ui-menu-item'] &-text{
     margin:0 4px;
   }
   [class~='recycle-ui-submenu'] &-text{
     text-align: center;
+    justify-content: center;
   }
   [class~='recycle-ui-submenu-inline'] &-text{
     text-align: left;
+    justify-content:left;
   }
 
 

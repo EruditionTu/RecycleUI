@@ -109,6 +109,7 @@ const MenuItem = forwardRef<
       renderHorizontal,
     ],
   );
+
   const menuItemStyle = useMemo((): CSSProperties => {
     const itemStyle: CSSProperties = {};
     const dealWithInlineIndent =

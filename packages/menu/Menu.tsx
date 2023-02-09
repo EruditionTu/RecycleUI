@@ -283,7 +283,9 @@ const Menu = forwardRef<
    * horizontal模式的style
    */
   const horizontalMenuStyle = useMemo((): CSSProperties => {
-    return { width: '100%' };
+    return {
+      /* width: '100%' */
+    };
   }, []);
   /**
    * inline和vertical模式的class
@@ -312,140 +314,131 @@ const Menu = forwardRef<
 
   if (isHorizontal) {
     return (
-      <div
-        style={{
-          width: '100%',
-          overflow: 'scrollX',
-        }}
+      <ul
+        ref={menuRef as any}
+        className={horizontalMenuCls}
+        style={{ ...horizontalMenuStyle, ...style }}
+        {...other}
       >
-        <ul
-          ref={menuRef as any}
-          className={horizontalMenuCls}
-          style={{ ...horizontalMenuStyle, ...style }}
-          {...other}
-        >
-          {shouldTransform
-            ? (children as Array<any>).map((child: any, index: number) => {
-                const value =
-                  child.key ||
-                  child.value ||
-                  child.props?.value ||
-                  `${submenu ? 'sub' : 'menu'}-${transformPrePath(path)}${index}`;
-                let props: any = {};
-                // 如果当前menu是submenu，那么MenuItem需要传递isSubMenuItem的参数
-                if (submenu && (child.type === MenuItem || child.type === 'Item')) {
-                  props.inSubMenu = true;
-                }
-                if (child.type === SubMenu || child.type === 'SubMenu') {
-                  props.value = value;
-                  props.path = [...path, value];
-                }
-                if (child.type === MenuItem || child.type === 'Item') {
-                  props.onClick = (e: any) => handleMenuItemSelect(value, e);
-                }
-                if (child.type === MenuGroup || child.type === 'Group') {
-                  // @ts-ignore
-                  props.children = isValidElement(child) ? child.props.children : child.children;
-                  props.inSubMenu = true;
-                  props.value = value;
-                  props.path = [...path];
-                  props.handleMenuItemSelect = handleMenuItemSelect;
-                  props.groupIndex = index;
-                }
-                if (isValidElement(child))
-                  return cloneElement(child, {
-                    ...(child.props as any),
+        {shouldTransform
+          ? (children as Array<any>).map((child: any, index: number) => {
+              const value =
+                child.key ||
+                child.value ||
+                child.props?.value ||
+                `${submenu ? 'sub' : 'menu'}-${transformPrePath(path)}${index}`;
+              let props: any = {};
+              // 如果当前menu是submenu，那么MenuItem需要传递isSubMenuItem的参数
+              if (submenu && (child.type === MenuItem || child.type === 'Item')) {
+                props.inSubMenu = true;
+              }
+              if (child.type === SubMenu || child.type === 'SubMenu') {
+                props.value = value;
+                props.path = [...path, value];
+              }
+              if (child.type === MenuItem || child.type === 'Item') {
+                props.onClick = (e: any) => handleMenuItemSelect(value, e);
+              }
+              if (child.type === MenuGroup || child.type === 'Group') {
+                // @ts-ignore
+                props.children = isValidElement(child) ? child.props.children : child.children;
+                props.inSubMenu = true;
+                props.value = value;
+                props.path = [...path];
+                props.handleMenuItemSelect = handleMenuItemSelect;
+                props.groupIndex = index;
+              }
+              if (isValidElement(child))
+                return cloneElement(child, {
+                  ...(child.props as any),
+                  ...props,
+                  key: value,
+                  active:
+                    child.type === SubMenu ? selectedSubMenu?.has(value) : activeKey?.has(value),
+                  level: level + 1,
+                });
+              props = {
+                ...props,
+                key: value,
+                active:
+                  child.type === 'SubMenu' ? selectedSubMenu?.has(value) : activeKey?.has(value),
+                level: level + 1,
+              };
+              return TransformItem(child, props);
+            })
+          : Children.map(horizontalVisibleList, (child: ReactNode, index: number) => {
+              if (!isValidElement(child)) return null;
+              const value =
+                child.key ||
+                child.props.value ||
+                `${submenu ? 'sub' : 'menu'}-${transformPrePath(path)}${index}`;
+              const props: any = {};
+              // horizontal模式首行menu不能渲染MenuGroup
+              if (child.type === MenuGroup) return null;
+              // 如果当前menu是submenu，那么mMenuItem需要传递isSubMenuItem的参数
+              if (submenu && child.type === MenuItem) {
+                props.inSubMenu = true;
+              }
+              if (child.type === SubMenu) {
+                props.value = value;
+                props.path = [...path, value];
+              }
+              if (child.type === MenuItem) {
+                props.onClick = (e: any) => {
+                  handleMenuItemSelect(value, e);
+                };
+              }
+              return (
+                <>
+                  {cloneElement(child, {
                     ...props,
-                    key: value,
+                    ...child.props,
+                    key: `${value}`,
                     active:
                       child.type === SubMenu ? selectedSubMenu?.has(value) : activeKey?.has(value),
                     level: level + 1,
-                  });
-                props = {
-                  ...props,
-                  key: value,
-                  active:
-                    child.type === 'SubMenu' ? selectedSubMenu?.has(value) : activeKey?.has(value),
-                  level: level + 1,
-                };
-                return TransformItem(child, props);
-              })
-            : Children.map(horizontalVisibleList, (child: ReactNode, index: number) => {
-                if (!isValidElement(child)) return null;
-                const value =
-                  child.key ||
-                  child.props.value ||
-                  `${submenu ? 'sub' : 'menu'}-${transformPrePath(path)}${index}`;
-                const props: any = {};
-                // horizontal模式首行menu不能渲染MenuGroup
-                if (child.type === MenuGroup) return null;
-                // 如果当前menu是submenu，那么mMenuItem需要传递isSubMenuItem的参数
-                if (submenu && child.type === MenuItem) {
-                  props.inSubMenu = true;
-                }
-                if (child.type === SubMenu) {
-                  props.value = value;
-                  props.path = [...path, value];
-                }
-                if (child.type === MenuItem) {
-                  props.onClick = (e: any) => {
-                    handleMenuItemSelect(value, e);
-                  };
-                }
-                return (
-                  <>
-                    {cloneElement(child, {
-                      ...props,
-                      ...child.props,
-                      key: `${value}`,
-                      active:
-                        child.type === SubMenu
-                          ? selectedSubMenu?.has(value)
-                          : activeKey?.has(value),
-                      level: level + 1,
-                    })}
-                  </>
-                );
-              })}
-          {horizontalHiddenList?.length !== 0 && (
-            <SubMenu label={overflowedIndicator}>
-              {horizontalHiddenList.map((item, index) => {
-                const value =
-                  item.key ||
-                  item.value ||
-                  item.props?.value ||
-                  `${submenu ? 'sub' : 'menu'}-${transformPrePath(path)}${index}`;
-                let props: any = {};
-                // 如果当前menu是submenu，那么MenuItem需要传递isSubMenuItem的参数
-                if (submenu && item.type === MenuItem) {
-                  props.inSubMenu = true;
-                }
-                if (item.type === SubMenu || item.type === 'SubMenu') {
-                  props.value = value;
-                  props.path = [...path, value];
-                  props.inSubMenu = true;
-                }
-                if (item.type === MenuItem || item.type === 'Item') {
-                  props.onClick = (e: any) => handleMenuItemSelect(value, e);
-                }
-                props = {
-                  ...props,
-                  key: value,
-                  active:
-                    // eslint-disable-next-line prettier/prettier
-                    item.type === SubMenu || item.type === 'SubMenu'
-                      ? selectedSubMenu?.has(value)
-                      : activeKey?.has(value),
-                  level: level + 1,
-                };
-                return isValidElement(item)
-                  ? cloneElement(item, { ...(item.props as any), ...props })
-                  : TransformItem(item, props);
-              })}
-            </SubMenu>
-          )}
-        </ul>
-      </div>
+                  })}
+                </>
+              );
+            })}
+        {horizontalHiddenList?.length !== 0 && (
+          <SubMenu label={overflowedIndicator}>
+            {horizontalHiddenList.map((item, index) => {
+              const value =
+                item.key ||
+                item.value ||
+                item.props?.value ||
+                `${submenu ? 'sub' : 'menu'}-${transformPrePath(path)}${index}`;
+              let props: any = {};
+              // 如果当前menu是submenu，那么MenuItem需要传递isSubMenuItem的参数
+              if (submenu && item.type === MenuItem) {
+                props.inSubMenu = true;
+              }
+              if (item.type === SubMenu || item.type === 'SubMenu') {
+                props.value = value;
+                props.path = [...path, value];
+                props.inSubMenu = true;
+              }
+              if (item.type === MenuItem || item.type === 'Item') {
+                props.onClick = (e: any) => handleMenuItemSelect(value, e);
+              }
+              props = {
+                ...props,
+                key: value,
+                active:
+                  // eslint-disable-next-line prettier/prettier
+                  item.type === SubMenu || item.type === 'SubMenu'
+                    ? selectedSubMenu?.has(value)
+                    : activeKey?.has(value),
+                level: level + 1,
+              };
+              return isValidElement(item)
+                ? cloneElement(item, { ...(item.props as any), ...props })
+                : TransformItem(item, props);
+            })}
+          </SubMenu>
+        )}
+      </ul>
     );
   }
   return (
