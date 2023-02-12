@@ -1,51 +1,47 @@
-import * as React from 'react';
-import Error from '../common/icon/error';
-import Info from '../common/icon/info';
-import Success from '../common/icon/success';
-import Warn from '../common/icon/warn';
-import Loading from '../common/icon/loading/loading';
+import React from 'react';
+import { ReactComponent as Error } from '../common/icon/svg/error.svg';
+import { ReactComponent as Info } from '../common/icon/svg/info.svg';
+import { ReactComponent as Success } from '../common/icon/svg/success.svg';
+import { ReactComponent as Warn } from '../common/icon/svg/warn.svg';
+import type { MessageType } from './type';
+import Loader from '../loader';
+import '../loader/style';
 
-export type MessageType =
-  | 'success'
-  | 'error'
-  | 'info'
-  | 'loading'
-  | 'warn'
-  | 'normal';
 const MessageIcon = (props: { type?: MessageType }) => {
-  console.log(props.type);
+  const prefixCls = 'recycle-ui-messgae';
+
   if (!props.type || props.type === 'normal') return <></>;
   if (props.type === 'info') {
     return (
-      <span className="msg-icon">
+      <span className={`${prefixCls}-icon`}>
         <Info width="16" height="16" />
       </span>
     );
   }
   if (props.type === 'success') {
     return (
-      <span className="msg-icon">
+      <span className={`${prefixCls}-icon`}>
         <Success width="16" height="16" />
       </span>
     );
   }
   if (props.type === 'error') {
     return (
-      <span className="msg-icon">
+      <span className={`${prefixCls}-icon`}>
         <Error width="16" height="16" />
       </span>
     );
   }
   if (props.type === 'warn') {
     return (
-      <span className="msg-icon">
+      <span className={`${prefixCls}-icon`}>
         <Warn width="16" height="16" />
       </span>
     );
   }
   return (
-    <span className="msg-icon">
-      <Loading />
+    <span className={`${prefixCls}-icon`}>
+      <Loader />
     </span>
   );
 };

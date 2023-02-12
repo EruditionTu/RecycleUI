@@ -6,14 +6,11 @@ import '../../button/style';
 
 export default function index1() {
   const message = (val: string) => {
-    Message.loading({
+    Message.info({
       content: val,
-      duration: 3000,
+      duration: 5000,
+      clearable: true,
     });
-    // 调用时请留给message结尾动画0.2s的空档时间
-    setTimeout(() => {
-      Message.success({ content: 'Update Success' });
-    }, 3201);
   };
 
   return (

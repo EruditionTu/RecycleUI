@@ -1,4 +1,8 @@
-.recycleui-message-container {
+@import '../../common/style/index.less';
+
+@recycle-message-prefix:~'@{recycle-prefix}-message'; 
+
+.@{recycle-message-prefix}{
   position: fixed;
   left: 50%;
   display: flex;
@@ -12,15 +16,16 @@
   border-radius: 5px;
   transform: translate(-50%, 0);
   opacity: 1;
-  animation: concis-show-message 0.3s;
-  .msg-icon {
+  animation: recycle-ui-show-message 0.3s;
+  & &-icon {
     display: flex;
   }
-  .toast-content {
+  & &-content {
     margin: 0 10px;
   }
 }
-@keyframes concis-show-message {
+
+@keyframes recycle-ui-show-message {
   0% {
     opacity: 0;
   }

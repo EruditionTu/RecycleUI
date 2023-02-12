@@ -1,20 +1,14 @@
-import type { CSSProperties } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import type { MessageType } from './MessageIcon';
+import { CloseOutlined as Close } from '@ant-design/icons';
 import MessageIcon from './MessageIcon';
-import type { MessageProps } from './MessageInterface';
-import Close from '../common/icon/close';
 
-export type Controler = (props: string | MessageProps<string>) => void;
-export interface MessageControl {
-  info: Controler;
-  success: Controler;
-  error: Controler;
-  normal: Controler;
-  warn: Controler;
-  loading: Controler;
-}
+import type { MessageStaticType, MessageController, MessageConfig, MessageType } from './type';
+
+export * from './type';
+
+export type MessageProps = Omit<MessageConfig, 'type'>;
+
 let container: HTMLDivElement | null; // 包裹消息组件的容器
 let topMessageNum: number = 0; // 统计在上面出现的message条数
 let bottomMessageNum: number = 0; // 统计在下面出现的message条数
@@ -23,9 +17,9 @@ let bottomMessageNum: number = 0; // 统计在下面出现的message条数
  * @param id 节点id
  * @param position top/bottom节点出现的位置
  */
-function remove(id: string, position: string) {
+function remove(id: string | number, position: string) {
   // 重排节点下元素高度
-  const container = document.querySelector('.all-container');
+  const container = document.querySelector('.recycle-ui-message-container');
   const children = Array.prototype.slice.call(container?.childNodes);
   for (const key in children) {
     if (children[key].getAttribute('class') === `${position}-${id}`) {
@@ -60,15 +54,15 @@ function changeHeight(children: HTMLElement[], position: any) {
  * @param props
  * @returns
  */
-const Message = (props: MessageProps<string>) => {
+const Message = (
+  props: Omit<MessageConfig, 'key'> & { type: MessageType; messageBoxId: string | number },
+) => {
   const { style, content, type, duration, position, clearable, messageBoxId } = props;
   // 隐藏属性的控制值，用来配合实现动画
   const [opac, setOpac] = useState(1);
   // 获取message组件的渲染实例，来通过transform属性设置组件的位置
   const messageDom = useRef<any>(null);
-  // 全局组件类名前缀--注意一下我之后对组件库的补充就在全局的名称前缀上面了
-  // const { prefixCls } = useContext(globalCtx) as GlobalConfigProps;
-  const classNames = 'recycleui-message-container';
+  const classNames = 'recycle-ui-message';
   // 组件初次加载，数量加1，并在出现动画结束之后移除动画并加上过度属性
   useEffect(() => {
     if (position === 'top') {
@@ -95,15 +89,15 @@ const Message = (props: MessageProps<string>) => {
   }, [topMessageNum, bottomMessageNum]);
 
   const closeMessage = () => {
-    remove(messageBoxId as string, position as string);
+    remove(messageBoxId, position!);
   };
 
   return (
     <div className={classNames} style={{ opacity: opac, ...style }} ref={messageDom}>
       <MessageIcon type={type} />
-      <span className="toast-content">{content}</span>
+      <span className={`${classNames}-content`}>{content}</span>
       {clearable && (
-        <span className="msg-icon">
+        <span className={`${classNames}-icon`}>
           <Close onClick={closeMessage} width="16" height="16" />
         </span>
       )}
@@ -116,31 +110,25 @@ const Message = (props: MessageProps<string>) => {
  * @param type 消息类型
  * @param props 消息配置
  */
-function addInstance(type: MessageType, props: string | MessageProps<string>) {
-  let style: CSSProperties = {}; // 消息样式
-  let duration: number = 3000; // 消息列表消失的时间间隔
-  let content; // 消息内容
-  let position: 'top' | 'bottom' = 'top'; // 位置
-  let clearable = false; // 显示关闭图标
-  if (typeof props === 'object') {
-    style = props.style != null || {};
-    duration = props.duration || 3000;
-    content = props.content;
-    position = props.position ? props.position : 'top';
-    clearable = props.clearable ? props.clearable : false;
-  } else if (typeof props === 'string') {
-    content = props;
-  }
+function addInstance(type: MessageType, config: MessageProps) {
+  const {
+    style = {},
+    duration = 3000,
+    content = '',
+    position = 'top',
+    clearable = false,
+    key,
+  } = config;
   const div = document.createElement('div');
   // 获得一个独一无二的标识符
-  const messageBoxId = String(Math.floor(Math.random() * 1000));
+  const messageBoxId = key || String(Math.floor(Math.random() * 1000));
   div.setAttribute('class', `${position}-${messageBoxId}`);
   // 是否存在消息盒子，不存在就创建
   if (container != null) {
     container.appendChild(div);
   } else {
     container = document.createElement('div');
-    container.setAttribute('class', 'all-container');
+    container.setAttribute('class', 'recycle-ui-message-container');
     document.body.appendChild(container);
     container.appendChild(div);
   }
@@ -171,13 +159,48 @@ function addInstance(type: MessageType, props: string | MessageProps<string>) {
   );
 }
 
-const info: Controler = (props: string | MessageProps<string>) => addInstance('info', props);
-const success: Controler = (props: string | MessageProps<string>) => addInstance('success', props);
-const error: Controler = (props: string | MessageProps<string>) => addInstance('error', props);
-const normal: Controler = (props: string | MessageProps<string>) => addInstance('normal', props);
-const warn: Controler = (props: string | MessageProps<string>) => addInstance('warn', props);
-const loading: Controler = (props: string | MessageProps<string>) => addInstance('loading', props);
-const message: MessageControl = {
+const info: MessageController = (config: Omit<MessageConfig, 'type'>) =>
+  addInstance('info', config);
+const success: MessageController = (config: Omit<MessageConfig, 'type'>) =>
+  addInstance('success', config);
+const error: MessageController = (config: Omit<MessageConfig, 'type'>) =>
+  addInstance('error', config);
+const normal: MessageController = (config: Omit<MessageConfig, 'type'>) =>
+  addInstance('normal', config);
+const warn: MessageController = (config: Omit<MessageConfig, 'type'>) =>
+  addInstance('warn', config);
+const loading: MessageController = (config: Omit<MessageConfig, 'type'>) =>
+  addInstance('loading', config);
+const config = () => {};
+const destroy = () => {};
+const open = (type: MessageType, config: MessageConfig) => {
+  switch (type) {
+    case 'info':
+      info(config);
+      break;
+    case 'error':
+      error(config);
+      break;
+    case 'loading':
+      loading(config);
+      break;
+    case 'normal':
+      normal(config);
+      break;
+    case 'success':
+      success(config);
+      break;
+    case 'warn':
+      warn(config);
+      break;
+    default:
+    // 报错：之后加上，报一个type不存在的错误。
+  }
+};
+const message: MessageStaticType = {
+  config,
+  destroy,
+  open,
   info,
   success,
   error,
