@@ -8,7 +8,7 @@ import type { MouseEvent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import Portal from '../common/components/Portal';
+import Portal from '../common/components/portal';
 import type { WithCustomStyle } from '@/packages/common/util/type';
 import type OverlayProps from './type';
 
