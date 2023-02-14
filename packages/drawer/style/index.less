@@ -1,0 +1,179 @@
+@import '../../common/style/index.less';
+
+@recycle-drawer-prefix:~'@{recycle-prefix}-drawer';
+
+.@{recycle-drawer-prefix}{
+    &-wrapper {
+        box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 0 46px 6px rgba(16, 22, 26, 0.2);
+        background-color: #fff;
+        position: fixed;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+      }
+    &-header {
+        display: flex;
+        align-items: center;
+        min-height: 40px;
+        padding-left: 13px;
+        padding-right: 5px;
+        background-color: #fff;
+        border-radius: 5px 5px 0 0;
+        box-shadow: 0 1px 0 rgba(16, 22, 26, 0.15);
+        font-size: 16px;
+        > recycle-ui-drawer-icon {
+          margin-right: 10px;
+          color: #393e48;
+      }
+    h4 {
+        margin: 0;
+        adding: 0;
+        flex: 1 1 auto;
+      }
+    }
+      &-body {
+        flex: 1 1 auto;
+        overflow: auto;
+        line-height: 18px;
+      }
+      &-footer {
+        box-shadow: 0 -1px 0 rgba(16, 22, 26, 0.15);
+        min-height: 40px;
+        padding-left: 13px;
+        padding-right: 5px;
+        display: flex;
+        align-items: center;
+      }
+      &-body-inner {
+        padding: 15px;
+      }
+      &.top &-wrapper,
+      &.bottom &-wrapper {
+        left: 0;
+        right: 0;
+      }
+      &.top &-wrapper {
+        top: 0;
+      }
+      &.bottom &-wrapper {
+        bottom: 0;
+      }
+      &.right &-wrapper,
+      &.left &-wrapper {
+        bottom: 0;
+        top: 0;
+      }
+      &.right &-wrapper {
+        right: 0;
+      }
+      &.left &-wrapper {
+        left: 0;
+      }
+
+}
+.@{recycle-drawer-prefix}-enter .recycle-ui-overlay-backdrop {
+  opacity: 0;
+}
+
+.@{recycle-drawer-prefix}-enter-active .recycle-ui-overlay-backdrop {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.@{recycle-drawer-prefix}-exit .recycle-ui-overlay-backdrop {
+  opacity: 1;
+}
+
+.@{recycle-drawer-prefix}-exit-active .recycle-ui-overlay-backdrop {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+
+
+.@{recycle-drawer-prefix}-enter.right .recycle-ui-overlay-content {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.@{recycle-drawer-prefix}-enter-active.right .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit.right .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit-active.right .recycle-ui-overlay-content {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+
+.@{recycle-drawer-prefix}-enter.left .recycle-ui-overlay-content {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.@{recycle-drawer-prefix}-enter-active.left .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit.left .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit-active.left .recycle-ui-overlay-content {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.@{recycle-drawer-prefix}-enter.top .recycle-ui-overlay-content {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.@{recycle-drawer-prefix}-enter-active.top .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit.top .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit-active.top .recycle-ui-overlay-content {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+
+
+.@{recycle-drawer-prefix}-enter.bottom .recycle-ui-overlay-content {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.@{recycle-drawer-prefix}-enter-active.bottom .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit.bottom .recycle-ui-overlay-content {
+  opacity: 1;
+  transform: translate(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.@{recycle-drawer-prefix}-exit-active.bottom .recycle-ui-overlay-content {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+
+.@{recycle-drawer-prefix}-enter,
+.@{recycle-drawer-prefix}-enter-done,
+.@{recycle-drawer-prefix}-exit {
+  display: inherit;
+}
