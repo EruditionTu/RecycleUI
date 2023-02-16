@@ -9,9 +9,8 @@ export default () => {
   return (
     <>
       <Button
-        type="primary"
         onClick={() => {
-          setProcess(_process => _process + 10);
+          setProcess((_process) => _process + 10);
         }}
       >
         进度增加

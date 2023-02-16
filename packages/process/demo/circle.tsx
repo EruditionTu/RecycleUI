@@ -8,9 +8,8 @@ export default () => {
   return (
     <>
       <Button
-        type="primary"
         onClick={() => {
-          setPercent(p => p + 10);
+          setPercent((p) => p + 10);
         }}
       >
         +10%
@@ -28,19 +27,9 @@ export default () => {
           <h3>改变进度条颜色</h3>
           <Process percent={percent} type="circle" strokeColor="pink" />
           <h3>改变轨道颜色</h3>
-          <Process
-            percent={percent}
-            type="circle"
-            status="success"
-            trailColor="pink"
-          />
+          <Process percent={percent} type="circle" status="success" trailColor="pink" />
           <h3>改变circle轨道宽度</h3>
-          <Process
-            percent={percent}
-            strokeWidth={20}
-            type="circle"
-            status="success"
-          />
+          <Process percent={percent} strokeWidth={20} type="circle" status="success" />
         </div>
       </div>
     </>
