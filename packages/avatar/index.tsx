@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import './style/index.less';
+import React, { isValidElement, useState, useEffect, useMemo, forwardRef } from 'react';
+import classNames from 'classnames';
 import AvatarProps from './type';
 
-export default React.forwardRef<HTMLSpanElement, AvatarProps>((props, ref) => {
+const Avatar = forwardRef<HTMLSpanElement, AvatarProps>((props, ref) => {
   const {
-    prefixCls = 'w-avatar',
     shape = 'circle',
     size = 'default',
     className,
@@ -16,16 +15,15 @@ export default React.forwardRef<HTMLSpanElement, AvatarProps>((props, ref) => {
   } = props;
   let children = props.children;
   const [isImgExist, setIsImgExist] = useState(true);
-  const cls = [
-    prefixCls,
-    className,
-    size ? `${prefixCls}-${size}` : null,
-    shape ? `${prefixCls}-${shape}` : null,
-    src ? `${prefixCls}-image` : null,
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .trim();
+  const prefixCls = useMemo(() => `recycle-ui-avatar`, []);
+
+  const avatarCls = useMemo(
+    () =>
+      classNames(prefixCls, className, `${prefixCls}-${shape}`, `${prefixCls}-${size}`, {
+        [`${prefixCls}-image`]: src,
+      }),
+    [],
+  );
 
   useEffect(() => {
     setIsImgExist(true);
@@ -44,14 +42,14 @@ export default React.forwardRef<HTMLSpanElement, AvatarProps>((props, ref) => {
         }}
       />
     );
-  } else if (icon && typeof icon === 'string') {
-    children = <></>;
-  } else if (icon && React.isValidElement(icon)) {
+  } else if (icon && isValidElement(icon)) {
     children = icon;
   }
   return (
-    <span {...resetProps} className={cls} ref={ref}>
+    <span {...resetProps} className={avatarCls} ref={ref}>
       {children}
     </span>
   );
 });
+
+export default Avatar;
