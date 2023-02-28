@@ -3,13 +3,9 @@
 .eslintignore
 /.idea/
 /.umi/
+/.history/
 /.husky/
 
 /node_modules/
 /example/node_modules/
 
-
-/docs/
-/packages/dropdown
-/packages/process
-typings.d.ts

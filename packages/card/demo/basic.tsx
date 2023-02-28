@@ -10,7 +10,8 @@ export default () => {
         <p>Card content</p>
         <p>Card content</p>
       </Card>
-      <Card title="Default size card" size="small" extra={<a href="#">More</a>}>
+      <div style={{ height: 30 }} />
+      <Card title="Small size card" size="small" extra={<a href="#">More</a>}>
         <p>Card content</p>
         <p>Card content</p>
         <p>Card content</p>

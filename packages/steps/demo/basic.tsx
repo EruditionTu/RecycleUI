@@ -3,7 +3,6 @@ import Steps from '..';
 import '../style';
 
 export default () => {
-  console.log(<div />);
   return (
     <Steps current={1} style={{ padding: '20px 0' }}>
       <Steps.Step

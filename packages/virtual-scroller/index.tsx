@@ -1,8 +1,8 @@
 import React, { useRef, useMemo, useEffect, useCallback, useState, cloneElement } from 'react';
 import type { FC, ReactElement, CSSProperties, ReactNode } from 'react';
 import type VirtualListProps from './type';
-import { ItemSizeGetter, ItemSize, Alignment, StyleCache, ItemStyle } from './type';
-import { Direction } from './type';
+import { ItemSizeGetter, Direction, ItemSize, Alignment, SCROLL_CHANGE_REASON } from './type';
+import type { StyleCache, ItemStyle } from './type';
 import Manager from './Manager';
 
 const STYLE_WRAPPER: React.CSSProperties = {
@@ -66,8 +66,16 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
   } = props;
 
   const viewRef = useRef<any>(null);
+  const lastProps = useRef({
+    ...props,
+  });
   const [offset, setOffset] = useState<number>(typeof scrollOffset === 'number' ? scrollOffset : 0);
+  const [scrollChangeReason, setScrollChangeReason] = useState<SCROLL_CHANGE_REASON>(
+    SCROLL_CHANGE_REASON.REQUESTED,
+  );
+  // 渲染的区间
   const [range, setRange] = useState<{ start?: number; stop?: number }>({ start: 0, stop: 0 });
+  // 样式缓存，之前划走的item，记录下item的高度
   const [styleCache, setStyleCache] = useState<StyleCache>({});
 
   /**
@@ -118,7 +126,7 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
   const viewWidth = useMemo((): number | string => {
     const usefulFeild = ['string', 'number'];
     if (usefulFeild.indexOf(typeof width) === -1 || width === undefined) {
-      return scrollDirection === Direction.VERTICAL ? '100%' : 400;
+      return scrollDirection === Direction.HORIZONTAL ? '100%' : 400;
     }
     return width;
   }, [width, scrollDirection]);
@@ -141,7 +149,7 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
     },
     [styleCache],
   );
-
+  // 虚拟列表实际渲染高度
   const items: ReactNode[] = useMemo((): ReactNode[] => {
     const renderLists: ReactNode[] = [];
     if (typeof range.start !== 'undefined' && typeof range.stop !== 'undefined') {
@@ -162,6 +170,12 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
     return renderLists;
   }, [range]);
 
+  // 重置虚拟列表的滚动状态
+  const recomputeSizes = useCallback((startIndex = 0) => {
+    setStyleCache({});
+    manager.current.resetItem(startIndex);
+  }, []);
+
   /**
    * 滚动控制事件
    */
@@ -171,6 +185,7 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
       if (viewScrollOffset < 0 || viewScrollOffset === offset || event.target !== viewRef.current) {
         return;
       }
+      setScrollChangeReason(SCROLL_CHANGE_REASON.OBSERVED);
       setOffset(viewScrollOffset);
       if (typeof onScroll === 'function') {
         onScroll(event, offset);
@@ -192,17 +207,20 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
   /**
    * 处理scrollToIndex的props
    */
-  const getOffsetWithIndex = useCallback((index: number) => {
-    if (index < 0 || index > itemCount) {
-      index = 0;
-    }
-    return manager.current.updateViewScrollOffset({
-      align: scrollToAlignment,
-      viewScrollOffset: offset || 0,
-      viewScrollSize: viewRef.current[viewSizeProps[scrollDirection]],
-      targetIndex: index,
-    });
-  }, []);
+  const getOffsetWithIndex = useCallback(
+    (index: number) => {
+      if (index < 0 || index > itemCount) {
+        index = 0;
+      }
+      return manager.current.updateViewScrollOffset({
+        align: scrollToAlignment,
+        viewScrollOffset: offset || 0,
+        viewScrollSize: viewRef.current[viewSizeProps[scrollDirection]],
+        targetIndex: index,
+      });
+    },
+    [itemCount, scrollDirection, offset, scrollToAlignment],
+  );
 
   /**
    *获取滚动条的滚动距离
@@ -226,15 +244,67 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
     };
   }, []);
 
+  // 处理显示区间的一些副作用
   useEffect(() => {
     const { start, stop } = manager.current.getRenderRange({
       viewScrollOffset: offset,
       viewScrollSize:
-        scrollDirection === Direction.VERTICAL ? (viewHeight as number) : (viewWidth as number),
+        scrollDirection === Direction.VERTICAL
+          ? viewRef.current.getBoundingClientRect().height
+          : viewRef.current.getBoundingClientRect().width,
       overscanCount,
     });
     setRange({ start, stop });
-  }, [manager, offset, scrollDirection, viewHeight, viewWidth, overscanCount]);
+  }, [offset, scrollDirection, viewHeight, viewWidth, overscanCount]);
+
+  // 当scoll 的位移属性发生变化
+  useEffect(() => {
+    // 判断scrollToIndex相关的属性是否发生变化
+    const scrollToIndexPropsChanged =
+      scrollToIndex !== lastProps.current.scrollToIndex ||
+      scrollToAlignment !== lastProps.current.scrollToAlignment;
+    // 判断item相关属性是否发生变化
+    const itemPropsChanged =
+      itemCount !== lastProps.current.itemCount ||
+      itemSize !== lastProps.current.itemSize ||
+      estimatedItemSize !== lastProps.current.estimatedItemSize;
+
+    // 如果item相关的属性发生变化，就重置列表的滚动状态
+    if (itemPropsChanged) {
+      recomputeSizes();
+    }
+
+    if (itemSize !== lastProps.current.itemSize) {
+      manager.current.updateConfig({
+        itemSizeGetter,
+      });
+    }
+    if (
+      itemCount !== lastProps.current.itemCount ||
+      estimatedItemSize !== lastProps.current.estimatedItemSize
+    ) {
+      manager.current.updateConfig({
+        itemCount,
+        estimatedItemSize: estimatedItemSizeMemo,
+      });
+    }
+    if (scrollOffset !== lastProps.current.scrollOffset) {
+      setOffset(scrollOffset || 0);
+      setScrollChangeReason(SCROLL_CHANGE_REASON.REQUESTED);
+    } else if (
+      typeof scrollToIndex === 'number' &&
+      (scrollToIndexPropsChanged || itemPropsChanged)
+    ) {
+      setOffset(getOffsetWithIndex(scrollToIndex));
+      setScrollChangeReason(SCROLL_CHANGE_REASON.REQUESTED);
+    }
+    lastProps.current = props;
+  }, [props]);
+
+  useEffect(() => {
+    if (scrollChangeReason !== SCROLL_CHANGE_REASON.REQUESTED) return;
+    scrollTo(offset);
+  }, [offset]);
 
   /**
    * 视窗的style
@@ -254,8 +324,8 @@ const VirtualList: FC<VirtualListProps> = (props: VirtualListProps): ReactElemen
   const listStyle = useMemo(
     () => ({
       ...STYLE_INNER,
-      width: '100%',
-      height: manager.current.getListTotleSize(),
+      width: scrollDirection === Direction.HORIZONTAL ? manager.current.getListTotleSize() : '100%',
+      height: scrollDirection === Direction.VERTICAL ? manager.current.getListTotleSize() : '100%',
     }),
     [viewHeight, viewWidth],
   );

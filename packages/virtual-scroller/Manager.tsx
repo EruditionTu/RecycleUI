@@ -1,4 +1,4 @@
-import { ItemSizeGetter, Alignment } from './type';
+import { ItemSizeGetter, Alignment, Options } from './type';
 
 type ListItemDataType = {
   [index: number]: {
@@ -243,6 +243,24 @@ class VirtualListManager {
     const totalSize = this.getListTotleSize();
 
     return Math.max(0, Math.min(totalSize - viewScrollSize, idealOffset));
+  }
+
+  public resetItem(index: number) {
+    this.lastMeasuredIndex = Math.min(this.lastMeasuredIndex, index - 1);
+  }
+
+  public updateConfig({ itemCount, itemSizeGetter, estimatedItemSize }: Partial<Options>) {
+    if (itemCount != null) {
+      this.itemCount = itemCount;
+    }
+
+    if (estimatedItemSize != null) {
+      this.estimatedItemSize = estimatedItemSize;
+    }
+
+    if (itemSizeGetter != null) {
+      this.itemSizeGetter = itemSizeGetter;
+    }
   }
 }
 

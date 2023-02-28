@@ -1,10 +1,25 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, CSSProperties } from 'react';
 
 type ItemSizeGetter = (index: number) => number;
 
 type ItemSize = number | Array<number> | ItemSizeGetter;
 
 type ItemPosition = 'absolute' | 'sticky';
+
+/**
+ * 列表每一项相关配置
+ * */
+export interface Options {
+  itemCount: number;
+  itemSizeGetter: ItemSizeGetter;
+  estimatedItemSize: number;
+}
+
+enum SCROLL_CHANGE_REASON {
+  OBSERVED = 'observed',
+  REQUESTED = 'requested',
+}
+
 /**
  * 滚动到第x个列表项时，第x个列表显示的位置
  */
@@ -61,23 +76,25 @@ interface StyleCache {
 }
 
 interface VirtualListProps {
+  estimatedItemSize?: number;
+  height: number;
   itemCount: number;
-  renderItem: RenderItem;
   itemSize: ItemSize;
-  width?: number | string;
-  height?: number | string;
+  onScroll?: OnScroll;
+  renderItem: RenderItem;
+  onItemsRendered?: Function;
+  overscanCount?: number;
+  width?: number;
+  scrollOffset?: number;
   scrollToAlignment?: Alignment;
   scrollDirection?: Direction;
-  scrollOffset?: number;
   scrollToIndex?: number;
   stickyIndices?: Array<number>;
-  overscanCount?: number;
-  estimatedItemSize?: number;
-  onItemsRendered?: Function;
   onItemsRender?: number;
-  onScroll?: OnScroll;
+  style?: CSSProperties;
 }
 export {
+  SCROLL_CHANGE_REASON,
   Direction,
   RenderItem,
   Alignment,

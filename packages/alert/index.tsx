@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useState } from 'react';
 import type { FC, ReactElement, CSSProperties } from 'react';
 import classNames from 'classnames';
-import type { WithCustomStyle } from '../common/util/toolType';
+import type { WithCustomStyle } from '../common/util/type';
 import AlertProps from './type';
 import withDefault from '../common/util/withDefault';
 import { ReactComponent as SuccessIcon } from '@/packages/common/icon/svg/success.svg';

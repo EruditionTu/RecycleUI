@@ -6,5 +6,6 @@
 /.idea/
 /.umi/
 /.husky/
+/.history/
 /node_modules/
 /example/node_modules/
