@@ -9,6 +9,7 @@ import { ReactComponent as InfoIcon } from '@/packages/common/icon/svg/info.svg'
 import { ReactComponent as WarnIcon } from '@/packages/common/icon/svg/warn.svg';
 import { ReactComponent as ErrorIcon } from '@/packages/common/icon/svg/error.svg';
 import { ReactComponent as CloseIcon } from '@/packages/common/icon/svg/close.svg';
+import "./style"
 
 const Alert: FC<WithCustomStyle<AlertProps>> = (
   props: WithCustomStyle<AlertProps>,

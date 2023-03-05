@@ -4,6 +4,7 @@ import { StarFilled } from '@ant-design/icons';
 import classNames from 'classnames';
 import type RateProps from './type';
 import Tooltip from '../tooltip';
+import "./style"
 
 const Rate = forwardRef<HTMLDivElement, RateProps>((props, ref): ReactElement => {
   const {

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Empty from '..';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
 
 export default () => (
   <Empty

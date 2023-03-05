@@ -2,9 +2,7 @@ import React from 'react';
 import Button from '../../button';
 import Card from '../../card';
 import Overlay from '..';
-import '../../button/style';
-import '../../card/style';
-import '../style';
+
 
 const div = document.createElement('div');
 div.id = 'tubowen';

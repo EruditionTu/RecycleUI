@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { ListItem } from './Item';
-import './style/index.less';
+import './style';
 
 export * from './Item';
 

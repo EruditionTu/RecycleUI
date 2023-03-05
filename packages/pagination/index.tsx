@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import type { HTMLAttributes } from 'react';
 import Select from '../select';
 import '../select/style';
+import "./style"
 
 export interface PaginationProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange'> {
   prefixCls?: string;

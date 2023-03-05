@@ -10,8 +10,6 @@ import {
 } from '@ant-design/icons';
 import Menu from '..';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
 
 function getItem(
   label: React.ReactNode,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import Breadcrumb from '..';
-import '../style';
 
 const App: React.FC = () => (
   <Breadcrumb>

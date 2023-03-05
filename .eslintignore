@@ -9,3 +9,7 @@
 /node_modules/
 /example/node_modules/
 
+/dist/
+/es/
+/lib/
+

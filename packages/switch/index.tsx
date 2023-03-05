@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react';
 import classNames from 'classnames';
 import type SwitchProps from './type';
 import Loader from '../loader';
+import "./style"
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
   const {

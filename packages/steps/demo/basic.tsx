@@ -1,6 +1,5 @@
 import React from 'react';
 import Steps from '..';
-import '../style';
 
 export default () => {
   return (

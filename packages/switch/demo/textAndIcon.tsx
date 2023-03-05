@@ -2,8 +2,7 @@ import React from 'react';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import Switch from '..';
 import Divider from '../../divider';
-import '../../divider/style';
-import '../style';
+
 
 const App: React.FC = () => (
   <>

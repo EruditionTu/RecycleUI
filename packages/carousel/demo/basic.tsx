@@ -1,6 +1,5 @@
 import React from 'react';
 import Carousel from '..';
-import '../style';
 
 export default () => {
   return (

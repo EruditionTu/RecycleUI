@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import Checkbox from './Checkbox';
 import CheckboxGroup from './CheckboxGroup';
 import type CheckboxProps from './type';
+import './style'
 
 interface CheckboxComponents extends FC<CheckboxProps> {
   Group: typeof CheckboxGroup;

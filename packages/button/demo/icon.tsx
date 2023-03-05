@@ -7,7 +7,6 @@ import {
   DownOutlined,
 } from '@ant-design/icons';
 import Button from '..';
-import '../style';
 
 const App: React.FC = () => {
   const rowStyle = {

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../button';
 import Modal from '..';
-import '../../button/style';
-import '../style';
+
 
 export default () => {
   const [visible, setVisible] = useState(false);

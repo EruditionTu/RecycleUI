@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '..';
-import '../style';
 
 export default () => {
   const [loading, setLoading] = useState(false);

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import invariant from 'invariant';
 import OverlayTrigger from '../overlay-trigger';
 import type TooltipProps from './type';
+import "./style";
 
 type WithChildren<T> = T & { children: ReactElement };
 

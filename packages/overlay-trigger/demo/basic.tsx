@@ -1,6 +1,5 @@
 import React from 'react';
 import OverlayTrigger from '..';
-import '../style';
 
 const tooltip = (
   <div style={{ backgroundColor: '#fff', border: '1px solid #333', padding: 10, borderRadius: 3 }}>

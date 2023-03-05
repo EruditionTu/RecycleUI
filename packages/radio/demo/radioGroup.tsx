@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Radio from '..';
-import '../style';
 
 const App: React.FC = () => {
   const [value, setValue] = useState(1);

@@ -1,8 +1,6 @@
 import React from 'react';
 import Card from '..';
 import { Col, Row } from '../../grid';
-import '../style';
-import '../../grid/style';
 
 const App: React.FC = () => (
   <div style={{ backgroundColor: '#ececec', padding: 30 }}>

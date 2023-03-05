@@ -1,8 +1,7 @@
 import React from 'react';
 import Skeleton from '..';
 import Divider from '../../divider';
-import '../../divider/style';
-import '../style';
+
 
 const App: React.FC = () => {
   return (

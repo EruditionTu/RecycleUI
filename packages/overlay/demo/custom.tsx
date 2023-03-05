@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from '../../button';
 import Overlay from '..';
-import '../../button/style';
-import '../style';
+
 
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);

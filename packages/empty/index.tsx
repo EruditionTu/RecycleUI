@@ -1,6 +1,6 @@
 import React, { memo, useMemo, useCallback } from 'react';
 import type { PropsWithChildren } from 'react';
-
+import "./style"
 export interface EmptyProps {
   description?: React.ReactNode; // 自定义描述内容
   image?: string; // 设置显示图片

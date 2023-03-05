@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Loader from '..';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
 
 export default () => {
   const [fullScreen, setFullScreen] = useState(false);

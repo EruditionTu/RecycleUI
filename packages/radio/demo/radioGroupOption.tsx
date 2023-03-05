@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
 import Radio from '..';
-import '../style';
 
 const plainOptions = ['Apple', 'Pear', 'Orange'];
 

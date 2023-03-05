@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import Option from './Option';
 import Group from './Group';
+import "./style"
 
 export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   size?: 'large' | 'default' | 'small';

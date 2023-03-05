@@ -1,8 +1,6 @@
 import React from 'react';
 import OverlayTrigger from '..';
 import Card from '../../card';
-import '../../card';
-import '../style';
 
 const card = (
   <Card hoverable border>

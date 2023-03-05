@@ -1,6 +1,5 @@
 import React from 'react';
 import List from '..';
-import '../style';
 
 const data = [
   '"X战警新变种人"首曝海报特写诡异人脸',

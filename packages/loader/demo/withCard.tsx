@@ -1,8 +1,6 @@
 import React from 'react';
 import Loader from '..';
 import Card from '../../card';
-import '../../card/style';
-import '../style';
 
 export default function Demo() {
   return (

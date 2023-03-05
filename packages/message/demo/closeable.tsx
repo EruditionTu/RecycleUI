@@ -2,7 +2,6 @@ import React from 'react';
 import Message from '..';
 import '../style';
 import Button from '../../button';
-import '../../button/style';
 
 export default function index1() {
   const message = (val: string) => {

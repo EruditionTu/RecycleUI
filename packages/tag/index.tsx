@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import InternalTag from './Tag';
 import CheckableTag from './CheckableTag';
 import type TagProps from './type';
+import "./style"
 
 interface TagType
   extends React.ForwardRefExoticComponent<TagProps & React.RefAttributes<HTMLElement>> {

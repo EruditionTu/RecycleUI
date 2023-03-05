@@ -1,6 +1,5 @@
 import React from 'react';
 import Breadcrumb from '..';
-import '../style';
 
 const App: React.FC = () => (
   <Breadcrumb>

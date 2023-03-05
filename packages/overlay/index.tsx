@@ -11,6 +11,7 @@ import omit from 'lodash/omit';
 import Portal from '../common/components/portal';
 import type { WithCustomStyle } from '@/packages/common/util/type';
 import type OverlayProps from './type';
+import "./style"
 
 const defaultEventCb = () => {};
 

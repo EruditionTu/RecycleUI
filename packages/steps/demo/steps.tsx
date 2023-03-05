@@ -2,9 +2,7 @@ import React from 'react';
 import Steps from '..';
 import Message from '../../message';
 import Button from '../../button';
-import '../../button/style';
-import '../../message/style';
-import '../style';
+
 
 const conStyle = {
   minHeight: 200,

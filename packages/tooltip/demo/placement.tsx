@@ -1,8 +1,7 @@
 import React from 'react';
 import Tooltip from '../index';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
+
 
 const text = <span>prompt text</span>;
 

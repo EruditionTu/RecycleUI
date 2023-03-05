@@ -11,6 +11,7 @@ import type { ReactNode } from 'react';
 import classNames from 'classnames';
 import type { CarouselProps, CarouselRef } from './type';
 import type { WithCustomStyle } from '../common/util/type';
+import "./style"
 
 const Carousel = forwardRef<CarouselRef, WithCustomStyle<CarouselProps> & { children?: ReactNode }>(
   (props, ref) => {

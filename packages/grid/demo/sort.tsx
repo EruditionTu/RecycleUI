@@ -2,8 +2,6 @@ import React from 'react';
 import Divider from '../../divider';
 import { Col, Row } from '..';
 import Inner from './inner';
-import '../style';
-import '../../divider/style';
 
 const commonStyle = {
   minHeight: '30px',

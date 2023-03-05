@@ -1,7 +1,6 @@
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import Avatar from '..';
-import '../style';
 
 export default function Demo() {
   return (

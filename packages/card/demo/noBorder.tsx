@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '..';
-import '../style';
 
 const App: React.FC = () => (
   <div style={{ backgroundColor: '#ececec', padding: '30px' }}>

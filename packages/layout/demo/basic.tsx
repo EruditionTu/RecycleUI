@@ -1,8 +1,6 @@
 import React from 'react';
 import Layout from '..';
 import Divider from '../../divider';
-import '../../divider/style';
-import '../style';
 import './demo.css';
 
 const { Header, Footer, Sider, Content } = Layout;

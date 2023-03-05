@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import OverlayTrigger, { OverlayTriggerProps } from '../overlay-trigger';
+import "./style"
 
 export interface DropdownProps extends OverlayTriggerProps {
   menu?: React.ReactNode;

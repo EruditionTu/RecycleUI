@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import Menu from '..';
-import '../style';
 
 function getItem(
   label: React.ReactNode,

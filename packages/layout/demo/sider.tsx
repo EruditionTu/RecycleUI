@@ -9,9 +9,6 @@ import React, { useState } from 'react';
 import Layout from '..';
 import Menu from '../../menu';
 import Breadcrumb from '../../breadcrumb';
-import '../style';
-import '../../menu/style';
-import '../../breadcrumb/style';
 
 const { Header, Content, Footer, Sider } = Layout;
 

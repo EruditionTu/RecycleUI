@@ -2,10 +2,7 @@ import React from 'react';
 import Button from '../../../button';
 import Card from '../../../card';
 import Overlay from '../..';
-import '../../../button/style';
-import '../../../card/style';
 import './animation.less';
-import '../../style';
 
 export default function Demo() {
   const [isOpen, setIsOpen] = React.useState(false);

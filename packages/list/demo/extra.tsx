@@ -1,6 +1,5 @@
 import React from 'react';
 import List from '..';
-import '../style';
 
 const data = [
   {

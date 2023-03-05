@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Drawer from '..';
 import Button from '../../button';
-import '../style';
-import '../../button/style';
 
 export default () => {
   const [visible, setVisible] = useState(false);

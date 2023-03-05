@@ -1,7 +1,6 @@
 import React from 'react';
 import { HeartOutlined } from '@ant-design/icons';
 import Rate from '..';
-import '../style';
 
 const App: React.FC = () => (
   <>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Process from '..';
 import Button from '../../button';
-import '../../button/style';
 
 export default () => {
   const [percent, setPercent] = React.useState(10);

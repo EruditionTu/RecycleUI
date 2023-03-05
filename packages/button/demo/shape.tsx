@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { ButtonShape } from '..';
 import Button from '..';
-import '../style';
 
 const App: React.FC = () => {
   const [shape, setShape] = useState<ButtonShape>('round');

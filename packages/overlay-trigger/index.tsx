@@ -20,6 +20,7 @@ import withDefault from '../common/util/withDefault';
 import contains from '../common/util/dom/contains';
 import getStyle from './util/getStyle';
 import isDom from '@/packages/common/util/dom/isDom';
+import "./style"
 
 export { OverlayStyle, TriggerProps, Delay, OverlayTriggerProps };
 

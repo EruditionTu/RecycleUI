@@ -5,6 +5,8 @@ import MessageIcon from './MessageIcon';
 
 import type { MessageStaticType, MessageController, MessageConfig, MessageType } from './type';
 
+import "./style"
+
 export * from './type';
 
 export type MessageProps = Omit<MessageConfig, 'type'>;

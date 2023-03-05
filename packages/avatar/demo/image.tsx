@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from '..';
-import '../style';
 
 const App = () => {
   const [src, setSrc] = React.useState(

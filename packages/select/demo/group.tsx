@@ -1,8 +1,7 @@
 import React from 'react';
 import { Col, Row } from '../../grid';
 import Select from '..';
-import '../style';
-import '../../grid/style';
+
 
 const { Group, Option } = Select;
 

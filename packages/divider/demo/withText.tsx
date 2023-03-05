@@ -1,6 +1,5 @@
 import React from 'react';
 import Divider from '..';
-import '../style';
 
 export default () => {
   return (

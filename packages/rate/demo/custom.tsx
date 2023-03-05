@@ -1,7 +1,6 @@
 import React from 'react';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import Rate from '..';
-import '../style';
 
 const customIcons: Record<number, React.ReactNode> = {
   1: <FrownOutlined />,

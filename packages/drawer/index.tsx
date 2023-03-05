@@ -4,7 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import Overlay from '../overlay';
 import type { OverlayProps } from '../overlay';
-import '../overlay/style';
+import './style'
 
 export interface DrawerProps extends OverlayProps {
   footer?: ReactNode;

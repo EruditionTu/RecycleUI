@@ -1,7 +1,6 @@
 import React from 'react';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Button from '../Button';
-import '../style';
 
 const { Group } = Button;
 export default () => (

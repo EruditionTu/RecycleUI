@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { forwardRef, useMemo } from 'react';
 import invariant from 'invariant';
 import type DividerProps from './type';
+import './style'
 
 const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
   const {

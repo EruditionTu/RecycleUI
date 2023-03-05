@@ -13,8 +13,7 @@ import {
 } from '@ant-design/icons';
 import Tag from '..';
 import Divider from '../../divider';
-import '../../divider/style';
-import '../style';
+
 
 const App: React.FC = () => (
   <>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Col, Row } from '..';
-import '../style';
 import Inner from './inner';
 
 const commonStyle = {

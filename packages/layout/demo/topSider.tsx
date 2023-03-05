@@ -3,9 +3,6 @@ import React from 'react';
 import Layout from '..';
 import Breadcrumb from '../../breadcrumb';
 import Menu from '../../menu';
-import '../style';
-import '../../menu/style';
-import '../../breadcrumb/style';
 
 const { Header, Content, Sider } = Layout;
 

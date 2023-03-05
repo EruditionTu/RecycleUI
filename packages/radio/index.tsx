@@ -3,6 +3,7 @@ import Radio from './Radio';
 import RadioGroup from './RadioGroup';
 import RadioButton from './RadioButton';
 import type RadioProps from './type';
+import "./style"
 
 interface RadioComponents extends FC<RadioProps> {
   Group: typeof RadioGroup;

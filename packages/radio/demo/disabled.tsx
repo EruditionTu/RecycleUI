@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../button';
 import Radio from '..';
-import '../../button/style';
-import '../style';
+
 
 const App: React.FC = () => {
   const [disabled, setDisabled] = useState(true);

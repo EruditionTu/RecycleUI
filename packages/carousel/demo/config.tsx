@@ -1,8 +1,6 @@
 import React from 'react';
 import Carousel from '..';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
 
 export default () => {
   const ref = React.useRef<any>();

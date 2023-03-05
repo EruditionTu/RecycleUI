@@ -9,6 +9,7 @@ import type MenuProps from './type';
 import MenuGroup from './MenuGroup';
 import MenuDivider from './MenuDiveder';
 import type { MenuValue, MenuContextProps, InlineSubMenuContextProps, ItemType } from './type';
+import "./style";
 
 function initSelectedMenuItem(defaultSelectedKeys: Array<MenuValue>): Set<MenuValue> {
   return defaultSelectedKeys instanceof Array ? new Set(defaultSelectedKeys) : new Set();

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Row } from '..';
 import Inner from './inner';
-import '../style';
 
 const commonStyle = {
   minHeight: '30px',

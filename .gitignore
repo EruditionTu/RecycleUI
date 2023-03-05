@@ -4,3 +4,8 @@
 /Question.md
 /.umi/
 /.history/
+/dist/
+/es/
+/lib/
+/packages/**/*.js
+/packages/**/*.map

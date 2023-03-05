@@ -2,8 +2,7 @@ import React from 'react';
 import type { MouseEvent } from 'react';
 import Tag from '..';
 import Divider from '../../divider';
-import '../style';
-import '../../divider/style';
+
 
 const close = (e: MouseEvent<HTMLElement>) => {
   alert('关闭tag');

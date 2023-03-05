@@ -1,6 +1,7 @@
 import React, { isValidElement, useState, useEffect, useMemo, forwardRef } from 'react';
 import classNames from 'classnames';
 import AvatarProps from './type';
+import "./style"
 
 const Avatar = forwardRef<HTMLSpanElement, AvatarProps>((props, ref) => {
   const {

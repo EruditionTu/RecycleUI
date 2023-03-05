@@ -2,8 +2,7 @@ import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import Steps from '..';
 import { Row, Col } from '../../grid';
-import '../../grid/style';
-import '../style';
+
 
 export default function Demo() {
   return (

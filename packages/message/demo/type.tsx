@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from '../../button';
 import Message from '..';
-import '../../button/style';
-import '../style';
+
 
 export default () => {
   return (

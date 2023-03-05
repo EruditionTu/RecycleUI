@@ -2,8 +2,6 @@ import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/i
 import React from 'react';
 import Layout from '..';
 import Menu from '../../menu';
-import '../style';
-import '../../menu/style';
 
 const { Header, Content, Footer, Sider } = Layout;
 

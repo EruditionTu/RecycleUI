@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../button';
 import Switch from '../index';
-import '../../button/style';
-import '../style';
+
 
 const App: React.FC = () => {
   const [disabled, setDisabled] = useState(true);

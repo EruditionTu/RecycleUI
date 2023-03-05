@@ -1,6 +1,5 @@
 import React from 'react';
 import Loader from '..';
-import '../style';
 
 export default () => {
   return (

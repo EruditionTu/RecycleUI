@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ChangeEvent } from 'react';
 import Radio from '..';
-import '../style';
+
 
 const onChange = (e: ChangeEvent<HTMLInputElement>) => {
   console.log(`radio checked:${e.target.value}`);

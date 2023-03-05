@@ -2,8 +2,7 @@ import React from 'react';
 import OverlayTrigger from '..';
 import Card from '../../card';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
+
 
 /**
  * tsCssproperty会报错误，所以要定义类型

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../../button';
 import Checkbox from '../../checkbox';
-import '../style';
-import '../../button/style';
 
 const App: React.FC = () => {
   const [checked, setChecked] = useState(true);

@@ -9,9 +9,6 @@ import {
 import Divider from '../../divider';
 import Switch from '../../switch';
 import Menu from '..';
-import '../../switch/style';
-import '../../divider/style';
-import '../style';
 
 function getItem(
   label: React.ReactNode,

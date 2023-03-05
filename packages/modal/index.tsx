@@ -8,6 +8,7 @@ import type { ModalMethod, DialogModalMethod, ModalOptions, DialogProps } from '
 import type ModalProps from './type';
 import Modal from './Modal';
 import DialogModal from './DialogModal';
+import "./style"
 
 const rootDomClass: string = 'recycle-ui-modal-root';
 

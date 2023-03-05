@@ -1,6 +1,5 @@
 import React from 'react';
 import Progress from '..';
-import '../style';
 
 const App: React.FC = () => (
   <>

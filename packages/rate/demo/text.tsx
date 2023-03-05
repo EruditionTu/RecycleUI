@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Rate from '..';
-import '../style';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 

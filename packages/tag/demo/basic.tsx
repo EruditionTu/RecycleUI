@@ -1,6 +1,5 @@
 import React from 'react';
 import Tag from '..';
-import '../style';
 
 const close = () => {
   alert('关闭tag');

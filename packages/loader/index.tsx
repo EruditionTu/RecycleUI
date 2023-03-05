@@ -3,6 +3,7 @@ import React, { useMemo, cloneElement } from 'react';
 import type { FC, ReactElement } from 'react';
 import type LoaderProps from './type';
 import useHiddenScroll from '../common/util/hooks/useHiddenScroll';
+import "./style"
 
 const indicatorView = (
   <svg viewBox="25 25 50 50">

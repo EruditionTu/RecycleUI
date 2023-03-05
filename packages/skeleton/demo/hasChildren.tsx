@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Skeleton from '..';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
+
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);

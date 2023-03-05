@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Process from '..';
 import Button from '../../button';
-import '../../button/style';
-import '../style';
+
 
 export default () => {
   const [process, setProcess] = React.useState(50);

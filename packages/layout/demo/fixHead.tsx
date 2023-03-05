@@ -1,10 +1,7 @@
 import React from 'react';
 import Layout from '..';
-import Breadcrumb from '@/packages/breadcrumb';
-import Menu from '@/packages/menu';
-import '../../menu/style';
-import '../../breadcrumb/style';
-import '../style';
+import Breadcrumb from '../../../packages/breadcrumb';
+import Menu from '../../../packages/menu';
 
 const { Header, Content, Footer } = Layout;
 

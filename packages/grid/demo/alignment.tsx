@@ -1,8 +1,6 @@
 import React from 'react';
 import { Col, Row } from '..';
 import Divider from '../../divider';
-import '../style';
-import '../../divider/style';
 
 const DemoBox: React.FC<{ children: React.ReactNode; value: number; color: string }> = (props) => (
   <p

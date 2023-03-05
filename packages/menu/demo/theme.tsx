@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import Switch from '../../switch';
 import Menu from '..';
-import '../style';
-import '../../switch/style';
+
 
 function getItem(
   label: React.ReactNode,

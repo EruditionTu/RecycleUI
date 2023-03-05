@@ -1,6 +1,5 @@
 import React from 'react';
 import Tooltip from '..';
-import '../style';
 
 export default () => {
   const textStyle = {
